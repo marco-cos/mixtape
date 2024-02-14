@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+/* 
+text font:
+.archivo{
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+logo font:
+.museomoderno{
+  font-family: "MuseoModerno", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+theme {
+  color: #bdbcbc --> nav bar
+  color: #eae8e8 --> background
+*/
