@@ -1,14 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+
 
 function Navbar() {
   return (
     <nav>
       <ul>
-        <li><a href="app.js">Home</a></li>
-        <li><a href="albums.js">Albums</a></li>
-        <li><a href="profile.js">Profile</a></li>
-        <li><a href="login.js">Login</a></li>
-        <li><a href="register.js">Register</a></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/albums">Albums</Link></li>
+        <li><Link to="/profile">Profile</Link></li>
+        <li><Link to="/login">Login</Link></li>
+        <li><Link to="/register">Register</Link></li>
       </ul>
     </nav>
   );
