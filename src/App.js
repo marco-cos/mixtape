@@ -5,14 +5,12 @@ import Register from './register.js';
 import Login from './login.js';
 import Profile from './profile.js';
 import Albums from './albums.js';
-import {Routes, Route} from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 function App() {
  return (
     <html>
-      <Router>
         <div>
         <Navbar />
           <Routes>
@@ -23,7 +21,6 @@ function App() {
             <Route path="/login" element={<Login />} />
           </Routes>
         </div>
-    </Router>
     </html>
   );
 }
