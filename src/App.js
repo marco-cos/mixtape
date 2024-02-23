@@ -1,26 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './navbar.js';
 
+
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <html>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" />
+        <Navbar />
+        <div className="friendContainer">
+          <div className="friendActivity">
+            <div className="header">
+              <h1>what your friends have been listening to.</h1>
+            </div>
+            <div className="albums">
+              <div className="cover"></div>
+              <div className="cover"></div>
+              <div className="cover"></div>
+              <div className="cover"></div>
+              <div className="cover"></div>
+            </div>
+            <div className="seeMoreContainer">
+              <div className="seeMore">
+                <h3>all activity</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="footerContainer">
+          <div className="gradientContainer">
+            <div className="gradientColor">
+              <div className="footer">
+                <h2>listen. log. jam.</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </html>
+
   );
 }
 
