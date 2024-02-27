@@ -5,8 +5,11 @@ import Register from './register.js';
 import Login from './login.js';
 import Profile from './profile.js';
 import Albums from './albums.js';
+import axios from 'axios' // used to transport data btwn frontend and backend
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+axios.defaults.baseURL = 'http://localhost:8000'; // this is the backend url
+axios.defaults.withCredentials = true
 
 function App() {
  return (
