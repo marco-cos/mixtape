@@ -1,25 +1,32 @@
 import React from "react";
 import { useState } from "react";
-import Navbar from "./navbar";
-
-// code for the navbar here
-
-const registerUser = (e) =>{
-    e.preventDefault()
-}
+import axios from 'axios'
 
 export default function Register(){
     const [userData, setUserData] = useState({
-        name: '',
+        username: '',
         email:'',
         password:'',
 
     })
+
+    const registerUser = async (e) =>{
+        e.preventDefault()
+        const {username, email, password} = userData
+        try {
+            const {userData} = await axios.post('/register',{
+                username, email, password
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return(
         <div>
             <form onSubmit = {registerUser}>
                 <label>Username</label>
-                <input type = 'text'placeholder= 'enter username' value={userData.name} onChange={(e) => setUserData({...userData,name:e.target.value})}/>
+                <input type = 'text'placeholder= 'enter username' value={userData.username} onChange={(e) => setUserData({...userData,username:e.target.value})}/>
                 <label>Email</label>
                 <input type = 'email' placeholder= 'enter email'value={userData.email} onChange={(e) => setUserData({...userData,email:e.target.value})}/>
                 <label>Password</label>
