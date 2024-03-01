@@ -4,9 +4,6 @@ const cors = require('cors');
 const User = require('../models/user')
 //const {registerUser} = require('../controllers/authController')
 
-// const test = (req,res) => {
-//     res.json('test works')
-// }
 
 // middleware
 
