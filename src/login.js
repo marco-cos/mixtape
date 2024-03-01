@@ -9,8 +9,8 @@ export default function Login(){
     })
 
     const loginUser = (e) =>{
-        e.preventDefault()
-            axios.get('/')
+    e.preventDefault()
+        axios.get('/')
     }
 
     return(
