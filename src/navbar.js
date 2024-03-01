@@ -9,7 +9,7 @@ function Navbar() {
     <div className="bar">
       <div className="leftSection">
         <div className="logo">
-          <img src={logo} alt="logo"/>
+        <li><Link to="/"><img src={logo} alt="logo"/></Link></li>
         </div>
       </div>
       <div className="centerSpacing">
