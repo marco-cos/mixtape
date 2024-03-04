@@ -35,6 +35,34 @@ body {
   padding-top: 50px;
 }
 
+@keyframes fade-left {
+  from {
+    scale: 1;
+    translate: 0%;
+    opacity: 1;
+  }
+
+  to {
+    scale: 0.8;
+    translate: -30%;
+    opacity: 0;
+  }
+}
+
+@keyframes fade-right {
+  from {
+    scale: 1;
+    translate: 0%;
+    opacity: 1;
+  }
+
+  to {
+    scale: 0.8;
+    translate: 30%;
+    opacity: 0;
+  }
+}
+
 .albums{
   display:grid;
   grid-template-columns: 225px 225px 225px 225px 225px;
