@@ -3,6 +3,7 @@ const router = express.Router();
 const cors = require('cors');
 const User = require('../models/user')
 //const {registerUser} = require('../controllers/authController')
+const jwt = require('jsonwebtoken');
 
 
 // middleware
@@ -31,7 +32,7 @@ router.post('/register', async (req,res) => {
         }
 
         // check if password was inputted
-        if(!password || password.length < 7){
+        if(!password || password.length > 6){
             return res.json({
                 error: 'password is required and must be less than 7 characters'
             })
@@ -45,8 +46,11 @@ router.post('/register', async (req,res) => {
             })
         }
 
+        // create user in database
         const user = await User.create({
-            username, email, password
+            username,
+            email, 
+            password,
         })
         return res.json(user)
     } catch(error){
@@ -62,16 +66,16 @@ router.post('/login', async (req,res) => {
         const {username, password} = req.body;
 
         // check if user exist and if password matches
-        const user = await User.findOne({username});
-        if (!user){
-            return res.json({
-                error: 'no user found'
-            })
-        }
 
-        const passMatch = await User.findOne({password});
+        const passMatch = await User.findOne({username, password});
         if (passMatch){
             res.json('password correct')
+
+            // JSON web token to create session cookies for each user to track their data after logging in
+            jwt.sign({email: passMatch.email, id: passMatch._id, username: passMatch.username}, process.env.JWT_SECRET, {}, (err,token)=> {
+                if(err) throw err;
+                res.cookie('token', token).json(passMatch)
+            })
         }
         if (!passMatch){
             return res.json({
