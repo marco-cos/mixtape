@@ -19,7 +19,7 @@ router.get('/', (req,res) => {
     }
 )
 
-// register enpoint
+// register endpoint
 router.post('/register', async (req,res) => {
     try{
         const{username, email, password} = req.body
@@ -55,5 +55,33 @@ router.post('/register', async (req,res) => {
 }
 )
 
+// login endpoint
+
+router.post('/login', async (req,res) => {
+    try {
+        const {username, password} = req.body;
+
+        // check if user exist and if password matches
+        const user = await User.findOne({username});
+        if (!user){
+            return res.json({
+                error: 'no user found'
+            })
+        }
+
+        const passMatch = await User.findOne({password});
+        if (passMatch){
+            res.json('password correct')
+        }
+        if (!passMatch){
+            return res.json({
+                error: 'incorrect password'
+            })
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+)
 
 module.exports = router
