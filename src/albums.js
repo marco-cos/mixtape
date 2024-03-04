@@ -1,6 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
+
 import './bubba-album.png';
+import './MIFLSA.png';
+import './skiptracing.png';
+import './TPAB.png';
+
 import './App.css';
 import { Link } from 'react-router-dom';
 
@@ -13,16 +18,25 @@ const albumsBlurb = {
 
 const album1 = {
     id: 'bubba',
-    url: '/public/bubba-album.png',
+    url: './bubba-album.png',
 }
 
 const album2 = {
     id: 'pond',
-    url: '/public/MIFLSA.png',
+    url: './MIFLSA.png',
 }
 
-const albumsArray = [album1, album2];
+const album3 = {
+    id: 'skiptracing',
+    url: './skiptracing.png',
+}
 
+const album4 = {
+    id: 'tpab',
+    url: './TPAB.png',
+}
+
+const albumsArray = [album1, album2, album3, album4];
 
 function AlbumGridComponent({ album, onClick}) {
     return (
