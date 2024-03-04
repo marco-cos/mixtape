@@ -43,7 +43,7 @@ function AlbumGridComponent({ album, onClick}) {
         <div style={{ cursor: 'pointer' }} onClick={() => onClick(album.id)}>
             <img 
                 src={album.url} 
-                className="fade-left" // or "fade-right" depending on the hover effect you want
+                className="fade-left"
                 style={{ width: '100%', height: 'auto', aspectRatio: '1 / 1' }} 
             />
         </div>

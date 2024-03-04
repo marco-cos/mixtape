@@ -64,11 +64,11 @@ body {
 }
 
 .fade-left:hover {
-  animation: fade-left 0.1s ease-in-out infinite; /* Adjust time as needed */
+  animation: fade-left 2s ease-in-out infinite; /* Adjust time as needed */
 }
 
 .fade-right:hover {
-  animation: fade-right 0.1s ease-in-out infinite; /* Adjust time as needed */
+  animation: fade-right 2s ease-in-out infinite; /* Adjust time as needed */
 }
 
 .albums{
