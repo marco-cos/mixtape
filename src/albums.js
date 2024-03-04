@@ -51,8 +51,8 @@ function AlbumGridComponent({ album, onClick}) {
 }
 
 function AlbumGrid({albumsArray}) {
-    const handleClick = (id) => {
-        console.log('Image ${id} clicked!');
+    const handleClick = (key) => {
+        console.log('Image {id} clicked!');
         // handle click event later
     }
     return (
@@ -68,7 +68,7 @@ export default function Top(){
 
     return(
         <div style={albumsBlurb}>
-            <h1>Listened to a new album? Drop your review.</h1>
+            <div>Listened to a new album? Drop your review.</div>
             <AlbumGrid albumsArray={albumsArray} />
         </div>
     )
