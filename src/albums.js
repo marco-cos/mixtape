@@ -41,7 +41,11 @@ const albumsArray = [album1, album2, album3, album4];
 function AlbumGridComponent({ album, onClick}) {
     return (
         <div style={{ cursor: 'pointer' }} onClick={() => onClick(album.id)}>
-            <img src={album.url} style={{ width: '100%', height: 'auto', aspectRatio: '1 / 1' }} />
+            <img 
+                src={album.url} 
+                className="fade-left" // or "fade-right" depending on the hover effect you want
+                style={{ width: '100%', height: 'auto', aspectRatio: '1 / 1' }} 
+            />
         </div>
     );
 }

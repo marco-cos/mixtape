@@ -63,6 +63,14 @@ body {
   }
 }
 
+.fade-left:hover {
+  animation: fade-left 0.1s ease-in-out infinite; /* Adjust time as needed */
+}
+
+.fade-right:hover {
+  animation: fade-right 0.1s ease-in-out infinite; /* Adjust time as needed */
+}
+
 .albums{
   display:grid;
   grid-template-columns: 225px 225px 225px 225px 225px;
