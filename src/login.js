@@ -1,16 +1,36 @@
 import { useState } from "react"
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login(){
+    const navigate = useNavigate()
     const [data, setData] = useState({
         username: '',
         password:'',
 
     })
 
-    const loginUser = (e) =>{
+    const [error, setError] = useState('')
+
+    const loginUser = async(e) =>{
     e.preventDefault()
-        axios.get('/')
+        //axios.get('/')
+        const {username,password} = data
+        try {
+            const {data} = await axios.post('/login', {
+                username,
+                password
+            });
+            if (data.error){
+                setError('incorrect username or password')
+            }
+            else{
+                setData({})
+                navigate('/')
+            }
+        } catch (error) {
+            console.error('error', error)
+        }
     }
 
     return(
@@ -21,6 +41,7 @@ export default function Login(){
                 <label>Password</label>
                 <input type = 'password' placeholder= 'enter password'value={data.password} onChange={(e) => setData({...data,password:e.target.value})}/>
                 <button type = 'login'>Login</button>
+                {error && <p style = {{color: 'red'}}>{error}</p>}
 
 
             </form>
