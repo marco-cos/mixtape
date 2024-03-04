@@ -4,6 +4,9 @@ const cors = require('cors');
 const User = require('../models/user')
 //const {registerUser} = require('../controllers/authController')
 const jwt = require('jsonwebtoken');
+const {hashpwd, comparepwd} = require('../helpers/auth')
+const bcrypt = require('bcrypt')
+
 
 
 // middleware
@@ -46,11 +49,12 @@ router.post('/register', async (req,res) => {
             })
         }
 
+        const hashedpwd = await hashpwd(password)
         // create user in database
         const user = await User.create({
             username,
             email, 
-            password,
+            password: hashedpwd,
         })
         return res.json(user)
     } catch(error){
@@ -66,9 +70,12 @@ router.post('/login', async (req,res) => {
         const {username, password} = req.body;
 
         // check if user exist and if password matches
+        //const passMatch = await User.findOne({username, password});
+        const user = await User.findOne({ username });
+        const comppwd = await bcrypt.compare(password,user.password)
 
-        const passMatch = await User.findOne({username, password});
-        if (passMatch){
+
+        if (comppwd){
             res.json('password correct')
 
             // JSON web token to create session cookies for each user to track their data after logging in
@@ -77,7 +84,7 @@ router.post('/login', async (req,res) => {
                 res.cookie('token', token).json(passMatch)
             })
         }
-        if (!passMatch){
+        if (!comppwd){
             return res.json({
                 error: 'incorrect password'
             })
