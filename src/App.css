@@ -85,12 +85,60 @@ body {
   align-items: center;
 
 }
+
 .cover {
   display: inline-block;
   width: 200px;
   height: 200px;
   background-color:black;
   border-radius: 20px;
+}
+
+.albums_albumpage{
+  display:grid;
+  grid-template-columns: 300px 300px 300px 300px 300px;
+  grid-template-rows: auto;
+  grid-row-gap:25px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right:auto;
+  justify-items: left;
+  align-items: left;
+  padding-left: 3%;
+}
+
+.cover_albumpage {
+  display: inline-block;
+  width: 275px;
+  height: 275px;
+  background-color:black;
+  border-radius: 20px;
+  justify-items: left;
+  align-items: left;
+}
+
+#albumpage {
+  padding-left: 3%;
+}
+
+#arrowdiv {
+  padding-right:3%;
+  padding-top:100px;
+  padding-bottom:100px;
+  background-color: #bdbcbc;
+  border-top-left-radius: 20%;
+  border-bottom-left-radius: 20%;
+}
+
+#arrow {
+  padding-left:40%;
+  opacity: 1;
+}
+
+#albumcontainer {
+  display: flex;
+  align-items: center;
+
 }
 
 .seeMoreContainer {
