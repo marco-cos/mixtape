@@ -44,7 +44,7 @@ body {
 
   to {
     scale: 0.8;
-    translate: -30%;
+    translate: -10%;
     opacity: 0;
   }
 }
@@ -58,17 +58,17 @@ body {
 
   to {
     scale: 0.8;
-    translate: 30%;
+    translate: 10%;
     opacity: 0;
   }
 }
 
 .fade-left:hover {
-  animation: fade-left 2s ease-in-out infinite; /* Adjust time as needed */
+  animation: fade-left 0.5s ease-in-out infinite; /* Adjust time as needed */
 }
 
 .fade-right:hover {
-  animation: fade-right 2s ease-in-out infinite; /* Adjust time as needed */
+  animation: fade-right 0.5s ease-in-out infinite; /* Adjust time as needed */
 }
 
 .albums{
