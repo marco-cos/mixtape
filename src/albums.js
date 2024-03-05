@@ -50,7 +50,7 @@ function AlbumGridComponent({ album, onClick}) {
         <div style={{ cursor: 'pointer' }} onClick={() => onClick(album.id)}>
             <img 
                 src={album.url} 
-                className="fade-left"
+                className="pop-out"
                 width="100%"
                 height="100%" 
             />

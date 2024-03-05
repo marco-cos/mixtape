@@ -63,12 +63,32 @@ body {
   }
 }
 
+@keyframes pop-out {
+  from {
+    scale: 1;
+    opacity: 80%;
+  }
+  to {
+    scale: 1.2;
+    opacity: 100%;
+  }
+}
+
 .fade-left:hover {
   animation: fade-left 0.5s ease-in-out infinite; /* Adjust time as needed */
 }
 
 .fade-right:hover {
   animation: fade-right 0.5s ease-in-out infinite; /* Adjust time as needed */
+}
+
+.pop-out:hover {
+  animation: pop-out 0.5s ease-in-out forwards;
+}
+
+.pop-out {
+  background-color:black;
+  border-radius: 10px;
 }
 
 .albums{
