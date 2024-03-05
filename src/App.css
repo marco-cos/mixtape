@@ -91,13 +91,42 @@ body {
   opacity: 50%;
 }
 
+@keyframes non-hovered {
+  from {
+    opacity: 100%;
+    scale: 1.0;
+  }
+  to {
+    opacity: 50%;
+    scale: 1.0;
+  }
+}
+
 .pop-out {
   background-color:black;
+  animation: pop-out-out 0.3s ease-in-out forwards;
 }
 
 .album-grid .pop-out:hover {
-  animation: pop-out 0.2s ease-in-out forwards;
+  animation: pop-out-in 0.2s ease-in-out forwards;
   opacity: 100%
+}
+
+@keyframes pop-out-in {
+  from {
+    scale: 1.0;
+  }
+  to {
+    scale: 1.09;
+  }
+}
+@keyframes pop-out-out {
+  from {
+    scale: 1.09;
+  }
+  to {
+    scale: 1.0;
+  }
 }
 
 @keyframes album-grid {
