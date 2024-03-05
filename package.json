@@ -49,5 +49,8 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "prettier": {
+    "importOrderParserPlugins": ["typescript", "decorators-legacy"]
   }
 }
