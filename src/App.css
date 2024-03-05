@@ -35,6 +35,62 @@ body {
   padding-top: 50px;
 }
 
+@keyframes fade-left {
+  from {
+    scale: 1;
+    translate: 0%;
+    opacity: 1;
+  }
+
+  to {
+    scale: 0.8;
+    translate: -10%;
+    opacity: 0;
+  }
+}
+
+@keyframes fade-right {
+  from {
+    scale: 1;
+    translate: 0%;
+    opacity: 1;
+  }
+
+  to {
+    scale: 0.8;
+    translate: 10%;
+    opacity: 0;
+  }
+}
+
+@keyframes pop-out {
+  from {
+    scale: 1;
+    opacity: 80%;
+  }
+  to {
+    scale: 1.2;
+    opacity: 100%;
+  }
+}
+
+.fade-left:hover {
+  animation: fade-left 0.5s ease-in-out infinite; /* Adjust time as needed */
+}
+
+.fade-right:hover {
+  animation: fade-right 0.5s ease-in-out infinite; /* Adjust time as needed */
+}
+
+.pop-out:hover {
+  animation: pop-out 0.5s ease-in-out forwards;
+}
+
+.pop-out {
+  background-color:black;
+  border-radius: 10px;
+}
+
 .albums{
   display:grid;
   grid-template-columns: 225px 225px 225px 225px 225px;
