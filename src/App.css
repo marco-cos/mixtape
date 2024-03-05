@@ -210,6 +210,31 @@ body {
   padding-bottom:.75%;
 }
 
+.postreview-body {
+  background: rgb(131,58,180);
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+}
+
+#postreviewbutton {
+  padding-top:6%;
+  padding-left: 30%;
+  transform: scale(1.5);
+}
+
+#ReviewPostBody {
+  position: absolute;
+  background-color:rgba(222, 222, 222, 0.8);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  margin-top:3%;
+  border-radius: 3%;
+  box-shadow: 0 0 3px #ccc;
+}
+
+
+
 .custom-button{
   display: inline-block;
   outline: none;
@@ -236,12 +261,6 @@ body {
 .custom-button:hover {
   color: #fff;
   background-color: #616467;
-}
-
-#postreviewbutton {
-  padding-top:6%;
-  padding-left: 30%;
-  transform: scale(1.5);
 }
 
 .seeMoreContainer {
