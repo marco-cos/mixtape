@@ -301,6 +301,10 @@ body {
 .bar {
   background-color: #bdbcbc;
 }
+#navbartext {
+  font-weight:bold;
+  font-size:medium;
+}
 .leftSection {
   display:inline-block;
   padding: 15px;
