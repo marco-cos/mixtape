@@ -30,16 +30,13 @@ export default function Register(){
                     <h1>Create your account</h1>
             
                         <div class="form-group">
-                            <label style={{ marginBottom: '5px' }}>Username</label><br />
-                            <input className='un' type='text' placeholder='' value={userData.username} onChange={(e) => setUserData({...userData, username: e.target.value})} />
+                            <input className='un' type='text' placeholder='username' value={userData.username} onChange={(e) => setUserData({...userData, username: e.target.value})} />
                         </div>
                         <div class="form-group">
-                            <label style={{ marginBottom: '5px' }}>Email</label><br />
-                            <input className='un' type='email' placeholder='' value={userData.email} onChange={(e) => setUserData({...userData, email: e.target.value})} />
+                            <input className='un' type='email' placeholder='email' value={userData.email} onChange={(e) => setUserData({...userData, email: e.target.value})} />
                         </div>
                         <div class="form-group">
-                            <label style={{ marginBottom: '5px' }}>Password</label><br />
-                            <input className='un' type='password' placeholder='' value={userData.password} onChange={(e) => setUserData({...userData, password: e.target.value})} />
+                            <input className='un' type='password' placeholder='password less than 7 characters' value={userData.password} onChange={(e) => setUserData({...userData, password: e.target.value})} />
                         </div>
                         <button className="custom-button" type='submit'>Submit</button>
                 </form>
