@@ -1,4 +1,5 @@
 import React from "react";
+import './register.css';
 import { useState } from "react";
 import axios from 'axios'
 
@@ -23,18 +24,29 @@ export default function Register(){
     }
 
     return(
-        <div>
-            <form onSubmit = {registerUser}>
-                <label>Username</label>
-                <input type = 'text'placeholder= 'enter username' value={userData.username} onChange={(e) => setUserData({...userData,username:e.target.value})}/>
-                <label>Email</label>
-                <input type = 'email' placeholder= 'enter email'value={userData.email} onChange={(e) => setUserData({...userData,email:e.target.value})}/>
-                <label>Password</label>
-                <input type = 'password' placeholder= 'enter password'value={userData.password} onChange={(e) => setUserData({...userData,password:e.target.value})}/>
-                <button type = 'submit'>Submit</button>
+        <body className="registerpg-body">
+            <div class="container">
+                <form class="registration-form" onSubmit={registerUser}>
+                    <h1>Create your account</h1>
+            
+                        <div class="form-group">
+                            <label style={{ marginBottom: '5px' }}>Username</label><br />
+                            <input className='un' type='text' placeholder='' value={userData.username} onChange={(e) => setUserData({...userData, username: e.target.value})} />
+                        </div>
+                        <div class="form-group">
+                            <label style={{ marginBottom: '5px' }}>Email</label><br />
+                            <input className='un' type='email' placeholder='' value={userData.email} onChange={(e) => setUserData({...userData, email: e.target.value})} />
+                        </div>
+                        <div class="form-group">
+                            <label style={{ marginBottom: '5px' }}>Password</label><br />
+                            <input className='un' type='password' placeholder='' value={userData.password} onChange={(e) => setUserData({...userData, password: e.target.value})} />
+                        </div>
+                        <button className="custom-button" type='submit'>Submit</button>
+                </form>
+            </div>
+        </body>
 
 
-            </form>
-        </div>
+
     )
 }
