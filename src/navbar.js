@@ -17,7 +17,7 @@ function Navbar() {
       <div className="rightSection">
         <div className="links">
           <nav>
-            <ul>
+            <ul id="navbartext">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/albums">Albums</Link></li>
               <li><Link to="/profile">Profile</Link></li>
