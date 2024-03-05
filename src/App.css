@@ -66,11 +66,9 @@ body {
 @keyframes pop-out {
   from {
     scale: 1;
-    opacity: 80%;
   }
   to {
-    scale: 1.2;
-    opacity: 100%;
+    scale: 1.09;
   }
 }
 
@@ -82,13 +80,33 @@ body {
   animation: fade-right 0.5s ease-in-out infinite; /* Adjust time as needed */
 }
 
-.pop-out:hover {
-  animation: pop-out 0.5s ease-in-out forwards;
+
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 225px));
+  gap: 10px;
+}
+
+.album-grid:hover .pop-out{
+  opacity: 50%;
 }
 
 .pop-out {
   background-color:black;
-  border-radius: 10px;
+}
+
+.album-grid .pop-out:hover {
+  animation: pop-out 0.2s ease-in-out forwards;
+  opacity: 100%
+}
+
+@keyframes album-grid {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 50%;
+  }
 }
 
 .albums{

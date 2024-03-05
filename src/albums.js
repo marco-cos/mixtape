@@ -1,4 +1,5 @@
 import nextbutton from './rightarrow.png';
+import './App.css';
 
 
 const album0 = {
@@ -41,9 +42,24 @@ const album9 = {
     id: 'phoebebridgers_alps',
     url: 'https://cdn.pastemagazine.com/www/articles/2019/11/25/strangerrrr.jpg'
 }
+const album10 = {
+    id: 'kaytranada_bubba',
+    url: 'https://m.media-amazon.com/images/I/71x4X6Ws2iL._UF1000,1000_QL80_.jpg'
+}
+const album11 = {
+    id: 'zachbryan_zachbryan',
+    url: 'https://bloximages.newyork1.vip.townnews.com/tulsaworld.com/content/tncms/assets/v3/editorial/4/3a/43a2749a-434b-11ee-a1cf-5fb34b91045c/64e8acf18403f.image.jpg?resize=1200%2C1200'
+}
+const album12 = {
+    id: 'sza_ctrl',
+    url: 'https://m.media-amazon.com/images/I/91AbZ7RgrEL._UF1000,1000_QL80_.jpg'
+}
+const album13 = {
+    id: 'tribe_beatsrhymes&life',
+    url: 'https://i.discogs.com/yc25vAWjMHzhMpMAQ-G0ngRD74NTEbaTqG8UNzKa4o4/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4MDg4/NDktMTY1NTI4MDc4/Ny01NjQwLmpwZWc.jpeg'
+}
 
-
-const albums = [album0, album1, album2, album3, album4, album5, album6, album7, album8, album9];
+const albums = [album0, album1, album2, album3, album4, album5, album6, album7, album8, album9, album10, album11, album12, album13];
 
 function AlbumGridComponent({ album, onClick}) {
     return (
@@ -60,11 +76,11 @@ function AlbumGridComponent({ album, onClick}) {
 
 function AlbumGrid({albumsArray}) {
     const handleClick = (key) => {
-        console.log('Image {id} clicked!');
+        console.log('Image ${id} clicked!');
         // handle click event later
     }
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '10px'}}>
+        <div className='album-grid'>
             {albumsArray.map((album) => (
                 <AlbumGridComponent key={album.id} album={album} onClick={handleClick} />
             ))}
@@ -74,17 +90,17 @@ function AlbumGrid({albumsArray}) {
 
 export default function Albums() {
     return (
-        <div id="albumpage">
+        <div id='albumpage'>
             <h1>Popular Albums</h1>
-            <div id="albumcontainer">
+            <div>
                 <AlbumGrid albumsArray={albums} />
             </div>
             <h1>Reviewed By Your Friends</h1>
-            <div id='albumcontaineer'>
+            <div>
                 <AlbumGrid albumsArray={albums} />
             </div>
             <h1>New Reviews</h1>
-            <div id='albumcontainer'>
+            <div>
                 <AlbumGrid albumsArray={albums} />
             </div>
         </div>
