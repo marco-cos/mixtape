@@ -126,7 +126,7 @@ export default function Albums() {
             grids.forEach( (grid,index) => {
                 const directionMultiplier = index % 2 === 0 ? 1 : -1;
 
-                const initialOffset = -grid.offsetWidth * 0.11;
+                const initialOffset = -grid.offsetWidth * 0.13;
                 const dynamicScrollAmount = scrollPosition / 20 * directionMultiplier;
                 grid.style.transform = `translateX(${initialOffset + dynamicScrollAmount}px)`;
             });
