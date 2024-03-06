@@ -156,6 +156,8 @@ export default function Albums() {
     )
 }
 
+export { AlbumGrid, AlbumGridComponent };
+
 /*
 export default function Albums(){
     return(
