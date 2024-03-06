@@ -105,6 +105,7 @@ body {
 .pop-out {
   background-color:black;
   animation: pop-out-out 0.3s ease-in-out forwards;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .album-grid .pop-out:hover {
