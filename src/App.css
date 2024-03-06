@@ -366,6 +366,16 @@ body {
 .rightSection{
   display:inline-block;
 }
+.headerStyle {
+  display:inline-block;
+  margin-right: 10px;
+}
+#profilepiceditbutton {
+  position:absolute;
+  left:18%;
+  width:2%;
+  height:8%;
+}
 ul {
   list-style-type: none;
   float: right;
