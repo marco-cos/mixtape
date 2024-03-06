@@ -83,8 +83,14 @@ body {
 
 .album-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 225px));
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(225px,225px));
   gap: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 120%;
+  transform: translateX(-11%);
 }
 
 .album-grid:hover .pop-out{
@@ -110,7 +116,8 @@ body {
 
 .album-grid .pop-out:hover {
   animation: pop-out-in 0.2s ease-in-out forwards;
-  opacity: 100%
+  opacity: 100%;
+  transition: transform 0.2s ease-in-out;
 }
 
 @keyframes pop-out-in {
@@ -186,6 +193,7 @@ body {
 }
 
 #albumpage {
+  min-width: 0;
   padding-left: 2%;
   padding-right: 10px;
 }

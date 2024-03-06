@@ -56,11 +56,35 @@ const album13 = {
     id: 'tribe_beatsrhymes&life',
     url: 'https://i.discogs.com/yc25vAWjMHzhMpMAQ-G0ngRD74NTEbaTqG8UNzKa4o4/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4MDg4/NDktMTY1NTI4MDc4/Ny01NjQwLmpwZWc.jpeg'
 }
+const album14 = {
+    id: 'terracemartin_dinnerparty',
+    url: 'https://admin.itsnicethat.com/images/ToeAVOUY-SVWp6eibmxEZmjEWFU=/189868/format-webp%7Cwidth-2880/Dinner_Party_album_cover_artwork_Amani_Washington_art_music_painting_itsni.jpg'
+}
+const album15 = {
+    id: 'tommisch&yussef_whatkindamusic',
+    url: 'https://media.pitchfork.com/photos/5ea205f03577a40009ece414/1:1/w_800,h_800,c_limit/What%20Kinda%20Music_Tom%20Misch%20and%20Yussef%20Dayes.jpg'
+}
+const album16 = {
+    id: 'avantdale_avantdale',
+    url: 'https://i.discogs.com/Hb5Exksb7ywMAYTW82wuc57FshE9jApFZCcOfSia2xU/rs:fit/g:sm/q:90/h:600/w:596/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzNTQ5/ODEyLTE2NjQ5NDA4/MjUtMzU4Ni5qcGVn.jpeg'
+}
+const album17 = {
+    id: 'beachhouse_cherry',
+    url: 'https://lastfm.freetls.fastly.net/i/u/ar0/92ee7e4f3afdbe6a9a8c13a4a790baf1.jpg'
+}
+const album18 = {
+    id: 'littlesimz_nothankyou',
+    url: 'https://media.pitchfork.com/photos/639780c076d8d727248c60d3/master/pass/littlesimz.jpeg'
+}
+const album19 = {
+    id: 'thesmiths_queenisdead',
+    url: 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/the-queen-is-dead-nyasia-hamill.jpg'
+}
 
-const albums = [album0, album1, album2, album3, album4, album5, album6, album7, album8, album9, album10, album11, album12, album13];
-const albums_shuf0 = [album11,album3,album13,album9,album5,album4,album12,album2,album6,album10,album1,album7,album8,album0];
-const albums_shuf1 = [album8,album11,album0,album9,album5,album6,album10,album3,album2,album13,album7,album4,album12,album1];
 
+const albums = [album19,album14,album12,album13,album3,album8,album1,album16,album4,album17,album5,album0,album18,album6,album15,album7,album2,album9,album11,album10];
+const albums_shuf0 = [album2,album5,album4,album19,album11,album17,album13,album14,album8,album10,album15,album12,album3,album0,album6,album1,album9,album18,album7,album16];
+const albums_shuf1 = [album13,album18,album11,album17,album8,album3,album16,album15,album5,album6,album7,album1,album0,album9,album10,album4,album12,album19,album14,album2];
 
 // a single album within the album grid
 function AlbumGridComponent({ album, onClick}) {
