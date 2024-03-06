@@ -1,4 +1,3 @@
-import nextbutton from './rightarrow.png';
 import './App.css';
 
 
@@ -63,11 +62,14 @@ const albums = [album0, album1, album2, album3, album4, album5, album6, album7, 
 const albums_shuf0 = [album11,album3,album13,album9,album5,album4,album12,album2,album6,album10,album1,album7,album8,album0];
 const albums_shuf1 = [album8,album11,album0,album9,album5,album6,album10,album3,album2,album13,album7,album4,album12,album1];
 
+
+// a single album within the album grid
 function AlbumGridComponent({ album, onClick}) {
     return (
         <div style={{ cursor: 'pointer' }} onClick={() => onClick(album.id)}>
             <img 
-                src={album.url} 
+                src={album.url}
+                alt='alt_text_here' 
                 className="pop-out"
                 width="100%"
                 height="100%" 
@@ -77,8 +79,8 @@ function AlbumGridComponent({ album, onClick}) {
 }
 
 function AlbumGrid({albumsArray}) {
-    const handleClick = (key) => {
-        console.log('Image ${id} clicked!');
+    const handleClick = (id) => {
+        console.log(`${id} clicked!`);
         // handle click event later
     }
     return (
