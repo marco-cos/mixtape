@@ -123,15 +123,15 @@ export default function Albums() {
     return (
         <div id='albumpage'>
             <h1>Popular Albums</h1>
-            <div>
+            <div style={{marginBottom: '50px'}}>
                 <AlbumGrid albumsArray={albums} />
             </div>
             <h1>Reviewed By Your Friends</h1>
-            <div>
+            <div style={{marginBottom: '50px'}}>
                 <AlbumGrid albumsArray={albums_shuf0} />
             </div>
             <h1>New Reviews</h1>
-            <div>
+            <div style={{marginBottom: '50px'}}>
                 <AlbumGrid albumsArray={albums_shuf1} />
             </div>
         </div>
