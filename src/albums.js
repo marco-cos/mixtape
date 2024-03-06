@@ -1,5 +1,4 @@
-import './App.css';
-
+import React, { useEffect } from 'react';
 
 const album0 = {
     id: 'pinkfloyd_dsotm',
@@ -96,8 +95,8 @@ function AlbumGridComponent({ album, onClick}) {
                 src={album.url}
                 alt='alt_text_here' 
                 className="pop-out"
-                width="100%"
-                height="100%" 
+                width="225px"
+                height="225px" 
             />
         </div>
     );
@@ -120,6 +119,25 @@ function AlbumGrid({albumsArray}) {
 
 // entire page
 export default function Albums() {
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+            const grids = document.querySelectorAll('.album-grid');
+
+            grids.forEach( (grid,index) => {
+                const directionMultiplier = index % 2 === 0 ? 1 : -1;
+
+                const initialOffset = -grid.offsetWidth * 0.11;
+                const dynamicScrollAmount = scrollPosition / 20 * directionMultiplier;
+                grid.style.transform = `translateX(${initialOffset + dynamicScrollAmount}px)`;
+            });
+        };
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
     return (
         <div id='albumpage'>
             <h1>Popular Albums</h1>
