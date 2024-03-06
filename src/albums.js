@@ -101,6 +101,7 @@ function AlbumGridComponent({ album, onClick}) {
     );
 }
 
+// album grid element
 function AlbumGrid({albumsArray}) {
     const handleClick = (id) => {
         console.log(`${id} clicked!`);
@@ -115,6 +116,7 @@ function AlbumGrid({albumsArray}) {
     )
 }
 
+// entire page
 export default function Albums() {
     useEffect(() => {
         const handleScroll = () => {
