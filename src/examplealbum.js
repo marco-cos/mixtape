@@ -45,7 +45,7 @@ function getalbumstars(reviews) {
     return stars
 }
 
-function getStars(starnum) {
+function getStarString(starnum) {
     let starstr = ""
     for (var i = 0; i < starnum; i++) {
         starstr+= "★"
@@ -74,7 +74,7 @@ function ReviewComponent({ review}) {
         }
     }
 
-    const stars = useState(getStars(review.stars));
+    const stars = useState(getStarString(review.stars));
 
 
     var redlikebutton = {
@@ -122,7 +122,7 @@ export default function examplealbum(){
     return(
         <html>
             <div id="albuminfo" >
-                <h1>{albuminfo.albuname} {getStars(getalbumstars(reviews))}</h1>
+                <h1>{albuminfo.albuname} {getStarString(getalbumstars(reviews))}</h1>
                 <h2>{albuminfo.artist}</h2>
                 <img src={albuminfo.image} width="100%" height="100%"/>
                 <div id="postreviewbutton"><Link to="/postreview"><button class="custom-button">Post a Review </button> </Link> </div>

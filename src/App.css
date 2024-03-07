@@ -271,6 +271,30 @@ body {
   background-color: transparent;
   height: 48px;
 }
+.custom-button:hover {
+  color: #fff;
+  background-color: #616467;
+}
+#SignUpButton {
+  background: rgb(131,58,180);
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  text-align: center;
+  height: 60px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width:18%;
+  font-size:150%;
+  padding: 0;
+  border-width:0px;
+  cursor:pointer;
+  color:ivory;
+  border-radius: 20px;
+}
+#SignUpButton:hover{
+  box-shadow: 0 10px 16px 0 rgba(0,0,0,0.25),0 15px 40px 0 rgba(0,0,0,0.20);
+}
+
 .search{
   display: flex;
   align-items: center;
@@ -321,10 +345,7 @@ nav{
 .links li{
   margin-left: 20px;
 }
-.custom-button:hover {
-  color: #fff;
-  background-color: #616467;
-}
+
 
 .seeMoreContainer {
   padding-right: 170px;
@@ -361,6 +382,16 @@ nav{
   font-style: italic;
   color:#6e6e6e
 }
+#centeredimage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top:20%;
+  height:20%;
+  width: 20%;
+
+}
+
 .bar {
   background-color: #bdbcbc;
 }

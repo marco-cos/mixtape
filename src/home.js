@@ -1,3 +1,6 @@
+import albumex from './albumex.png'
+import { Link } from 'react-router-dom'
+import listenlogjam from './listenlogjam.png'
 
 export default function Home(){
     return(
@@ -8,21 +11,14 @@ export default function Home(){
                     <div className="header">
                         <h1>what your friends have been listening to.</h1>
                     </div>
-                    <div className="albums">
-                        <div className="cover"></div>
-                        <div className="cover"></div>
-                        <div className="cover"></div>
-                        <div className="cover"></div>
-                        <div className="cover"></div>
-                    </div>
-                    <div className="seeMoreContainer">
-                        <div className="seeMore">
-                            <h3>all activity</h3>
-                        </div>
-                    </div>
+                    <img src={albumex} width="100%"></img>
                 </div>
+                <br></br>
+                <Link to="/register"><button id="SignUpButton">Sign Up Now →</button></Link>
+            
             </div>
-            <div className="footerContainer">
+            <img src={listenlogjam} alt="Footer" width="15%" height="15%" id="centeredimage"/>
+            {/* Literally cannot center this so replaced with image 
                 <div className="gradientContainer">
                     <div className="gradientColor">
                         <div className="footer">
@@ -30,7 +26,7 @@ export default function Home(){
                         </div>
                     </div>
                 </div>
-            </div>    
+            */}
         </html>
     )
 }
