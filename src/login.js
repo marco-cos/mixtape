@@ -1,12 +1,13 @@
 import './register.css';
-import { useState } from "react"
-import axios from 'axios'
+import { useState } from "react";
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+
 
 export default function Login(){
     const navigate = useNavigate()
     const [data, setData] = useState({
-        username: '',
+        email: '',
         password:'',
 
     })
@@ -15,12 +16,13 @@ export default function Login(){
 
     const loginUser = async(e) =>{
     e.preventDefault()
-        //axios.get('/')
-        const {username,password} = data
+        const {email,password} = data
         try {
-            const {data} = await axios.post('/login', {
-                username,
+            const {data} = await axios.post('http://localhost:8000/login', {
+                email,
                 password
+            }, {
+                withCredentials: true
             });
             if (data.error){
                 setError('incorrect username or password')
@@ -40,7 +42,7 @@ export default function Login(){
                 <form class="registration-form" onSubmit = {loginUser}>
                     <h1>Login</h1>
                     <div class="form-group">
-                        <input className='un' type = 'text'placeholder= 'enter username' value={data.username} onChange={(e) => setData({...data,username:e.target.value})}/>
+                        <input className='un' type = 'text'placeholder= 'enter email' value={data.username} onChange={(e) => setData({...data,email:e.target.value})}/>
                     </div>
                     <div class="form-group">
                         <input className='un' type = 'password' placeholder= 'enter password'value={data.password} onChange={(e) => setData({...data,password:e.target.value})}/>
