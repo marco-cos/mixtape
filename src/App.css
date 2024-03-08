@@ -52,6 +52,13 @@ body {
   gap: 10px;
   margin-left: auto;
   margin-right: auto;
+  flex-wrap: nowrap;
+}
+
+.album-grid-container {
+  overflow-x: auto;
+  display: flex;
+  white-space: nowrap;
 }
 
 .album-grid:hover .pop-out{
@@ -105,6 +112,30 @@ body {
   to {
     opacity: 50%;
   }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scrollContainer {
+  display: flex;
+  width: calc(200% + 4px); /* 100% for each image + a little extra to avoid a gap */
+  overflow: hidden;
+}
+
+.scrollContainer img {
+  width: 50%; /* Each image is half of the container width */
+  animation: scroll 30s linear infinite;
+}
+
+.friendActivity {
+  overflow: hidden; /* Ensure the images outside this container do not show */
 }
 
 .albums{
