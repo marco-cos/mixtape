@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const album0 = {
     id: 'pinkfloyd_dsotm',
@@ -86,6 +86,7 @@ const albums = [album19,album14,album12,album13,album3,album8,album1,album16,alb
 const albums_shuf0 = [album2,album5,album4,album19,album11,album17,album13,album14,album8,album10,album15,album12,album3,album0,album6,album1,album9,album18,album7,album16];
 const albums_shuf1 = [album13,album18,album11,album17,album8,album3,album16,album15,album5,album6,album7,album1,album0,album9,album10,album4,album12,album19,album14,album2];
 
+
 // a single album within the album grid
 function AlbumGridComponent({ album, onClick}) {
     return (
@@ -102,22 +103,44 @@ function AlbumGridComponent({ album, onClick}) {
 }
 
 // album grid element
-function AlbumGrid({albumsArray}) {
+function AlbumGrid({ albumsArray }) {
+    const scrollContainerRef = useRef(null);
+    const [displayAlbums, setDisplayAlbums] = useState([...albumsArray, ...albumsArray]); 
+
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        const totalWidth = container.scrollWidth / 2; 
+
+        const handleScroll = () => {
+            if (container.scrollLeft >= totalWidth) {
+                container.scrollLeft = 0;
+            }
+        };
+        container.addEventListener('scroll', handleScroll);
+        
+        return () => {
+            container.removeEventListener('scroll', handleScroll);
+        };
+    }, [albumsArray]);
+
     const handleClick = (id) => {
         console.log(`${id} clicked!`);
         // handle click event later
     }
     return (
-        <div className='album-grid'>
-            {albumsArray.map((album) => (
-                <AlbumGridComponent key={album.id} album={album} onClick={handleClick} />
-            ))}
+        <div ref={scrollContainerRef} className='album-grid-container'>
+            <div className='album-grid'>
+                {displayAlbums.map((album, index) => (
+                    <AlbumGridComponent key={album.id} album={album} onClick={handleClick} />
+                ))}
+            </div>
         </div>
     )
 }
 
 // entire page
 export default function Albums() {
+
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
