@@ -1,5 +1,6 @@
 body {
   background-color: #231f20;
+  color: #DEDEDE;
   font-family: "Archivo", sans-serif;
   font-size: 15px;
   font-variation-settings:"wdth" 100;
@@ -63,10 +64,12 @@ body {
   display: flex;
   white-space: nowrap;
   margin: 0 -40px;
+  background-color: #231f20;
 }
 
 .album-grid-container::-webkit-scrollbar {
   display: none;
+  background-color: #231f20;
 }
 
 .album-grid:hover .pop-out{
@@ -137,11 +140,13 @@ body {
   width: calc(200% + 4px); /* 100% for each image + a little extra to avoid a gap */
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: #231f20;
 }
 
 .scrollContainer img {
   width: 50%; /* Each image is half of the container width */
   animation: scroll 30s linear infinite;
+  background-color: #231f20;
 }
 
 .friendActivity {
@@ -368,7 +373,7 @@ body {
 }
 nav{
   width:100%;
-  background-color: white;
+  background-color: #DEDEDE;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
