@@ -3,11 +3,15 @@ import './App.css';
 import albumex from './albumex.png'
 import { Link } from 'react-router-dom'
 import listenlogjam from './listenlogjam.png'
+import mixtape_newlogo_large from './mixtape_newlogo_large.png'
 
 export default function Home(){
     return(
         <html>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" />
+            <div>
+                <img src={mixtape_newlogo_large}></img>
+            </div>
             <div className="friendContainer">
                 <div className="friendActivity">
                     <div className="header">

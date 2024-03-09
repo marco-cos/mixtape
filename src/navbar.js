@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.png';
+import logo from './mixtape_newlogo_small.png';
 import searchicon from './searchicon.svg';
 import './App.css';
 import { Link } from 'react-router-dom'
@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <nav>
       <div className="logo">
-      <li><Link to="/"><img src={logo} alt="logo"/></Link></li>
+      <li><Link to="/"><img src={logo} height='40px' width='100px' alt="logo"/></Link></li>
       </div>
       <div className="links">
           <ul id="navbartext">
