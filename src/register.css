@@ -13,7 +13,8 @@ body.registerpg-body::before {
     filter: blur(5px);
   }
 .container{
-    background: rgba(255, 255, 255, 0.9);
+    background-color: #231f20;
+    color: DEDEDE;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 3);
     padding: 20px;
     border-radius: 10px;
