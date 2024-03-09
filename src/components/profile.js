@@ -1,8 +1,40 @@
 import React, { useState } from 'react';
 import { AlbumGrid, AlbumGridComponent } from './albums.js';
-import editbutton from './editbutton.png';
+import editbutton from '../images/editbutton.png';
+import axios from 'axios';
 
-export default function Profile(){
+
+export default function Profile(){  
+    // const [profilePic, setProfilePic] = useState(null);
+
+    // const handlePicUpload = async (e) => {
+    //     const file = e.target.files[0];
+    //     setProfilePic(file);
+    // };
+
+    // const uploadImage = async (e) => {
+    //     console.log("upload img")
+    //     e.preventDefault();
+    //     if (!profilePic) {
+    //         return;
+    //     }
+    //     try {
+    //         const formData = new FormData();
+    //         formData.append('image', profilePic)
+    //         console.log('access images route');
+    //         const response = await axios.post('http://localhost:8000/images', formData, {
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data'
+    //             },
+    //             withCredentials: true
+    //         });
+    //         console.log("image uploaded successfully")
+    //     } catch (error) {
+    //         console.error("error uploading image:", error)
+    //     }
+    // };
+
+
 
     //TO CHANGE: Set isuerprofile to true if the profile that is being viewed belongs to user that is logged in, otherwise false
     var isuserprofile = true;
@@ -77,14 +109,20 @@ export default function Profile(){
     //TO CHANGE: Make uploaded image get sent to firebase 
     return(
         <html>
-             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" />
             <div style={{ paddingLeft: '5%', paddingTop: '5%'}}>
                 <h1>{user}</h1>
-                <img src={picurl} alt="Profile Pic" width="20%" height="20%"/> <br/>
-                <div style={editButtonDisplay}>
-                    <label for="myfile">Select new profile pic: </label>
-                    <input type="file" accept="image/png" id="myfile" name="myfile"></input>
-                </div>
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" alt="Profile"/>
+                {/* <img src={profilePic ? URL.createObjectURL(profilePic) : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'} alt="Profile" />
+                    <div>
+                        <form className="imgUpload" onSubmit={uploadImage}>
+                            <div>
+                                <label htmlFor="myfile">Select new profile pic:</label>
+                                <input type="file" accept="image/png" id="myfile" name="myfile" onChange={handlePicUpload} />
+                            </div>
+                            <button className="custom-button" type='submit'>Upload</button>
+                        </form>
+                    </div>               */}
                  <br></br>
                  <h2 style={{display:"inline-block",marginRight:'10px'}}>Bio</h2>
                  

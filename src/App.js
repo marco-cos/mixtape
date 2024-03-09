@@ -1,12 +1,12 @@
 import './App.css';
-import Navbar from './navbar.js';
-import Home from './home.js';
-import Register from './register.js';
-import Login from './login.js';
-import Profile from './profile.js';
-import Albums from './albums.js';
-import Examplealbum from './examplealbum.js'
-import Postreview from './postreview.js';
+import Navbar from './components/navbar.js';
+import Home from './components/home.js';
+import Register from './components/register.js';
+import Login from './components/login.js';
+import Profile from './components/profile.js';
+import Albums from './components/albums.js';
+import Examplealbum from './components/examplealbum.js'
+import Postreview from './components/postreview.js';
 import axios from 'axios'; // used to transport data btwn frontend and backend
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 

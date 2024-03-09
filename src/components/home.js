@@ -1,6 +1,6 @@
-import albumex from './albumex.png'
+import albumex from '../images/albumex.png'
 import { Link } from 'react-router-dom'
-import listenlogjam from './listenlogjam.png'
+import listenlogjam from '../images/listenlogjam.png'
 
 export default function Home(){
     return(

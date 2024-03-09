@@ -7,7 +7,11 @@ const app = express();
 const { MONGO_URL, PORT} = process.env;
 const bodyParser = require('body-parser'); 
 
-const authRoute = require("./routes/authRoutes");
+
+app.set("view engine", "ejs");
+
+
+// const authRoute = require("./routes/authRoutes");
 
 // database connection
 mongoose.connect(process.env.MONGO_URL)
@@ -33,3 +37,4 @@ app.use(cookieParser())
 app.use(express.urlencoded({extended:false}))
 
 app.use('/', require('./routes/authRoutes'))
+app.use('/images', require('./routes/imgRoutes'))

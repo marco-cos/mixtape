@@ -29,6 +29,7 @@ export default function Login(){
             }
             else{
                 setData({})
+                console.log("logged in")
                 navigate('/')
             }
         } catch (error) {
@@ -49,7 +50,6 @@ export default function Login(){
                     </div>
                     <button className="custom-button" type = 'login'>Login</button>
                     {error && <p style = {{color: 'red'}}>{error}</p>}
-
                 </form>
              </div>
         </body>

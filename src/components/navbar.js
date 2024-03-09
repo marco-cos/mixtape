@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './logo.png';
-import searchicon from './searchicon.svg';
-import './App.css';
+import logo from '../images/logo.png';
+import searchicon from '../images/searchicon.svg';
+import '../App.css';
 import { Link } from 'react-router-dom'
 
 
