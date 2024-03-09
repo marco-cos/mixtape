@@ -1,5 +1,5 @@
 body {
-  background-color: #eae8e8;
+  background-color: #231f20;
   font-family: "Archivo", sans-serif;
   font-size: 15px;
   font-variation-settings:"wdth" 100;
@@ -368,7 +368,7 @@ body {
 }
 nav{
   width:100%;
-  background-color: #b6b4b4;
+  background-color: white;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
