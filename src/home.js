@@ -9,7 +9,7 @@ export default function Home(){
     return(
         <html>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" />
-            <div>
+            <div className='home-logo'>
                 <img src={mixtape_newlogo_large}></img>
             </div>
             <div className="friendContainer">
