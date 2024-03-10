@@ -9,7 +9,7 @@ export default function Home(){
     return(
         <html>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" />
-            <div className='home-logo'>
+            <div className='home-logo' style={{marginBottom:'-70px', marginTop:'-20px'}}>
                 <img src={mixtape_newlogo_large}></img>
             </div>
             <div className="friendContainer">
@@ -25,7 +25,9 @@ export default function Home(){
                 <br></br>
                 <Link to="/register"><button id="SignUpButton">Sign Up Now →</button></Link>
             </div>
-            <img src={listenlogjam} alt="Footer" width="15%" height="15%" id="centeredimage"/>
+            <div style={{display:'flex', justifyContent:'center', marginTop:'95px'}}>
+                <img src={listenlogjam} width="15%" height="15%"/>
+            </div>
             {/* Literally cannot center this so replaced with image 
                 <div className="gradientContainer">
                     <div className="gradientColor">
