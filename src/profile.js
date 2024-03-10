@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AlbumGrid, AlbumGridComponent } from './albums.js';
-import editbutton from './editbutton.png';
+import editbutton from './assets/editbutton.png';
 
 export default function Profile(){
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import albumex from './albumex.png'
+import albumex from './assets/albumex.png'
 import { Link } from 'react-router-dom'
-import listenlogjam from './listenlogjam.png'
-import mixtape_newlogo_large from './mixtape_newlogo_large.png'
+import listenlogjam from './assets/listenlogjam.png'
+import mixtape_newlogo_large from './assets/mixtape_newlogo_large.png'
 
 export default function Home(){
     return(
