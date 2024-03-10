@@ -101,7 +101,7 @@ export default function Home(){
             </div>
             <div style={{display:'flex', justifyContent:'center'}}>
                 <Link to="/register">
-                    <button style={{backgroundColor:'transparent', display:'flex', justifyContent:'center', scale:'0.3'}}>
+                    <button className="signup_button">
                         <img src={signupbutton}></img>
                     </button>
                 </Link>
