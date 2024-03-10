@@ -67,26 +67,26 @@ export default function Home(){
         <html>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" />
             <div className='home-logo' style={{marginBottom:'-70px', marginTop:'-20px'}}>
-                <img src={mixtape_newlogo_large}></img>
+                <img src={mixtape_newlogo_large} className="slideUp"></img>
             </div>
             <div className="friendContainer">
                 <div className="friendActivity">
                     <div className="header">
-                        <h1>what your friends have been listening to.</h1>
+                        <h1 className="fadeIn">what your friends have been listening to.</h1>
                     </div>
                     <div className="scrollContainer">
-                        <img src={album0.url} width="225px" height="225px" alt="Album 0"></img>
-                        <img src={album1.url} width="225px" height="225px" alt="Album 1"></img>
-                        <img src={album2.url} width="225px" height="225px" alt="Album 2"></img>
-                        <img src={album3.url} width="225px" height="225px" alt="Album 3"></img>
-                        <img src={album4.url} width="225px" height="225px" alt="Album 4"></img>
-                        <img src={album5.url} width="225px" height="225px" alt="Album 5"></img>
-                        <img src={album6.url} width="225px" height="225px" alt="Album 6"></img>
-                        <img src={album7.url} width="225px" height="225px" alt="Album 7"></img>
-                        <img src={album8.url} width="225px" height="225px" alt="Album 8"></img>
+                        <img src={album0.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 0"></img>
+                        <img src={album1.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 1"></img>
+                        <img src={album2.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 2"></img>
+                        <img src={album3.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 3"></img>
+                        <img src={album4.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 4"></img>
+                        <img src={album5.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 5"></img>
+                        <img src={album6.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 6"></img>
+                        <img src={album7.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 7"></img>
+                        <img src={album8.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 8"></img>
 
-                        <img src={album0.url} width="225px" height="225px" alt="Album 0"></img>
-                        <img src={album1.url} width="225px" height="225px" alt="Album 1"></img>
+                        <img src={album0.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 0"></img>
+                        <img src={album1.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 1"></img>
                         <img src={album2.url} width="225px" height="225px" alt="Album 2"></img>
                         <img src={album3.url} width="225px" height="225px" alt="Album 3"></img>
                         <img src={album4.url} width="225px" height="225px" alt="Album 4"></img>
