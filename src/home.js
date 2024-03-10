@@ -4,6 +4,7 @@ import albumex from './assets/albumex.png'
 import { Link } from 'react-router-dom'
 import listenlogjam from './assets/listenlogjam.png'
 import mixtape_newlogo_large from './assets/mixtape_newlogo_large.png'
+import signupbutton from './assets/signupbutton.png'
 
 //
 // ALBUMS SCROLLING CONTAINER
@@ -97,7 +98,13 @@ export default function Home(){
                     </div>
                 </div>
                 <br></br>
-                <Link to="/register"><button id="SignUpButton">Sign Up Now →</button></Link>
+            </div>
+            <div style={{display:'flex', justifyContent:'center'}}>
+                <Link to="/register">
+                    <button style={{backgroundColor:'transparent', display:'flex', justifyContent:'center', scale:'0.3'}}>
+                        <img src={signupbutton}></img>
+                    </button>
+                </Link>
             </div>
             <div style={{display:'flex', justifyContent:'center', marginTop:'95px'}}>
                 <img src={listenlogjam} width="15%" height="15%"/>
