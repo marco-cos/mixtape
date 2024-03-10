@@ -39,6 +39,7 @@ body {
 
 .friendActivity {
   padding-top: 50px;
+  overflow: hidden; 
 }
 
 @keyframes pop-out {
@@ -132,30 +133,27 @@ body {
 }
 
 @keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-2025px); } 
 }
 
 .scrollContainer {
+  width: 9000px;
   display: flex;
-  width: calc(200% + 4px); /* 100% for each image + a little extra to avoid a gap */
+  white-space: nowrap;
   overflow-x: hidden;
-  overflow-y: auto;
   background-color: #231f20;
+  animation: scroll 50s linear infinite;
 }
 
 .scrollContainer img {
-  width: 50%; /* Each image is half of the container width */
-  animation: scroll 30s linear infinite;
-  background-color: #231f20;
+  flex-shrink: 0;
+  margin-right: 10px;
 }
 
-.friendActivity {
-  overflow: hidden; /* Ensure the images outside this container do not show */
+.scrollContainer::after {
+  content: "";
+  width: 100%; /* pushes the last image fully into view */
 }
 
 .albums{
