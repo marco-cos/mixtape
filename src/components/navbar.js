@@ -46,7 +46,7 @@ function hidesearch(){
     <div>
     <nav>
       <div className="logo">
-      <li><Link to="/"><img src={logo} alt="logo"/></Link></li>
+      <li><Link to="/"><img src={logo} alt="logo" width="15%"/></Link></li>
       </div>
       <div className="links">
           <ul id="navbartext">
