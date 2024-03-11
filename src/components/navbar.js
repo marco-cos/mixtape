@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './assets/mixtape_newlogo_small.png';
-import searchicon from './assets/searchicon.svg';
-import './App.css';
+import logo from '../images/mixtape_newlogo_small.png';
+import searchicon from '../images/searchicon.svg';
+import '../App.css';
 import { Link } from 'react-router-dom'
 
 

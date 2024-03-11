@@ -1,4 +1,4 @@
-import likebutton from './assets/likebutton.png';
+import likebutton from '../images/likebutton.png';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 

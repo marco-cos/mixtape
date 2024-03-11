@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
-import albumex from './assets/albumex.png'
+import '../App.css';
 import { Link } from 'react-router-dom'
-import listenlogjam from './assets/listenlogjam.png'
-import mixtape_newlogo_large from './assets/mixtape_newlogo_large.png'
-import signupbutton from './assets/signupbutton.png'
+import listenlogjam from '../images/listenlogjam.png'
+import mixtape_newlogo_large from '../images/mixtape_newlogo_large.png'
+import signupbutton from '../images/signupbutton.png'
 
 //
 // ALBUMS SCROLLING CONTAINER

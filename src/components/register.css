@@ -5,7 +5,7 @@ body.registerpg-body::before {
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url("assets/albumcovers2.png");
+    background-image: url("../images/albumcovers2.png");
     background-size: cover;
     opacity: 0.5;
     background-color: rgba(0, 0, 0, 0.5);
