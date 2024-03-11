@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import logo from '../images/logo.png';
+import logo from '../images/mixtape_newlogo_small.png.png';
 import searchicon from '../images/searchicon.svg';
 import '../App.css';
 import { Link } from 'react-router-dom'

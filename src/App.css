@@ -1,12 +1,13 @@
 body {
-  background-color: #eae8e8;
+  background-color: #231f20;
+  color: #DEDEDE;
   font-family: "Archivo", sans-serif;
   font-size: 15px;
   font-variation-settings:"wdth" 100;
 }
 .App {
   text-align: center;
-  color: #eae8e8;
+  color: #DEDEDE;
 }
 
 .App-logo {
@@ -14,6 +15,11 @@ body {
   pointer-events: none;
 }
 
+.home-logo {
+  display: flex;
+  scale: 75%;
+  justify-content: center;
+}
 
 /* .App-header {
   background-color: #282c34;
@@ -33,6 +39,7 @@ body {
 
 .friendActivity {
   padding-top: 50px;
+  overflow: hidden; 
 }
 
 @keyframes pop-out {
@@ -63,10 +70,12 @@ body {
   display: flex;
   white-space: nowrap;
   margin: 0 -40px;
+  background-color: #231f20;
 }
 
 .album-grid-container::-webkit-scrollbar {
   display: none;
+  background-color: #231f20;
 }
 
 .album-grid:hover .pop-out{
@@ -97,6 +106,37 @@ body {
   z-index: 1;
 }
 
+/* OPENING ANIMATIONS */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fadeIn {
+  animation: fadeIn 1.5s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.slideUp {
+  animation: slideUp 1.5s ease-out forwards;
+}
+
+@keyframes slideUpAlbums {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.slideUpAlbums {
+  animation: slideUpAlbums 1s ease-out forwards;
+}
+
+/* */
+
 @keyframes pop-out-in {
   from {
     scale: 1.0;
@@ -124,28 +164,27 @@ body {
 }
 
 @keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-2025px); } 
 }
 
 .scrollContainer {
+  width: 9000px;
   display: flex;
-  width: calc(200% + 4px); /* 100% for each image + a little extra to avoid a gap */
+  white-space: nowrap;
   overflow-x: hidden;
-  overflow-y: auto;
+  background-color: #231f20;
+  animation: scroll 50s linear infinite;
 }
 
 .scrollContainer img {
-  width: 50%; /* Each image is half of the container width */
-  animation: scroll 30s linear infinite;
+  flex-shrink: 0;
+  margin-right: 10px;
 }
 
-.friendActivity {
-  overflow: hidden; /* Ensure the images outside this container do not show */
+.scrollContainer::after {
+  content: "";
+  width: 100%; /* pushes the last image fully into view */
 }
 
 .albums{
@@ -192,6 +231,21 @@ body {
   border-radius: 20px;
   justify-items: left;
   align-items: left;
+}
+
+.signup_button {
+  background-color: transparent; 
+  border: none;
+  display:flex; 
+  justify-content: center; 
+  scale: 0.3; 
+  width: 200px; 
+  height: 100px;
+  transition: filter 0.3s ease-in-out;
+}
+
+.signup_button:hover {
+  filter: brightness(150%);
 }
 
 #albumpage {
@@ -317,25 +371,6 @@ body {
   color: #fff;
   background-color: #616467;
 }
-#SignUpButton {
-  background: rgb(131,58,180);
-  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
-  text-align: center;
-  height: 60px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width:18%;
-  font-size:150%;
-  padding: 0;
-  border-width:0px;
-  cursor:pointer;
-  color:ivory;
-  border-radius: 20px;
-}
-#SignUpButton:hover{
-  box-shadow: 0 10px 16px 0 rgba(0,0,0,0.25),0 15px 40px 0 rgba(0,0,0,0.20);
-}
 
 .search {
   display: flex;
@@ -361,16 +396,17 @@ body {
   width: 40px;
   height: 36px;
   border: 1px solid #616467;
-  background: #616467;
+  background: #231f20;
   text-align: center;
   color: #fff;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 20px;
 }
+
 nav{
   width:100%;
-  background-color: #b6b4b4;
+  background-color: #DEDEDE;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
