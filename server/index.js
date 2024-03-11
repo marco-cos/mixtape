@@ -38,3 +38,5 @@ app.use(express.urlencoded({extended:false}))
 
 app.use('/', require('./routes/authRoutes'))
 app.use('/images', require('./routes/imgRoutes'))
+app.use('/profile', require('./routes/profileRoutes'))
+// app.use('/review', require('./routes/reviewRoutes'))

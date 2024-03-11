@@ -20,14 +20,17 @@ const userSchema = new Schema({
         type: String,
         required: [true, "Password is required"]
     },
-    bio: String,
+    bio: { 
+        type: String,
+        default: "I love music"
+    },
     favArtist : String,
-    albums: [{ type: Schema.Types.ObjectId, ref: 'Album' }], 
     favSong: String,
-    reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }], 
-    // followers: [{ type: Schema.Types.ObjectId, ref: 'Album' }], 
+    favAlbum: String,
+    albums: [{ type: Schema.Types.ObjectId, ref: 'Album' }], 
+    followers: [{ type: Schema.Types.ObjectId, ref: 'User' }], 
+    following: [{ type: Schema.Types.ObjectId, ref: 'User' }], 
 
-    // following: [FollowerModel],
 })
 
 userSchema.pre("save", async function () {

@@ -1,11 +1,15 @@
 import './register.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
-
+import { useAuth } from '../context/authContext';
 
 export default function Login(){
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { isLoggedIn, login, logout } = useAuth();
+    console.log("isLoggedIn 1: ", isLoggedIn);
+    // console.log(sessionStorage.getItem('userId'));
+
     const [data, setData] = useState({
         email: '',
         password:'',
@@ -14,28 +18,40 @@ export default function Login(){
 
     const [error, setError] = useState('')
 
+    useEffect(() => {
+        if (isLoggedIn) {
+        }
+    }, [isLoggedIn]);
+
     const loginUser = async(e) =>{
-    e.preventDefault()
-        const {email,password} = data
+        e.preventDefault();
+        const {email,password} = data;
         try {
-            const {data} = await axios.post('http://localhost:8000/login', {
+            const result = await axios.post('http://localhost:8000/verifyUser/login', {
                 email,
                 password
             }, {
                 withCredentials: true
             });
-            if (data.error){
-                setError('incorrect username or password')
-            }
-            else{
-                setData({})
-                console.log("logged in")
-                navigate('/')
+            const id  = result.data.userId;
+            if (result.error){
+                setError('incorrect username or password');
+            } else {
+                login(id);
+                setData({});
+                navigate('/');
             }
         } catch (error) {
-            console.error('error', error)
+            console.error('error', error);
         }
-    }
+    };
+
+    const handleLogout = () => {
+        logout();
+        localStorage.removeItem('userId');
+        console.log("logged out");
+        navigate('/'); // Redirect to home page after logout
+    };
 
     return(
         <body className="registerpg-body">
@@ -51,6 +67,9 @@ export default function Login(){
                     <button className="custom-button" type = 'login'>Login</button>
                     {error && <p style = {{color: 'red'}}>{error}</p>}
                 </form>
+                {isLoggedIn && ( // Conditionally render logout button if logged in
+                    <button className="custom-button" onClick={handleLogout}>Logout</button>
+                )}
              </div>
         </body>
     )

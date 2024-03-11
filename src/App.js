@@ -9,27 +9,30 @@ import Examplealbum from './components/examplealbum.js'
 import Postreview from './components/postreview.js';
 import axios from 'axios'; // used to transport data btwn frontend and backend
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContextProvider } from './context/authContext';
+
 
 axios.defaults.baseURL = 'http://localhost:8000'; // this is the backend url
 axios.defaults.withCredentials = true
 
 function App() {
  return (
-    <html>
         <div>
         <Navbar />
           <div style={{ marginTop: '70px' }}></div>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/albums" element={<Albums />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/examplealbum" element={<Examplealbum />} />
-            <Route path="/postreview" element={<Postreview />} />
-          </Routes>
+          <AuthContextProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/albums" element={<Albums />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/examplealbum" element={<Examplealbum />} />
+              <Route path="/postreview" element={<Postreview />} />
+            </Routes>
+          </AuthContextProvider>
         </div>
-    </html>
   );
 }
 

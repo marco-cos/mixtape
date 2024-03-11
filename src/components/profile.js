@@ -1,91 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AlbumGrid, AlbumGridComponent } from './albums.js';
 import editbutton from '../images/editbutton.png';
 import axios from 'axios';
+import { useParams } from 'react-router';
 
 
 export default function Profile(){  
-    // const [profilePic, setProfilePic] = useState(null);
+   const params = useParams();
+//    const navigate = useNavigate();
+   
+   const [user, setUser] = useState({});
+   const { username } = useParams();
 
-    // const handlePicUpload = async (e) => {
-    //     const file = e.target.files[0];
-    //     setProfilePic(file);
-    // };
-
-    // const uploadImage = async (e) => {
-    //     console.log("upload img")
-    //     e.preventDefault();
-    //     if (!profilePic) {
-    //         return;
-    //     }
-    //     try {
-    //         const formData = new FormData();
-    //         formData.append('image', profilePic)
-    //         console.log('access images route');
-    //         const response = await axios.post('http://localhost:8000/images', formData, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data'
-    //             },
-    //             withCredentials: true
-    //         });
-    //         console.log("image uploaded successfully")
-    //     } catch (error) {
-    //         console.error("error uploading image:", error)
-    //     }
-    // };
+   useEffect(() => {
+        const fetchUser = async() => {
+            if (username === undefined) {
+                const res = await axios.get('http://localhost:8000/profile/65ee4fcaeb421699883cb9f2');
+            }
+            else {
+                const res = await axios.get(`http://localhost:8000/profile/?username=${username}`);
+                setUser(res.data);
+                console.log(res.data);
+            }
+        };
+        fetchUser();
+   }, [username]);
 
 
-
-    //TO CHANGE: Set isuerprofile to true if the profile that is being viewed belongs to user that is logged in, otherwise false
-    var isuserprofile = true;
-
-    //TO CHANGE: Set user variable to username of profile that is being viewed
-    var user = "username";
-
-    //TO CHANGE: Get profile pic from firebase
+   
     var picurl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
 
-    const editButtonDisplay = {
-        display: isuserprofile ? 'inline-block' : 'none',
-        marginRight: isuserprofile ? '10px' : '0px',
-        cursor: isuserprofile ? 'pointer' : 'default',
-    };
+    // const editButtonDisplay = {
+    //     display: isuserprofile ? 'inline-block' : 'none',
+    //     marginRight: isuserprofile ? '10px' : '0px',
+    //     cursor: isuserprofile ? 'pointer' : 'default',
+    // };
     
-
-    //TO CHANGE: Initial states should be changed so that they fetch from database
-    const [bio, setBio] = useState("I love music. This is my favorite website ever invented in the history of the world ever.");
-    const [favartist, setfavartist] = useState("Alvin & The Chipmunks");
-    const [favalbum, setfavalbum] = useState("Melodrama - Lorde");
-    const [favsong, setfavsong] = useState("I can't think of any songs - Some Artist.");
-    
-    const BioEdit = () => {
-        let input = prompt("Enter your new bio content:", "");
-        if (!(input == null || input == "")) {
-            setBio(input)
-        } 
-    }
-
-    const ArtistEdit = () => {
-        let input = prompt("Enter your new favorite artist:", "");
-        if (!(input == null || input == "")) {
-            setfavartist(input)
-        } 
-    }
-
-    const AlbumEdit = () => {
-        let input = prompt("Enter your new favorite album:", "");
-        if (!(input == null || input == "")) {
-            setfavalbum(input)
-        } 
-    }
-
-    const SongEdit = () => {
-        let input = prompt("Enter your new favorite song:", "");
-        if (!(input == null || input == "")) {
-            setfavsong(input)
-        } 
-    }
-
     //TO CHANGE: Change these to the albums that the user has reviewed, put in albums variable
     const album0 = {
         id: 'pinkfloyd_dsotm',
@@ -108,10 +58,10 @@ export default function Profile(){
 
     //TO CHANGE: Make uploaded image get sent to firebase 
     return(
-        <html>
+        <div>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" />
             <div style={{ paddingLeft: '5%', paddingTop: '5%'}}>
-                <h1>{user}</h1>
+                <h1>{user.username}</h1>
                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" alt="Profile"/>
                 {/* <img src={profilePic ? URL.createObjectURL(profilePic) : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'} alt="Profile" />
                     <div>
@@ -126,18 +76,18 @@ export default function Profile(){
                  <br></br>
                  <h2 style={{display:"inline-block",marginRight:'10px'}}>Bio</h2>
                  
-                <img src={editbutton} alt="logo" width="1.5%" height="1.5%" style={editButtonDisplay} onClick={() => BioEdit()}/> <br/>
-                <p>{bio}</p>
+                {/* <img src={editbutton} alt="logo" width="1.5%" height="1.5%" style={editButtonDisplay} onClick={() => BioEdit()}/> <br/> */}
+                <p>{user.bio}</p>
 
-                <h2 class="headerStyle">Favorite Artist</h2><img src={editbutton} alt="logo" width="1.5%" height="1.5%" style={editButtonDisplay} onClick={() => ArtistEdit()}/> <br/>
-                <p>{favartist}</p>
-                <h2 class="headerStyle">Favorite Album</h2><img src={editbutton} alt="logo" width="1.5%" height="1.5%" style={editButtonDisplay} onClick={() => AlbumEdit()}/> <br/>
-                <p>{favalbum}</p>
-                <h2 class="headerStyle">Favorite Song</h2><img src={editbutton} alt="logo" width="1.5%" height="1.5%" style={editButtonDisplay} onClick={() => SongEdit()}/> <br/>
-                <p>{favsong}</p>
+                {/* <h2 class="headerStyle">Favorite Artist</h2><img src={editbutton} alt="logo" width="1.5%" height="1.5%" style={editButtonDisplay} onClick={() => ArtistEdit()}/> <br/> */}
+                <p>{user.favArtist}</p>
+                {/* <h2 class="headerStyle">Favorite Album</h2><img src={editbutton} alt="logo" width="1.5%" height="1.5%" style={editButtonDisplay} onClick={() => AlbumEdit()}/> <br/> */}
+                <p>{user.favAlbum}</p>
+                {/* <h2 class="headerStyle">Favorite Song</h2><img src={editbutton} alt="logo" width="1.5%" height="1.5%" style={editButtonDisplay} onClick={() => SongEdit()}/> <br/> */}
+                <p>{user.favSong}</p>
                 <h2 class="headerStyle">Recent Reviews</h2><br/>
                 <AlbumGrid albumsArray={albums} />
             </div>
-        </html>
+        </div>
     )
 }
