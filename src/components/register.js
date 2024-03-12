@@ -47,12 +47,14 @@ export default function Register(){
             else if (result.message === "Username taken") {
                 setError('User with this username already exists');
             }
+            else if (result.message === "Email address is required" || result.message === "Password is required"){
+                setError("All fields are required");
+            }
             else {
-                login(id);
                 // console.log("local storage id: ", localStorage.getItem('userId'));
                 setUserData({})
                 console.log("navigate");
-                navigate('/')
+                navigate('/login')
             }
         } catch (error) {
             console.error('error', error)
@@ -61,7 +63,7 @@ export default function Register(){
 
     const handleLogout = () => {
         logout();
-        sessionStorage.removeItem('userId');
+        localStorage.removeItem('userId');
         console.log("logged out");
 
         navigate('/login'); // Redirect to login page after logout

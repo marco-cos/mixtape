@@ -3,12 +3,12 @@ import axios from 'axios';
 import logo from '../images/logo.png';
 import searchicon from '../images/searchicon.svg';
 import '../App.css';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 
 function Navbar() {
   const [results, setresults] = useState([]);
-
+ 
   const handleSearch = async (query) => {
     if (query != "") {
         try {
@@ -41,6 +41,8 @@ function Navbar() {
 function hidesearch(){
   setresultvisibility(false);
 }
+
+
 
   return (
     <div>

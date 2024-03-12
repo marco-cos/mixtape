@@ -7,6 +7,7 @@ import Profile from './components/profile.js';
 import Albums from './components/albums.js';
 import Examplealbum from './components/examplealbum.js'
 import Postreview from './components/postreview.js';
+import OtherUserProfile from './components/otherUserProfile.js';
 import axios from 'axios'; // used to transport data btwn frontend and backend
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useContext } from 'react';
@@ -26,6 +27,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/albums" element={<Albums />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:username" element={<OtherUserProfile />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/examplealbum" element={<Examplealbum />} />

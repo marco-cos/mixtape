@@ -65,5 +65,19 @@ const getStorageExp = (key) => {
     return value; // Return non-expired item
 };
 
+const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        const base64String = fileReader.result.split(',')[1]; // Extracting base64 data after the comma
+        resolve(base64String);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
 
-export { setStorageExp, getStorageExp};
+
+export { setStorageExp, getStorageExp, convertToBase64 };

@@ -32,7 +32,7 @@ module.exports.Register = async (req, res, next) => {
     console.log(user._id);
     res
       .status(201)
-      .json({ message: "User signed in successfully", success: true, token: jwtToken, userId: user._id });
+      .json({ message: "user created successfully", success: true, token: jwtToken, userId: user._id });
     // req.user = user;
     next();
   } catch (error) {

@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Review = require('../models/review');
 
-module.exports.review = async(req, res) => {
+module.exports.createReview = async(req, res) => {
     const newReview = new Review(req.body);
     try {
         const savedReview = await newReview.save();
@@ -11,7 +11,8 @@ module.exports.review = async(req, res) => {
     }
 }
 
-module.exports.Like = async (req, res) => {
+
+module.exports.like = async (req, res) => {
     try {
         const review = await Review.findById(req.params.id);
         if (!review.likes.includes(req.body.userId)) {
@@ -26,23 +27,52 @@ module.exports.Like = async (req, res) => {
     }
 }
 
-module.exports.getReview = async (req, res) => {
+module.exports.getAllReviews = async (req, res) => {
     try {
-        const review = await Review.findById(req.params.id);
-        res.status(200).json(review);
+        const reviews = await Review.find()
+            .populate("postedBy", "_id name")
+            .populate("comments.postedBy", "_id name")
+            .sort({ creationDate: -1 });
+        res.json({ reviews });
     } catch (error) {
-        res.status(500).json(error);
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
     }
 }
 
 module.exports.getUserReviews = async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
-        const reviews = await Review.find({ reviewer: user._id });
-        res.status(200).json(posts);
+        username = req.params.username
+        console.log(req.params.username);
+        const user = await User.findOne({username});
+        const reviews = await Review.find({ reviewer: user._id })
+                                    .populate('reviewer', '_id name');
+        res.status(200).json(reviews);
     } 
     catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ error: "could not get reviews" });
     }
 }
 
+module.exports.comment = async (req, res) => {
+    try {
+        const comment = {
+            text: req.body.text,
+            postedBy: req.user._id
+        };
+
+        const updatedReview = await Post.findByIdAndUpdate(
+            req.body.postId,
+            { $push: { comments: comment } },
+            { new: true }
+        )
+            .populate("comments.postedBy", "_id name")
+            .populate("postedBy", "_id name")
+            .exec();
+
+        res.json(updatedReview);
+    } catch (error) {
+        res.status(422).json({ error: error.message });
+    }
+    
+}
