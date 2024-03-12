@@ -1,5 +1,5 @@
 # Mixtape
-![Logo](https://raw.githubusercontent.com/marco-cos/mixtape/main/src/images/mixtape_newlogo_small.png)
+![Logo](https://raw.githubusercontent.com/marco-cos/mixtape/main/src/images/logo4readme.png)
 
 Mixtape is an open-source client/server application allowing users to post and search for persistent reviews of music albums, dynamically displaying the information to website viewers. Music lovers can discover new music and share their thoughts on albums with the Mixtape community.
 
