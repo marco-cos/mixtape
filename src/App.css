@@ -279,7 +279,7 @@ body {
   padding-left:2%;
   vertical-align: top;
   padding-right:1%;
-
+  color:#eae8e8;
 }
 
 
@@ -289,9 +289,8 @@ body {
   width:65%;
   vertical-align: top;
   padding-right:.5%;
-  height: 85vh;
+  height: 90vh;
   overflow-y:scroll;
-  border-radius: 3%;
 }
 
 #excolor {
@@ -370,6 +369,10 @@ body {
 .custom-button:hover {
   color: #fff;
   background-color: #616467;
+}
+#custombalbun {
+  color: white;
+  box-shadow: inset 0 0 0 2px white;
 }
 
 .search {
