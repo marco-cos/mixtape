@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 
+//
+// SHOWCASE ALBUMS
+//
+
 const album0 = {
     id: 'pinkfloyd_dsotm',
     url: 'https://archive.smashing.media/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/aecf4604-1d3b-417f-97c6-d5be80f51eb9/3.jpg'
@@ -81,13 +85,14 @@ const album19 = {
     url: 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/the-queen-is-dead-nyasia-hamill.jpg'
 }
 
-
 const albums = [album19,album14,album12,album13,album3,album8,album1,album16,album4,album17,album5,album0,album18,album6,album15,album7,album2,album9,album11,album10];
 const albums_shuf0 = [album2,album5,album4,album19,album11,album17,album13,album14,album8,album10,album15,album12,album3,album0,album6,album1,album9,album18,album7,album16];
 const albums_shuf1 = [album13,album18,album11,album17,album8,album3,album16,album15,album5,album6,album7,album1,album0,album9,album10,album4,album12,album19,album14,album2];
 
+//
+// CODE
+//
 
-// a single album within the album grid
 function AlbumGridComponent({ album, onClick}) {
     return (
         <div style={{ cursor: 'pointer' }} onClick={() => onClick(album.id)}>

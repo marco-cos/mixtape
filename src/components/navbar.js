@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import logo from '../images/logo.png';
+import logo from '../images/mixtape_newlogo_small.png';
 import searchicon from '../images/searchicon.svg';
 import '../App.css';
 import { Link } from 'react-router-dom';
 
 
 function Navbar() {
-  const [results, setresults] = useState([]);
- 
+  const [results, setresults] = useState({ users: [], albums: [] });
+
   const handleSearch = async (query) => {
     if (query != "") {
         try {
@@ -34,7 +34,8 @@ function Navbar() {
     zIndex: "1000",
     right:"0",
     borderRadius:"10px",
-    visibility: resultsvisible ? "visible" : "hidden"
+    visibility: resultsvisible ? "visible" : "hidden",
+    paddingLeft:"10px",
   };
 
 
@@ -48,7 +49,7 @@ function hidesearch(){
     <div>
     <nav>
       <div className="logo">
-      <li><Link to="/"><img src={logo} alt="logo"/></Link></li>
+      <li><Link to="/"><img src={logo} alt="logo" width="15%"/></Link></li>
       </div>
       <div className="links">
           <ul id="navbartext">
@@ -71,11 +72,15 @@ function hidesearch(){
     <div >
       <ul style={searchresults}>
         <div style={{display:"flex",justifyContent:"space-between"}}>
-          <li><b>Search Results: </b></li>
-          <li onClick={hidesearch} style={{color:"red",textDecoration:"underline",cursor:"pointer"}}>X</li>
+          <li style={{color:"black"}} ><b>Search Results: </b></li>
+          <li onClick={hidesearch} style={{color:"red",textDecoration:"underline",cursor:"pointer",padding:"0"}}>X</li>
         </div>
-        {results.map((user) => (<li key={user._id}>{user.username} <br/></li>))}
-        <br/>
+        <p style={{color:"black"}}><b>Users:</b></p>
+        {results.users.map((users) => (<li style={{padding:"0"}} key={users._id}><a href={"user/"+users.username}>{users.username}</a> <br/></li>))}
+        <p style={{color:"black"}}><b>Albums:</b></p>
+        {results.albums.map((albums) => (<li style={{padding:"0"}} key={albums._id}><a href={"albums/"+albums.title}>{albums.title + " - " + albums.artist}</a> <br/></li>))}
+
+       <br/>
       </ul>
     </div>
   </div>
