@@ -34,7 +34,8 @@ function Navbar() {
     zIndex: "1000",
     right:"0",
     borderRadius:"10px",
-    visibility: resultsvisible ? "visible" : "hidden"
+    visibility: resultsvisible ? "visible" : "hidden",
+    paddingLeft:"10px",
   };
 
 
@@ -69,11 +70,12 @@ function hidesearch(){
     <div >
       <ul style={searchresults}>
         <div style={{display:"flex",justifyContent:"space-between"}}>
-          <li><b>Search Results: </b></li>
-          <li onClick={hidesearch} style={{color:"red",textDecoration:"underline",cursor:"pointer"}}>X</li>
+          <li style={{color:"black"}} ><b>Search Results: </b></li>
+          <li onClick={hidesearch} style={{color:"red",textDecoration:"underline",cursor:"pointer",padding:"0"}}>X</li>
         </div>
-        {results.map((user) => (<li key={user._id}>{user.username} <br/></li>))}
-        <br/>
+        <p style={{color:"black"}}><b>Users:</b></p>
+        {results.map((user) => (<li style={{padding:"0"}} key={user._id}><a href={"user/"+user.username}>{user.username}</a> <br/></li>))}
+\        <br/>
       </ul>
     </div>
   </div>
