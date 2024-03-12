@@ -384,24 +384,27 @@ body {
 }
 .searchTerm {
   width: 50%;
-  border: 3px solid #616467;
+  border: 3px solid #231f20;
   border-right: none;
   padding: 5px;
   height: 20px;
   border-radius: 5px 0 0 5px;
   outline: none;
-  background-color: #b6b4b4;
+  background-color: #DEDEDE;
 }
 .search button{
   width: 40px;
   height: 36px;
-  border: 1px solid #616467;
+  border: 1px solid #231f20;
   background: #231f20;
   text-align: center;
   color: #fff;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 nav{
@@ -419,7 +422,8 @@ nav{
   width: 65%;
   display: flex;
   justify-content: right;
-  list-style: none
+  list-style: none;
+  margin-right: 30px;
 }
 .links li{
   margin-left: 20px;
