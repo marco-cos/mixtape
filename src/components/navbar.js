@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 
 function Navbar() {
-  const [results, setresults] = useState([]);
+  const [results, setresults] = useState({ users: [], albums: [] });
 
   const handleSearch = async (query) => {
     if (query != "") {
@@ -74,8 +74,11 @@ function hidesearch(){
           <li onClick={hidesearch} style={{color:"red",textDecoration:"underline",cursor:"pointer",padding:"0"}}>X</li>
         </div>
         <p style={{color:"black"}}><b>Users:</b></p>
-        {results.map((user) => (<li style={{padding:"0"}} key={user._id}><a href={"user/"+user.username}>{user.username}</a> <br/></li>))}
-\        <br/>
+        {results.users.map((users) => (<li style={{padding:"0"}} key={users._id}><a href={"user/"+users.username}>{users.username}</a> <br/></li>))}
+        <p style={{color:"black"}}><b>Albums:</b></p>
+        {results.albums.map((albums) => (<li style={{padding:"0"}} key={albums._id}><a href={"albums/"+albums.title}>{albums.title + " - " + albums.artist}</a> <br/></li>))}
+
+       <br/>
       </ul>
     </div>
   </div>
