@@ -11,12 +11,13 @@ module.exports.Register = async (req, res, next) => {
     const { email, password, username} = req.body;
     const existingUserEmail = await User.findOne({ email });
     const existingUsername = await User.findOne({ username });
-    if (existingUserEmail == email) {
-      return res.json({ message: "Email already registered" });
+    if (existingUserEmail) {
+      return res.status(400).json({ message: "Email already registered" });
     }
-    else if (existingUsername == username) {
-      return res.json({ message: "Username taken"})
+    if (existingUsername) {
+      return res.status(400).json({ message: "Username taken"})
     }
+
     const user = await User.create({ email, password, username });
     
     const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, { expiresIn: '1d'});
