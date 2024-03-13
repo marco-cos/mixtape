@@ -43,4 +43,3 @@ app.use('/searchresults', require('./routes/searchRoutes'));
 app.use('/profile', require('./routes/profileRoutes'))
 app.use('/review', require('./routes/reviewRoutes'))
 app.use('/Albumpage', require('./routes/albumpageRoutes'));
-// app.use('/review', require('./routes/reviewRoutes'))
