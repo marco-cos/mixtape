@@ -22,7 +22,10 @@ const reviewSchema = new Schema({
     rating: {type: String, ref: 'rating'},
     //comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
     userID: { type: String, ref:'userID', required: true },
-    reviewText: { type: String, ref: 'reviewText'}
+    album: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Album',
+    }
 });
 const ReviewModel = mongoose.model('Review', reviewSchema);
 module.exports = ReviewModel;

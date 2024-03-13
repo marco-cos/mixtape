@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 export default function Postreview(){
     const navigate = useNavigate();
-    const { userId: loggedInUserId } = useAuth();
+    //const { userId: loggedInUserId } = useAuth();
     const userId = localStorage.getItem('userId');
     //const username = localStorage.getItem('username');
     console.log("here is the userID:", userId);
@@ -17,18 +17,22 @@ export default function Postreview(){
         albumName: '',
         rating: '5',
         content: '',
-        userID: userId
+        userID: userId,
     })
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         
         try {
+            // const albumResponse = await axios.get(`http://localhost:8000/albums/${data.albumName}`);
+            // const albumId = albumResponse.data._id;
+
             const response = await axios.post('http://localhost:8000/createReview', {
+                albu
                 albumName: data.albumName,
                 rating: data.rating,
                 content: data.content,
-                userID: userId
+                userID: data.userID,
             });
 
             console.log(response.data); 
