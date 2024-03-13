@@ -5,7 +5,7 @@ import Register from './components/register.js';
 import Login from './components/login.js';
 import Profile from './components/profile.js';
 import Albums from './components/albums.js';
-import Examplealbum from './components/examplealbum.js'
+import Albumpage from './components/albumPage.js'
 import Postreview from './components/postreview.js';
 import OtherUserProfile from './components/otherUserProfile.js';
 import axios from 'axios'; // used to transport data btwn frontend and backend
@@ -26,12 +26,12 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/albums" element={<Albums />} />
-              <Route path="/albums/:albumName" element={<albumPage/>} />
+              <Route path="/albums/:albumName" element={<Albumpage/>} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/profile/:username" element={<OtherUserProfile />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/examplealbum" element={<Examplealbum />} />
+              <Route path="/Albumpage" element={<Albumpage />} />
               <Route path="/postreview" element={<Postreview />} />
             </Routes>
           </AuthContextProvider>
