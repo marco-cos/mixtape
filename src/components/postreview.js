@@ -1,20 +1,19 @@
 import './postreview.css'
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useUserId } from '../context/authUser';
 import { Link } from 'react-router-dom'
 
 
-export default function PostReview(){
+export default function Postreview(){
     const navigate = useNavigate();
-  
     const userId = localStorage.getItem('userId');
+    //const username = localStorage.getItem('username');
     console.log("here is the userID:", userId);
 
     const [data, setData] = useState({
         albumName: '',
-        rating: '',
+        rating: '5',
         reviewText: '',
         userID: userId
     })
@@ -23,7 +22,7 @@ export default function PostReview(){
         event.preventDefault();
         
         try {
-            const response = await axios.post('http://localhost:8000/review', {
+            const response = await axios.post('http://localhost:8000/createReview', {
                 albumName: data.albumName,
                 rating: data.rating,
                 reviewText: data.reviewText,
@@ -31,6 +30,8 @@ export default function PostReview(){
             });
 
             console.log(response.data); 
+            // WILL WANT TO NAVIGATE BACK TO ALBUM PAGE
+            //navigate(`http://localhost:8000/${albumName}`)
             navigate('/'); 
         } catch (error) {
             console.error('Error submitting review:', error);
