@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import editbutton from '../images/editButton.png';
+import editbutton from '../images/editbutton.png';
 import axios from 'axios';
 import { useAuth } from '../context/authContext'; // Import the useAuth hook
 import { useNavigate } from 'react-router-dom';
