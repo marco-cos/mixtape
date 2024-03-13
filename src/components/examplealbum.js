@@ -1,6 +1,35 @@
 import likebutton from '../images/likebutton.png';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import axios from 'axios';
+
+//ENTER ALBUM NAME HERE TO FETCH FROM DATABASE
+const albumNAME = "bewitched";
+
+
+function Examplealbum(){
+
+    const [albuminfo, setAlbumInfo] = useState({
+        albuname: "",
+        artist: "",
+        image: "https://assets.vogue.com/photos/58b9984661298051ac278def/master/w_2560%2Cc_limit/00-holding-lorde-album-art.jpg",
+    });
+
+const getalbuminfo = async (query) => {
+        try {
+            const response = await axios.post('/Albumpage', { query }, {withCredentials: true});
+            //setresultvisibility(true);
+            //setresults(response.data);
+            let returneddata = response.data;
+            setAlbumInfo({...albuminfo, albuname: returneddata.albums.title, artist: returneddata.albums.artist,});
+            
+            } catch (error) {
+            console.error(error);
+            }
+  };
+    
+  useEffect(() => {getalbuminfo(albumNAME); }, []);
 
 //TO CHNAGE: Make this currently logged in user
 var user = "username"
@@ -111,12 +140,6 @@ function ReviewComponent({ review}) {
 }
 
 //TO CHANGE: Dynamically get album info
-const albuminfo = {
-    albuname: "Melodrama",
-    artist: "Lorde",
-    image: "https://assets.vogue.com/photos/58b9984661298051ac278def/master/w_2560%2Cc_limit/00-holding-lorde-album-art.jpg",
-}
-
 
 function Reviews({ReviewList}) {
     return (
@@ -128,10 +151,10 @@ function Reviews({ReviewList}) {
     )
 }
 
-
 //TO CHANGE: Post review button should link to posting review of album of which the page was
-export default function examplealbum(){
+
     return(
+        
         <html>            
             <div id="albuminfo" >
                 <h1 >{albuminfo.albuname} {getStarString(getalbumstars(reviews))}</h1>
@@ -139,7 +162,6 @@ export default function examplealbum(){
                 <img src={albuminfo.image} width="100%" height="100%"/>
                 <div id="postreviewbutton"><Link to="/postreview"><button class="custom-button">Post a Review </button> </Link> </div>
             </div>
-
             <div id="reviewwrapper">
                 <div id="reviews"> 
                 <br></br>
@@ -149,3 +171,5 @@ export default function examplealbum(){
         </html>
     )
 }
+
+export default Examplealbum;

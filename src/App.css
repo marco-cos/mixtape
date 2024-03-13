@@ -370,11 +370,6 @@ body {
   color: #fff;
   background-color: #616467;
 }
-#custombalbun {
-  color: white;
-  box-shadow: inset 0 0 0 2px white;
-}
-
 .search {
   display: flex;
   align-items: center;
