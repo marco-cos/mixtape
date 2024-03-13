@@ -1,12 +1,39 @@
 const User = require('../models/user');
 const Review = require('../models/review');
+const Albums = require('../models/albums');
 
 module.exports.createReview = async(req, res) => {
-    const newReview = new Review(req.body);
-    try {
+    try{
+        const name = req.body.albumName;
+        console.log(name);
+        //const name1 = name.toString();
+        // const existingalbum = await Albums.findOne({title: {$regex: name1, $options: 'i'}});
+        const existingalbum = await Albums.findOne({title: {$regex: name, $options: 'i'}});
+        // const existingalbum = await Albums.findOne({title: req.body.albumName});
+        if (!existingalbum){
+            // we only want to review existing albums
+            return res.status(500).json({ error: "cannot review an album that does not exist" });
+        }
+        console.log(existingalbum);
+        const newReview = new Review({
+            album: existingalbum._id,
+            albumName,
+            rating,
+            content,
+            userID,
+            likes,
+        });
+
+        existingalbum.reviews.push(newReview.album);
+
+        await existingalbum.save();
+
+        //Fail here
         const savedReview = await newReview.save();
+
         res.status(200).json(savedReview);
-    } catch (error) {
+    }
+    catch (error) {
         res.status(500).json(error);
     }
 }
