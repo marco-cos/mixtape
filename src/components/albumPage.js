@@ -35,7 +35,7 @@ const getalbuminfo = async (query) => {
                 const review0 = {
                         username: returneddata.reviews[i].reviewer,
                         stars: returneddata.reviews[i].stars,
-                        date: returneddata.reviews[i].creationDate,
+                        date: returneddata.reviews[i].creationDate.split('T')[0],
                         favSong: returneddata.reviews[i].favSong,
                         leastfavSong: returneddata.reviews[i].leastFavSong,
                         text: returneddata.reviews[i].content,
