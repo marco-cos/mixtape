@@ -6,23 +6,13 @@ import axios from 'axios';
 import { useAuth } from '../context/authContext'; // Import the useAuth hook
 import { useParams } from 'react-router-dom';
 
+
+
 function Examplealbum(){
     const Albumpage= useParams()
     const albumID = Albumpage.albumName;
-    console.log("TEST");
-    var { user }  = useAuth();
-    
-    if (user === null) {
-        const localId = localStorage.getItem('userId');
-        console.log("localId:", localId);
-        if (localId === null) {
-            console.error('please log in');
-        }
-        user = localId;
-    }
-
-    console.log(user);
-
+    var user =localStorage.getItem('userId')
+    console.log(user)
 
     const [albuminfo, setAlbumInfo] = useState({
         albuname: "",
@@ -38,8 +28,7 @@ const getalbuminfo = async (query) => {
     if(!beenrun) {
         beenrun=true;
         try {
-            const response = await axios.post('/Albumpage', { query }, {withCredentials: true});
-            console.log(response.data)
+            const response = await axios.post('/Albumpage/getalbuminf', { query }, {withCredentials: true});
             let returneddata = response.data;
             setAlbumInfo({image: returneddata.albums.cover, albuname: returneddata.albums.title, artist: returneddata.albums.artist,});
             for (let i = 0; i < returneddata.reviews.length; i++) {
@@ -51,6 +40,7 @@ const getalbuminfo = async (query) => {
                         leastfavSong: returneddata.reviews[i].leastFavSong,
                         text: returneddata.reviews[i].content,
                         likedby: returneddata.reviews[i].likes,
+                        objID: returneddata.reviews[i].ID,
                     }
                 setReviews(reviews => [...reviews, review0]);
             }
@@ -61,6 +51,30 @@ const getalbuminfo = async (query) => {
     
     }
   };
+
+  const unlikereview = async (reviewID, userID) => {
+    console.log(reviewID,userID);
+
+    try {
+        const response = await axios.put(`/Albumpage/unlike`, { reviewID: reviewID, userID: userID });
+    } catch (error) {
+        console.error("error updating bio:", error);
+    }
+
+  };
+
+  const likereview = async (reviewID, userID) => {
+    console.log(reviewID,userID);
+
+    try {
+        const response = await axios.put(`/Albumpage/like`, { reviewID: reviewID, userID: userID });
+    } catch (error) {
+        console.error("error updating bio:", error);
+    }
+
+  };
+
+
     
   useEffect(() => {getalbuminfo(albumID); }, []);
 
@@ -87,15 +101,17 @@ function getStarString(starnum) {
 
 function ReviewComponent({ review}) {
     const [likecount, setlikecount] = useState(review.likedby.length);
-
    function likecountchange() {
         if (review.likedby.indexOf(user) > -1) {
-            //TO CHANGE: User unliked, so remove their name from firebase
-            setlikecount(likecount-1)
+            //Unlike
+            console.log(review)
+            unlikereview(review.objID,user);
+            setlikecount(likecount-1);
             review.likedby.splice(review.likedby.indexOf(user), 1);
         }
         else {
-            //TO CHANGE: User liked, so add their name to firebase
+            //Like
+            likereview(review.objID,user);
             setlikecount(likecount+1)
             review.likedby.push(user)
 

@@ -1,5 +1,7 @@
 const router = require("express").Router();
-const { Albumpage } = require("../controllers/albumpageController");
-router.post('/', Albumpage);
+const { getalbuminf ,unlike, like} = require("../controllers/albumpageController");
+router.post('/getalbuminf', getalbuminf);
+router.put('/unlike', unlike);
+router.put('/like', like);
 
 module.exports = router;
