@@ -20,7 +20,6 @@ const reviewSchema = new Schema({
     stars: Number,
     albumName: {type: String, ref: 'albumName'},
     rating: {type: String, ref: 'rating'},
-    likes: {type: Number, default: 0, ref:'likes'},
     //comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
     userID: { type: String, ref:'userID', required: true },
     reviewText: { type: String, ref: 'reviewText'}

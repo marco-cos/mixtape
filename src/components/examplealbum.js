@@ -3,14 +3,26 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
-
-//ENTER ALBUM NAME HERE TO FETCH FROM DATABASE
-const albumID = "65efabe83e6f2272beec6ceb";
-
-//GET USER ID
-var user = "65ecd39e061f87dfb0bd15c4"
+import { useAuth } from '../context/authContext'; // Import the useAuth hook
+import { useParams } from 'react-router-dom';
 
 function Examplealbum(){
+    const Albumpage= useParams()
+    const albumID = Albumpage.albumName;
+
+    var { user }  = useAuth();
+    
+    if (user === null) {
+        const localId = localStorage.getItem('userId');
+        console.log("localId:", localId);
+        if (localId === null) {
+            console.error('please log in');
+        }
+        user = localId;
+    }
+
+    console.log(user);
+
 
     const [albuminfo, setAlbumInfo] = useState({
         albuname: "",
@@ -27,10 +39,10 @@ const getalbuminfo = async (query) => {
         beenrun=true;
         try {
             const response = await axios.post('/Albumpage', { query }, {withCredentials: true});
+            console.log(response.data)
             let returneddata = response.data;
             setAlbumInfo({image: returneddata.albums.cover, albuname: returneddata.albums.title, artist: returneddata.albums.artist,});
             for (let i = 0; i < returneddata.reviews.length; i++) {
-    
                 const review0 = {
                         username: returneddata.reviews[i].reviewer,
                         stars: returneddata.reviews[i].stars,

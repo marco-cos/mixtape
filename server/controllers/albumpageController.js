@@ -5,7 +5,7 @@ const User = require("../models/user");
 exports.Albumpage = async (req, res, next) => {
   try {
     const { query } = req.body;
-    const albums = await Albumpage.findById(query);
+    const albums = await Albumpage.findOne({title: {$regex:query, $options: 'i'}});
     let reviewsArray = [];
 
     for (let i = 0; i < albums.reviews.length; i++) {
@@ -13,9 +13,8 @@ exports.Albumpage = async (req, res, next) => {
         const reviewObj = (await Review.findById(reviewID)).toObject();
         const reviewerID = reviewObj.reviewer.toString();
         const reviewer = await User.findById(reviewerID);
-    
         reviewObj.reviewer= reviewer.username;
-        reviewsArray.push(reviewObj);
+        reviewsArray.push(reviewObj); 
     }
     res.json({albums: albums,
             reviews: reviewsArray
