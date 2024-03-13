@@ -1,17 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const { getProfile, updateProfile, followUser, unfollowUser, getFollowers } = require('../controllers/profileController');
+const { getProfileFromId, getProfileFromUsername, updateBio, followUser, unfollowUser, getFollowers, updateProfilePic, checkSameUser } = require('../controllers/profileController');
 // const { userVerification } = require('../middlewares/authMiddleware');
 
-router.route('/:id').get(getProfile);
+router.route('/').get(getProfileFromId);
 
-router.route('/:id/follow').get(followUser);
+router.route('/:username').get(getProfileFromUsername);
 
-router.route('/:id/unfollow').get(unfollowUser)
+router.route('/:targetUser/follow').get(followUser);
 
-router.route('/:id/update').put(updateProfile);
+router.route('/:targetUser/unfollow').get(unfollowUser)
 
-router.route('/followers/:userId').get(getFollowers);
+router.route('/:username/updateBio').put(updateBio);
+
+router.route('/followers/:username').get(getFollowers);
+
+router.route('/:username/updatePic').put(updateProfilePic);
+
+router.route('/:username/checkSame').get(checkSameUser);
 
 module.exports = router;
 

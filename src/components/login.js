@@ -19,8 +19,7 @@ export default function Login(){
     const [error, setError] = useState('')
 
     useEffect(() => {
-        if (isLoggedIn) {
-        }
+        console.log("isLoggedIn:", isLoggedIn);
     }, [isLoggedIn]);
 
     const loginUser = async(e) =>{
@@ -34,6 +33,8 @@ export default function Login(){
                 withCredentials: true
             });
             const id  = result.data.userId;
+            // console.log("result data: ", result);
+            // console.log("result id", id);
             if (result.error){
                 setError('incorrect username or password');
             } else {

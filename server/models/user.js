@@ -1,9 +1,6 @@
 const mongoose = require('mongoose')
 const {Schema} = mongoose
 const bcrypt = require("bcryptjs");
-const ReviewModel = require('./review.js');
-const { FollowerModel } = require('./followers.js').schema;
-const { AlbumModel } = require('./albums.js').schema;
 
 const userSchema = new Schema({
     username: {
@@ -24,10 +21,21 @@ const userSchema = new Schema({
         type: String,
         default: "I love music"
     },
-    favArtist : String,
-    favSong: String,
-    favAlbum: String,
-    albums: [{ type: Schema.Types.ObjectId, ref: 'Album' }], 
+    profilePic: {
+        type: String
+    },
+    favArtist: { 
+        type: String,
+        default: "Taylor Swift"
+    },
+    favSong: { 
+        type: String,
+        default: " SuperShy by NewJeans"
+    },
+    favAlbum: { 
+        type: String,
+        default: "Folklore by Taylor Swift"
+    },
     followers: [{ type: Schema.Types.ObjectId, ref: 'User' }], 
     following: [{ type: Schema.Types.ObjectId, ref: 'User' }], 
 

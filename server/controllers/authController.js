@@ -32,11 +32,12 @@ module.exports.Register = async (req, res, next) => {
     console.log(user._id);
     res
       .status(201)
-      .json({ message: "User signed in successfully", success: true, token: jwtToken, userId: user._id });
+      .json({ message: "user created successfully", success: true, token: jwtToken, userId: user._id });
     // req.user = user;
     next();
-  } catch (error) {
-    console.error(error);
+  } catch (error) { //ensure errors thrown are logged (registering issue username/email issue)
+    console.error('Registration error:', error);
+    res.status(500).json({ message: 'An error occurred during registration.' });
   }
 };
 
@@ -65,8 +66,9 @@ module.exports.Login = async (req, res, next) => {
     //    req.user = auth;
        res.status(201).json({ message: "User logged in successfully", success: true, token: jwtToken, userId: user._id });
        next()
-    } catch (error) {
-      console.error(error);
+    } catch (error) {//ensure errors thrown are logged (registering issue username/email issue)
+      console.error('Registration error:', error);
+      res.status(500).json({ message: 'An error occurred during registration.' });
     }
   }
 

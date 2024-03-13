@@ -3,7 +3,7 @@ import axios from 'axios';
 import logo from '../images/mixtape_newlogo_small.png';
 import searchicon from '../images/searchicon.svg';
 import '../App.css';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 
 function Navbar() {
@@ -42,6 +42,8 @@ function Navbar() {
 function hidesearch(){
   setresultvisibility(false);
 }
+
+
 
   return (
     <div>
