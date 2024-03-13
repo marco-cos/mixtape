@@ -14,8 +14,9 @@ export default function Postreview(){
     console.log("here is the userID:", userId);
 
     const [data, setData] = useState({
+        album: '',
         albumName: '',
-        rating: '5',
+        rating: '',
         content: '',
         userID: userId,
     })
@@ -28,7 +29,6 @@ export default function Postreview(){
             // const albumId = albumResponse.data._id;
 
             const response = await axios.post('http://localhost:8000/createReview', {
-                albu
                 albumName: data.albumName,
                 rating: data.rating,
                 content: data.content,

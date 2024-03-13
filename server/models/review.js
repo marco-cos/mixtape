@@ -6,9 +6,9 @@ const reviewSchema = new Schema({
     content: { type: String, default: ''},
     creationDate: {type: Date, default: Date.now},
     // album: {type: mongoose.Schema.Types.ObjectId, ref: 'Album'},
-    favSong: String,
-    leastFavSong: String,
-    likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+    favSong: {type: String, default:''},
+    leastFavSong: {type: String, default:''},
+    likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}], default:[],
     comments: [{
         text: String,
         postedBy: {
@@ -17,14 +17,15 @@ const reviewSchema = new Schema({
         }
     }],
     reviewer: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    stars: Number,
-    albumName: {type: String, ref: 'albumName'},
-    rating: {type: String, ref: 'rating'},
+    stars: {type: Number, default:5},
+    albumName: {type: String, ref: 'albumName', default:''},
+    rating: {type: String, ref: 'rating', default:''},
     //comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
     userID: { type: String, ref:'userID', required: true },
     album: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Album',
+        default:'',
     }
 });
 const ReviewModel = mongoose.model('Review', reviewSchema);

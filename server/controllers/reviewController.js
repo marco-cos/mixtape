@@ -4,6 +4,7 @@ const Albums = require('../models/albums');
 
 module.exports.createReview = async(req, res) => {
     try{
+        const {albumName, rating, content, userID,likes} = req.body;
         const name = req.body.albumName;
         console.log(name);
         //const name1 = name.toString();
@@ -23,8 +24,8 @@ module.exports.createReview = async(req, res) => {
             userID,
             likes,
         });
-
-        existingalbum.reviews.push(newReview.album);
+        console.log(newReview.album);
+        existingalbum.reviews.push(newReview._id);
 
         await existingalbum.save();
 
