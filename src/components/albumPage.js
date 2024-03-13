@@ -1,95 +1,164 @@
-import React, { useState, useEffect } from 'react';
-// import { AlbumGrid, AlbumGridComponent } from './albums.js';
-// import editbutton from '../images/editbutton.png';
+import likebutton from '../images/likebutton.png';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
-// import { useParams } from 'react-router-dom';
 import { useAuth } from '../context/authContext'; // Import the useAuth hook
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-
-
-export default function Profile(){  
-    const navigate = useNavigate();
-    const { albumTitle } = useParams();
-
-    const [album, setAlbum] = useState({});
-    const [reviews, setReviews] = useState([]);
+function Examplealbum(){
+    const Albumpage= useParams()
+    const albumID = Albumpage.albumName;
+    console.log("TEST");
+    var { user }  = useAuth();
     
-    const getAlbum = async() => {
-        console.log(albumTitle); 
-        try {
-            // const response = await axios.get(`http://localhost:8000/${albumTitle}`);
-            setAlbum(response.data);
-        } catch (error) {
-            console.error("error fetching album:", error);
+    if (user === null) {
+        const localId = localStorage.getItem('userId');
+        console.log("localId:", localId);
+        if (localId === null) {
+            console.error('please log in');
         }
-        
-    };
+        user = localId;
+    }
+
+    console.log(user);
 
 
-    useEffect(() => {
-        getAlbum();
+    const [albuminfo, setAlbumInfo] = useState({
+        albuname: "",
+        artist: "",
+        image: "",
     });
 
-    useEffect(() => {
-        const fetchReviews = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8000/${albumTitle}/reviews`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                console.log(response);
-                setReviews(response.reviews);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                // Handle error, maybe set an error state or show a message to the user
-            }
-        };
-        fetchReviews();
-    }, []);
-    
-    
-    //TO CHANGE: Change these to the albums that the user has reviewed, put in albums variable
-    const album0 = {
-        id: 'pinkfloyd_dsotm',
-        url: 'https://archive.smashing.media/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/aecf4604-1d3b-417f-97c6-d5be80f51eb9/3.jpg'
-    }
-    const album1 = {
-        id: 'taylorswift_1989',
-        url: 'https://hips.hearstapps.com/hmg-prod/images/7-64ecb1c909b78.png?crop=0.502xw:1.00xh;0.498xw,0&resize=1200:*'
-    }
-    const album2 = {
-        id: 'harrystyles_fineline',
-        url: 'https://cdn.vox-cdn.com/thumbor/cUUdVnTXrleRNqbV-9JloWAleSI=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19535833/thumb_clean.jpg'
-    }
-    const album3 = {
-        id: 'lanadelrey_borntodie',
-        url: 'https://imgv3.fotor.com/images/blog-richtext-image/born-to-die-music-album-cover.png'
-    }
-    const albums = [album0, album1, album2, album3]
+    const [reviews, setReviews] = useState([]);
 
+let beenrun = false;
 
-    //TO CHANGE: Make uploaded image get sent to firebase 
-    return(
-        <div>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" />
-            <div style={{ paddingLeft: '5%', paddingTop: '5%'}}>
-                <h1>{album.title}</h1>
-                    <img></img>
-                 <br></br>
-                 <h2 style={{display:"inline-block",marginRight:'10px'}}>{album.artist}</h2>
-                    <div className="gallery">
-                    {
-                        reviews.map(item=>{
-                            return(
-
-                                <img key={item._id} className="item" src={item.photo} alt={item.title}/>  
-                            )
-                        })
+const getalbuminfo = async (query) => {
+    if(!beenrun) {
+        beenrun=true;
+        try {
+            const response = await axios.post('/Albumpage', { query }, {withCredentials: true});
+            console.log(response.data)
+            let returneddata = response.data;
+            setAlbumInfo({image: returneddata.albums.cover, albuname: returneddata.albums.title, artist: returneddata.albums.artist,});
+            for (let i = 0; i < returneddata.reviews.length; i++) {
+                const review0 = {
+                        username: returneddata.reviews[i].reviewer,
+                        stars: returneddata.reviews[i].stars,
+                        date: returneddata.reviews[i].creationDate,
+                        favSong: returneddata.reviews[i].favSong,
+                        leastfavSong: returneddata.reviews[i].leastFavSong,
+                        text: returneddata.reviews[i].content,
+                        likedby: returneddata.reviews[i].likes,
                     }
-                    </div>
-            </div>
+                setReviews(reviews => [...reviews, review0]);
+            }
+    
+            } catch (error) {
+            console.error(error);
+            }
+    
+    }
+  };
+    
+  useEffect(() => {getalbuminfo(albumID); }, []);
 
+function getalbumstars(reviews) {
+    let starsum = 0
+    for (var x = 0; x < reviews.length; x++) {
+        starsum+=reviews[x].stars
+    }
+    let stars = Math.round(starsum/reviews.length)
+    return stars
+}
+
+function getStarString(starnum) {
+    let starstr = ""
+    for (var i = 0; i < starnum; i++) {
+        starstr+= "★"
+    }
+    for (var i = 0; i < 5 - starnum; i++) {
+        starstr+="☆"
+    }
+    return starstr
+}
+
+
+function ReviewComponent({ review}) {
+    const [likecount, setlikecount] = useState(review.likedby.length);
+
+   function likecountchange() {
+        if (review.likedby.indexOf(user) > -1) {
+            //TO CHANGE: User unliked, so remove their name from firebase
+            setlikecount(likecount-1)
+            review.likedby.splice(review.likedby.indexOf(user), 1);
+        }
+        else {
+            //TO CHANGE: User liked, so add their name to firebase
+            setlikecount(likecount+1)
+            review.likedby.push(user)
+
+        }
+    }
+
+    const stars = useState(getStarString(review.stars));
+
+
+    var redlikebutton = {
+        filter: (review.likedby.indexOf(user) > -1) ? "invert(11%) sepia(84%) saturate(5483%) hue-rotate(2deg) brightness(92%) contrast(117%)" : "contrast(100%)",
+        paddingTop: "2%",
+        paddingRight:"1%"
+    };
+    
+    return (
+        <div id="review">
+        <div id="titleblock">
+            <h2 style={{paddingTop: "0.5%"}}>{review.username}</h2>
+            <h2>{stars}</h2>
+            <img  style={redlikebutton} src={likebutton} alt="like button" width="2%" height="2%" onClick={() => likecountchange()}/>
+            <h4 style={{paddingTop: ".75%"}}>{likecount}</h4>
+            <p  style={{paddingTop: "1.5%"}}><b>{review.date}</b></p>
+        </div>
+        <div style={{fontSize:20}}>
+            <p><b>Favorite Song: </b>{review.favSong}</p>
+            <p><b>Least Favorite Song: </b>{review.leastfavSong}</p>
+            <p >{review.text}</p>
+        </div>
+        <hr></hr>
+    </div>
+);
+}
+
+
+function Reviews({ReviewList}) {
+    return (
+        <div>
+            {ReviewList.map((review) => (
+                <ReviewComponent review={review} />
+            ))}
         </div>
     )
 }
+
+
+    return(
+        
+        <html>            
+            <div id="albuminfo" >
+                <h1 >{albuminfo.albuname} {getStarString(getalbumstars(reviews))}</h1>
+                <h2>{albuminfo.artist}</h2>
+                <img src={"data:image/jpeg;base64,"+albuminfo.image} width="100%" height="100%"/>
+                <div id="postreviewbutton"><Link to="/postreview"><button class="custom-button">Post a Review </button> </Link> </div>
+            </div>
+            <div id="reviewwrapper">
+                <div id="reviews"> 
+                <br></br>
+                <Reviews ReviewList={reviews} />
+                </div>
+            </div>
+        </html>
+    )
+}
+
+export default Examplealbum;
