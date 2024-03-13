@@ -26,7 +26,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/albums" element={<Albums />} />
-              <Route path="/albums/:albumName" element={<albumPage/>} />
+              <Route path="/albums/:albumName" element={<Examplealbum/>} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/profile/:username" element={<OtherUserProfile />} />
               <Route path="/register" element={<Register />} />

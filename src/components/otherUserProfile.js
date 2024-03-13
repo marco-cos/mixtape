@@ -65,9 +65,10 @@ export default function OtherUserProfile(){
                 setUserFollowing(0); 
             }
             if (user.data.followers){
-                // console.log(user.data.followers.length);
+                console.log(user.data.followers.length);
                 setUserFollowers(user.data.following.length);
             } else {
+                console.log(user.data.followers.length);
                 setUserFollowers(0);
             }
             setUserFollowers(user.data.followers.length);

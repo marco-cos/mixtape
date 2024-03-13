@@ -158,7 +158,7 @@ export default function Profile(){
         if (user.username) {
             const fetchReviews = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:8000/review/${user.username}/myReviews`);
+                    const response = await axios.get(`http://localhost:8000/createReview/${user.username}/myReviews`);
                     console.log("reviews: ", response.data);
                     if (response.status >= 200 && response.status < 300) {
                         setMyReviews(response.data);
