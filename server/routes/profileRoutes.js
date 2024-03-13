@@ -1,23 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const { getProfileFromId, getProfileFromUsername, updateBio, followUser, unfollowUser, getFollowers, updateProfilePic, checkSameUser } = require('../controllers/profileController');
+const { getProfileFromId, getProfileFromUsername, checkSameUser, 
+    followUser, unfollowUser, getFollowers, updateProfilePic, 
+    updateBio, updateArtist, updateSong, updateAlbum
+    } = require('../controllers/profileController');
 // const { userVerification } = require('../middlewares/authMiddleware');
 
 router.route('/').get(getProfileFromId);
-
 router.route('/:username').get(getProfileFromUsername);
+router.route('/:username/checkSame/:loginId').get(checkSameUser);
 
 router.route('/:targetUser/follow').get(followUser);
-
 router.route('/:targetUser/unfollow').get(unfollowUser)
-
-router.route('/:username/updateBio').put(updateBio);
-
 router.route('/followers/:username').get(getFollowers);
 
-router.route('/:username/updatePic').put(updateProfilePic);
 
-router.route('/:username/checkSame').get(checkSameUser);
+router.route('/:username/updatePic').put(updateProfilePic);
+router.route('/:username/updateBio').put(updateBio);
+router.route('/:username/updateArtist').put(updateArtist);
+router.route('/:username/updateSong').put(updateSong);
+router.route('/:username/updateAlbum').put(updateAlbum);
+
+
+
+
 
 module.exports = router;
 

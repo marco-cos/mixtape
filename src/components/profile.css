@@ -1,0 +1,84 @@
+.page-container {
+    padding: 15px; 
+    display: flex;
+    flex-direction: column; /* Make the container flex column */
+    align-items: center; 
+}
+.profile-container {
+    display: flex;
+    flex: 1;
+    width: 100%; /* Ensure the profile container takes full width */
+    max-width: 800px; /* Set maximum width for better readability */
+    margin-bottom: 20px; /* Add some spacing between profile and reviews */
+}
+
+.left-column {
+    width: 50%;
+}
+.right-column {
+    width: 50%;
+    padding-left: 20px;
+}
+
+.username-container {
+    padding-top: 10px;
+}
+.group-container {
+    align-items: center;
+}
+.user-header {
+    display: inline-block; /* Use flexbox to align items */
+    margin-right: 10px;
+}
+
+.title {
+    margin-right: 10px; /* Add right margin to create space between title and button */
+}
+
+.editButton {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+#profilePic {
+    border-radius: 50%;
+    width: 200px; /* Make profile pic responsive */
+    height: 200px;
+    max-width: 200px; /* Set maximum width for better display */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.followers-container {
+    display:inline-block;
+    padding-right: 5px;
+}
+
+.following-container {
+    display:inline-block;
+    padding-left: 5px;
+}
+
+#editButton {
+    width: 15px; 
+    height: 15px; 
+    margin-right: 10px; 
+    display: inline-block; 
+    cursor: button;
+}
+
+.title {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.reviews-container{
+    padding: 20px;
+    width: 100%; /* Take full width of page */
+    max-width: 800px; /* Set maximum width for better readability */
+}
+
+.review-title{
+    text-align: center;
+}

@@ -14,8 +14,8 @@ module.exports.getProfileFromId = async (req, res) => {
         return res.status(404).json({ error: 'User not found' });
     }
     const reviews = await Review.find({ reviewer: user._id }).populate("reviewer");
-    const { username, password, ...other } = user._doc;
-    res.status(200).json({ user: { username, ...other }, reviews });
+    const { username, favArtist, favSong, favAlbum, password, ...other } = user._doc;
+    res.status(200).json({ user: { username, favArtist, favSong, favAlbum, ...other }, reviews });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -28,7 +28,7 @@ module.exports.getProfileFromUsername = async (req, res) => {
     // console.log(req.params);
     console.log(username);
     try {
-      const user = await User.findOne(username);
+      const user = await User.findOne({username: username});
       if (!user) {
           return res.status(404).json({ error: 'User not found' });
       }
@@ -40,26 +40,6 @@ module.exports.getProfileFromUsername = async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
-
-module.exports.updateBio = async (req, res, next) => {
-  try {
-    const { bio } = req.body;
-    const newBio = bio;
-    const user = await User.findOne({ username: req.params.username });
-    await User.findByIdAndUpdate(user._id, { bio: newBio }, {
-        new: true,
-        runValidators: true,
-        useFindAndModify: true,
-    });
-    res.status(200).json({
-        success: true,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Internal server error' });
-  }
-}
 
 module.exports.followUser = async (req, res, next) => {
     const targetUsername = req.params.targetUser;
@@ -154,8 +134,7 @@ module.exports.updateProfilePic = async (req, res) => {
 
 module.exports.checkSameUser = async (req, res, next) => {
   try {
-    const { loggedInUserId } = req.body;
-    const { otherUsername } = req.params.username;
+    const { loggedInUserId, otherUsername } = req.params;
     const loggedIn = await User.findById(loggedInUserId);
     const otherUser = await User.findOne({ username: otherUsername });
     const sameUser = loggedIn._id.equals(otherUser._id);
@@ -165,3 +144,83 @@ module.exports.checkSameUser = async (req, res, next) => {
     res.status(500).json({ error: 'Internal Server Error' });
 }
 }
+
+module.exports.updateBio = async (req, res, next) => {
+  try {
+    const { bio } = req.body;
+    const newBio = bio;
+    const user = await User.findOne({ username: req.params.username });
+    await User.findByIdAndUpdate(user._id, { bio: newBio }, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: true,
+    });
+    res.status(200).json({
+        success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+}
+
+module.exports.updateArtist= async (req, res, next) => {
+  try {
+    const { artist } = req.body;
+    console.log(artist);
+    const newArtist = artist;
+    const user = await User.findOne({ username: req.params.username });
+    await User.findByIdAndUpdate(user._id, { favArtist: newArtist }, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: true,
+    });
+    res.status(200).json({
+        success: true,
+        favArtist: user.favArtist
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+}
+
+module.exports.updateSong = async (req, res, next) => {
+  try {
+    const { song } = req.body;
+    const newSong = song;
+    const user = await User.findOne({ username: req.params.username });
+    await User.findByIdAndUpdate(user._id, { favSong: newSong }, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: true,
+    });
+    res.status(200).json({
+        success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+}
+
+module.exports.updateAlbum = async (req, res, next) => {
+  try {
+    const { album } = req.body;
+    const newAlbum = album;
+    const user = await User.findOne({ username: req.params.username });
+    await User.findByIdAndUpdate(user._id, { favAlbum: newAlbum }, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: true,
+    });
+    res.status(200).json({
+        success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+}
+
+

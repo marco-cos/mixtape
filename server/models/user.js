@@ -19,22 +19,22 @@ const userSchema = new Schema({
     },
     bio: { 
         type: String,
-        default: "I love music"
+        default: "Add Bio Here"
     },
     profilePic: {
         type: String
     },
     favArtist: { 
         type: String,
-        default: "Taylor Swift"
+        default: "Add Favorite Artist Here"
     },
     favSong: { 
         type: String,
-        default: " SuperShy by NewJeans"
+        default: "Add Favorite Song Here"
     },
     favAlbum: { 
         type: String,
-        default: "Folklore by Taylor Swift"
+        default: "Add Favorite Album Here"
     },
     followers: [{ type: Schema.Types.ObjectId, ref: 'User' }], 
     following: [{ type: Schema.Types.ObjectId, ref: 'User' }], 
