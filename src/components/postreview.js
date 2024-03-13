@@ -16,7 +16,7 @@ export default function Postreview(){
     const [data, setData] = useState({
         albumName: '',
         rating: '5',
-        reviewText: '',
+        content: '',
         userID: userId
     })
 
@@ -27,7 +27,7 @@ export default function Postreview(){
             const response = await axios.post('http://localhost:8000/createReview', {
                 albumName: data.albumName,
                 rating: data.rating,
-                reviewText: data.reviewText,
+                content: data.content,
                 userID: userId
             });
 
@@ -81,15 +81,15 @@ export default function Postreview(){
                             <option value='2'>★★☆☆☆ - Bad</option>
                             <option value='1'>★☆☆☆☆ - Horrible</option>
                         </select> 
-                        <label for="reviewtext"><h4>Your Review</h4></label>
+                        <label for="content"><h4>Your Review</h4></label>
                         <textarea 
                             style={{fontSize: "20px"}} 
-                            id="reviewtext" 
-                            name="reviewText" 
+                            id="content" 
+                            name="content" 
                             rows="15" 
                             cols="60" 
                             placeholder="I thought this album was..."
-                            value={data.reviewText}
+                            value={data.content}
                             onChange={handleChange}>
                         </textarea> <br /> <br/>
                         <button type="submit" class="custom-button" >Submit Review</button>
