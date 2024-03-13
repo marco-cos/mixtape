@@ -49,11 +49,11 @@ function hidesearch(){
       </div>
       <div className="links">
           <ul id="navbartext">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/albums">Albums</Link></li>
-            <li><Link to="/profile">Profile</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
+            <li><Link to="/" style={{color:"white"}}>Home</Link></li>
+            <li><Link to="/albums" style={{color:"white"}}>Albums</Link></li>
+            <li><Link to="/profile" style={{color:"white"}}>Profile</Link></li>
+            <li><Link to="/login" style={{color:"white"}}>Login</Link></li>
+            <li><Link to="/register" style={{color:"white"}}>Register</Link></li>
             </ul>
           <div className="search">
               <input type="text" class="searchTerm" placeholder="search" onChange={(e) => handleSearch(e.target.value)}></input>
