@@ -2,13 +2,13 @@ import './postreview.css'
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useUserId } from '../context/authUser';
+import { useAuth } from '../context/authContext';
 import { Link } from 'react-router-dom'
 
 
 export default function PostReview(){
     const navigate = useNavigate();
-  
+    const { userId: loggedInUserId } = useAuth();
     const userId = localStorage.getItem('userId');
     console.log("here is the userID:", userId);
 

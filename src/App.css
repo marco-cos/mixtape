@@ -1,5 +1,5 @@
 body {
-  background-color: #231f20;
+  background-color: #080814;
   color: #DEDEDE;
   font-family: "Archivo", sans-serif;
   font-size: 15px;
@@ -70,12 +70,12 @@ body {
   display: flex;
   white-space: nowrap;
   margin: 0 -40px;
-  background-color: #231f20;
+  background-color: #080814;
 }
 
 .album-grid-container::-webkit-scrollbar {
   display: none;
-  background-color: #231f20;
+  background-color: #080814;
 }
 
 .album-grid:hover .pop-out{
@@ -407,7 +407,7 @@ body {
 
 nav{
   width:100%;
-  background-color: #DEDEDE;
+  background-color: #171724;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
@@ -476,9 +476,11 @@ nav{
 .bar {
   background-color: #bdbcbc;
 }
+
 #navbartext {
   font-weight:bold;
   font-size:medium;
+  color: white;
 }
 .leftSection {
   display:inline-block;
@@ -508,18 +510,18 @@ ul {
   margin-right: 20px;
 }
 li {
-  
+  color: white;
   display:inline;
   padding: 20px;
 }
 
 a:link { 
   text-decoration: none; 
-  color:black;
+  color:white;
 } 
 a:visited { 
   text-decoration: none; 
-  color:black;
+  color:white;
 } 
 a:hover { 
   text-decoration: none; 

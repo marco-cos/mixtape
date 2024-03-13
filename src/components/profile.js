@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { AlbumGrid, AlbumGridComponent } from './albums.js';
 import editbutton from '../images/editButton.png';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { useAuth } from '../context/authContext'; // Import the useAuth hook
 import { useNavigate } from 'react-router-dom';
 import { convertToBase64 } from '../helper.js';
@@ -33,8 +31,6 @@ export default function Profile(){
 
     const [favAlbum, setFavAlbum] = useState('');
     const [isEditingAlbum, setIsEditingAlbum] = useState(false); // State variable to control the edit mode of favAlbum
-
-
 
     var { userId }  = useAuth();
     
@@ -180,31 +176,7 @@ export default function Profile(){
     
 
     if (!user) return null;
-   
-    // const editButtonDisplay = {
-    //     display: user ? 'inline-block' : 'none',
-    //     marginRight: user ? '10px' : '0px',
-    //     cursor: user ? 'pointer' : 'default',
-    // };
-    
-    //TO CHANGE: Change these to the albums that the user has reviewed, put in albums variable
-    const album0 = {
-        id: 'pinkfloyd_dsotm',
-        url: 'https://archive.smashing.media/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/aecf4604-1d3b-417f-97c6-d5be80f51eb9/3.jpg'
-    }
-    const album1 = {
-        id: 'taylorswift_1989',
-        url: 'https://hips.hearstapps.com/hmg-prod/images/7-64ecb1c909b78.png?crop=0.502xw:1.00xh;0.498xw,0&resize=1200:*'
-    }
-    const album2 = {
-        id: 'harrystyles_fineline',
-        url: 'https://cdn.vox-cdn.com/thumbor/cUUdVnTXrleRNqbV-9JloWAleSI=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19535833/thumb_clean.jpg'
-    }
-    const album3 = {
-        id: 'lanadelrey_borntodie',
-        url: 'https://imgv3.fotor.com/images/blog-richtext-image/born-to-die-music-album-cover.png'
-    }
-    const albums = [album0, album1, album2, album3]
+  
 
     const profilePicUrl = user.profilePic ? `data:image/jpeg;base64,${user.profilePic}` : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 

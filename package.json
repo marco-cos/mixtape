@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start-src\" \"npm run start-server\"",
-    "start-src": "react-scripts start",
+    "start-src": "PORT=3000 react-scripts start",
     "start-server": "cd server && nodemon index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",

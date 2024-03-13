@@ -3,11 +3,13 @@ import { AlbumGrid, AlbumGridComponent } from './albums.js';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../context/authContext'; // Import the useAuth hook
-import './profile.css'
+import './profile.css';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function OtherUserProfile(){  
     // const { isLoggedIn } = useAuth(); // Access isLoggedIn state from AuthContext
+    const navigate = useNavigate();
     const [user, setUser] = useState({});
     const { username } = useParams();
     console.log("parameter: ", username);
@@ -33,24 +35,25 @@ export default function OtherUserProfile(){
         loggedInUserId = localId;
     }
 
-    // const checkSameUser = async () => {
-    //     try {
-    //         const check = await axios.get(`http://localhost:8000/profile/${username}/checkSame/`, {
-    //             params: {
-    //                 loggedInUserId: loggedInUserId
-    //             }
-    //         });
-    //         if (check.isSameUser) {
-    //             setSameUser(true);
-    //         }
-    //         else {
-    //             console.log(loggedInUsername);
-    //             setLoggedInUsername(check.loggedInUsername);
-    //         }
-    //     } catch (error) {
-    //         console.error("error fetching users:", error);
-    //     }
-    // }
+    const checkSameUser = async () => {
+        try {
+            const check = await axios.get(`http://localhost:8000/profile/${username}/checkSame/`, {
+                params: {
+                    loggedInUserId: loggedInUserId
+                }
+            });
+            if (check.isSameUser) {
+                setSameUser(true);
+                navigate('/profile');
+            }
+            else {
+                console.log(loggedInUsername);
+                setLoggedInUsername(check.loggedInUsername);
+            }
+        } catch (error) {
+            console.error("error fetching users:", error);
+        }
+    }
     
     const getUser = async() => {
         try {
