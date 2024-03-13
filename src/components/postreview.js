@@ -1,29 +1,98 @@
 import './postreview.css'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
+import { useUserId } from '../context/authUser';
+import { Link } from 'react-router-dom'
 
-export default function postreview(){
+
+export default function PostReview(){
+    const navigate = useNavigate();
+  
+    const userId = localStorage.getItem('userId');
+    console.log("here is the userID:", userId);
+
+    const [data, setData] = useState({
+        albumName: '',
+        rating: '',
+        reviewText: '',
+        userID: userId
+    })
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        
+        try {
+            const response = await axios.post('http://localhost:8000/review', {
+                albumName: data.albumName,
+                rating: data.rating,
+                reviewText: data.reviewText,
+                userID: userId
+            });
+
+            console.log(response.data); 
+            navigate('/'); 
+        } catch (error) {
+            console.error('Error submitting review:', error);
+        }
+    };
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        const parsedValue = name === "rating" ? parseInt(value) : value;
+        console.log(name, value);
+        setData({
+            ...data,
+            [name]: parsedValue
+        });
+
+    };
+
     return(
-    <html>
-        <body class="postreview-body">
+    
+        <div className="postreview-body">
                 <div id="ReviewPostBody">
                     <h1>Post a Review</h1>
-                    <form>
+                    <form onSubmit= { handleSubmit }  >
                         <label for="albumname"><h3>Album Name</h3></label>
-                        <input style={{fontSize: "20px",width:"60%"}} type="text" id="albname"></input>
+                        <input 
+                            style={{fontSize: "20px",width:"60%"}} 
+                            type="text" 
+                            id="albname" 
+                            name="albumName"
+                            value={data.albumName}
+                            onChange={handleChange}
+                        />
                         <label for="rating"><h4>Your Rating</h4></label>
-                        <select name="rating" id="rating" style={{width:"40%"}}>
+                        <select 
+                            name="rating" 
+                            id="rating" 
+                            style={{width:"40%"}}
+                            value={data.rating}
+                            onChange={handleChange}
+                        >
                             <option disabled selected value> Select a rating </option>
-                            <option value="5">★★★★★ - Amazing</option>
-                            <option value="4">★★★★☆ - Great</option>
-                            <option value="3">★★★☆☆ - Average</option>
-                            <option value="2">★★☆☆☆ - Bad</option>
-                            <option value="1">★☆☆☆☆ - Horrible</option>
+                            <option value='5'>★★★★★ - Amazing</option>
+                            <option value='4'>★★★★☆ - Great</option>
+                            <option value='3'>★★★☆☆ - Average</option>
+                            <option value='2'>★★☆☆☆ - Bad</option>
+                            <option value='1'>★☆☆☆☆ - Horrible</option>
                         </select> 
                         <label for="reviewtext"><h4>Your Review</h4></label>
-                        <textarea style={{fontSize: "20px"}} id="reviewtext" name="reviewtext" rows="15" cols="60" placeholder="I thought this album was..."></textarea> <br /> <br/>
-                        <input type="submit" value="Submit Review" class="custom-button"></input>
+                        <textarea 
+                            style={{fontSize: "20px"}} 
+                            id="reviewtext" 
+                            name="reviewText" 
+                            rows="15" 
+                            cols="60" 
+                            placeholder="I thought this album was..."
+                            value={data.reviewText}
+                            onChange={handleChange}>
+                        </textarea> <br /> <br/>
+                        <button type="submit" class="custom-button" >Submit Review</button>
                     </form>
                 </div>
-            </body>
-        </html>
+            </div>
+        
         )
     }

@@ -11,10 +11,10 @@ module.exports.Register = async (req, res, next) => {
     const { email, password, username} = req.body;
     const existingUserEmail = await User.findOne({ email });
     const existingUsername = await User.findOne({ username });
-    if (existingUserEmail) {
+    if (existingUserEmail == email) {
       return res.json({ message: "Email already registered" });
     }
-    else if (existingUsername) {
+    else if (existingUsername == username) {
       return res.json({ message: "Username taken"})
     }
     const user = await User.create({ email, password, username });
