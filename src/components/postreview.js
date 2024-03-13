@@ -29,6 +29,7 @@ export default function Postreview(){
             // const albumId = albumResponse.data._id;
 
             const response = await axios.post('http://localhost:8000/createReview', {
+                albu
                 albumName: data.albumName,
                 rating: data.rating,
                 content: data.content,
