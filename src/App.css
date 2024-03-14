@@ -518,6 +518,16 @@ ul {
   float: right;
   margin-right: 20px;
 }
+di {
+  list-style-type: none;
+  float: right;
+  margin-right: 10px;
+  border: 3px solid #ccc; /* Add border around the ul */
+  padding: 20px; /* Add padding for spacing */
+  background: #ccc;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  font-family: Archivo, sans-serif;
+}
 li {
   color: white;
   display:inline;

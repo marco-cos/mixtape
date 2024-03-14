@@ -294,7 +294,7 @@ export default function Profile(){
             </div>
             <div className="reviews-container">
                 <div className="review-title">
-                    <h2 class="headerStyle"></h2><br/>
+                    <h2 class="headerStyle">Recent Reviews</h2><br/>
                 </div>
                     <div className="gallery">
                         {myReviews.map(review => ( 

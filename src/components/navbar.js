@@ -89,19 +89,19 @@ function hidesearch(){
 
   </nav>
     <div >
-      <ul style={searchresults}>
-        <div style={{display:"flex",justifyContent:"space-between"}}>
-          <li style={{color:"black"}} ><b>Search Results: </b></li>
-          <li onClick={hidesearch} style={{color:"red",textDecoration:"underline",cursor:"pointer",padding:"0"}}>X</li>
+      <di style={searchresults}>
+        <div style={{display:"flex",justifyContent:"space-between", background:"#ccc"}}>
+          <li style={{color:"black", padding: "5px"}} ><b>Search Results: </b></li>
+          <li onClick={hidesearch} style={{color:"red",textDecoration:"underline",cursor:"pointer",padding:"5px"}}>X</li>
         </div>
-        <p style={{color:"black"}}><b>Users:</b></p>
-        {results.users.map((users) => (<li style={{padding:"0"}} key={users._id}>
+        <p style={{color:"black", padding: "5px"}}><b>Users:</b></p>
+        {results.users.map((users) => (<li style={{padding:"5px"}} key={users._id}>
           <a href={`/profile/${users.username}`}>{users.username}</a><br/></li>))}
-        <p style={{color:"black"}}><b>Albums:</b></p>
-        {results.albums.map((albums) => (<li style={{padding:"0"}} key={albums._id}><a href={`/albums/${albums.title}`}>{albums.title + " - " + albums.artist}</a> <br/></li>))}
+        <p style={{color:"black", padding: "5px"}}><b>Albums:</b></p>
+        {results.albums.map((albums) => (<li style={{padding:"5px"}} key={albums._id}><a href={`/albums/${albums.title}`}>{albums.title + " - " + albums.artist}</a> <br/></li>))}
 
         <br/>
-      </ul>
+      </di>
     </div>
   </div>
 
