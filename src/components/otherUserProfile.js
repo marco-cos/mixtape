@@ -77,18 +77,33 @@ export default function OtherUserProfile(){
     };
 
 
+    function getStarString(starnum) {
+        let starstr = ""
+        for (var i = 0; i < starnum; i++) {
+            starstr+= "★"
+        }
+        for (var i = 0; i < 5 - starnum; i++) {
+            starstr+="☆"
+        }
+        return starstr
+    }
+
     useEffect(() => {
         verifyUser();
         getUser();
     }, [])
+    const [myReviews, setMyReviews] = useState([]);
 
     useEffect(() => {
+        if (user.username) {
             const fetchReviews = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:8000/review/${username}/myReviews`);
-                    console.log("reviews: ", response.data);
+                    console.log("GETTING REVIEWS")
+                    const response = await axios.get(`http://localhost:8000/createReview/${user.username}/myReviews`);
+                    console.log("GOT REVIEWS: ");
+                    console.log(response.data)
                     if (response.status >= 200 && response.status < 300) {
-                        setReviews(response.data);
+                        setMyReviews(response.data);
                     } else {
                         throw new Error(`Network response was not ok: ${response.statusText}`);
                     }
@@ -97,7 +112,8 @@ export default function OtherUserProfile(){
                 }
             };
             fetchReviews();
-    }, [reviews.length]); 
+        }
+    }, [user.username]); 
 
 
     const handleFollow = async (e) => {
@@ -205,21 +221,25 @@ export default function OtherUserProfile(){
                     </div>
                 </div>
             </div>
-            <div className="reviews-container">
-                <div className="review-title">
-                    <h2 class="headerStyle">Recent Reviews</h2><br/>
-                </div>
-                    <div className="gallery">
-                        {reviews.map(review => ( 
+            <h2 class="headerStyle">Recent Reviews</h2><br/>
+                    <div class="reviews-grid">
+                        {myReviews.map(review => ( 
                             console.log(review._id),
-                            <div key={review._id} className="review-item">
-                                <p>{review.content}</p>
-                                <p>Creation Date: {review.creationDate}</p>
-                                <p>Favorite Song: {review.favSong}</p>
-                                <p>Least Favorite Song: {review.leastFavSong}</p>
+                            <div  class="review-item" key={review._id}>
+                                <a href={"/albums/"+review.album.title}> <img 
+                                    src={"data:image/jpeg;base64,"+review.album.cover}
+                                    alt='alt_text_here' 
+                                    className="pop-out"
+                                    width="225px"
+                                    height="225px" ></img></a>
+
+                                <p>{getStarString(review.review.stars) +"⠀⠀⠀" +review.review.creationDate.split('T')[0]} </p>
+                                <p><b>Favorite Song:</b> {review.review.favSong}</p>
+                                <p><b>Least Favorite Song: </b>{review.review.leastFavSong}</p>
+                                <p><b>Your Review: </b>{review.review.content}</p>
+                                
                             </div>
                         ))}  
+                    </div>
                     </div> 
-            </div>
-        </div>
     )}
