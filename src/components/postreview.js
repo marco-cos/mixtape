@@ -119,7 +119,7 @@ export default function Postreview(){
                         <textarea 
                             style={{fontSize: "20px"}} 
                             id="content" 
-                            name="Your Review" 
+                            name="content" 
                             rows="9" 
                             cols="60" 
                             placeholder="I thought this album was..."
