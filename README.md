@@ -11,6 +11,16 @@ https://github.com/marco-cos/mixtape.git
 cd mixtape
 ```
 ### Run the application 
+You will need to create a .env file in the root directory and create a MongoDB account.
+The .env file should follow this format:
+```
+MONGO_URL=mongodb+srv://<username>:<password>@mixtapedb.xancxpj.mongodb.net/?retryWrites=true&w=majority&appName=mixtapeDB;
+PORT = 8000;
+JWT_SECRET=<jwtkey>;
+```
+Make sure to substitute username, password, and jwtkey into the appropriate fields. This information will be sent accordingly.
+The backend is run locally under port 8000 and the frontend is run under port 3000.
+
 Install the requirements (assuming npm is installed), use `npm start` to run the frontend and backend and start the application.
 ```
 npm install
