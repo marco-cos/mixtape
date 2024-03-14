@@ -170,8 +170,8 @@ export default function OtherUserProfile(){
                             <div className="username-container">
                                 <h1>{user.username}</h1>
                             </div>
-                            <div className="follow-button">
-                                <button onClick={handleFollow}>
+                            <div>
+                                <button className="custom-button" onClick={handleFollow}>
                                     {isFollowing ? 'Following' : 'Follow'}
                                 </button>
                             </div>
