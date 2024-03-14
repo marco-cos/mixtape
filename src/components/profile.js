@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import editbutton from '../images/editbutton.png';
+import editbutton from '../images/editButton.png';
 import axios from 'axios';
 import { useAuth } from '../context/authContext'; // Import the useAuth hook
 import { useNavigate } from 'react-router-dom';
@@ -33,7 +33,7 @@ export default function Profile(){
     const [isEditingAlbum, setIsEditingAlbum] = useState(false); // State variable to control the edit mode of favAlbum
 
     var { userId }  = useAuth();
-    
+    console.log("local storage: ", userId);
     if (userId === null) {
         const localId = localStorage.getItem('userId');
         console.log("localId:", localId);
@@ -41,12 +41,7 @@ export default function Profile(){
             console.error('please log in');
         }
         userId = localId;
-    }
-
-    useEffect(() => {
-        getUser(); // Call getUser() to fetch user data
-    }, [userId]); // Triggered when userId changes
-    
+    }    
     const getUser = async() => {
         console.log(userId); 
         try {
@@ -60,24 +55,22 @@ export default function Profile(){
             setFavAlbum(response.data.favAlbum);
             setProfilePic(response.data.profilePic);
             console.log("response data", response.data.user);
-            if (response.data.following) {
-                setUserFollowing(response.data.following.length);
-            } else {
-                setUserFollowing(0); 
-            }
-            if (response.data.followers){
-                console.log(response.data.followers.length);
-                setUserFollowers(response.data.following.length);
-            } else {
-                setUserFollowers(0);
-            }
-            setUserFollowers(response.data.followers.length);
-            setUserFollowing(response.data.following.length);
+            // console.log("followers: ", response.data.user.followers);
+            console.log("follower num: ", response.data.user.followers.length);
+            console.log("following num: ", response.data.user.following.length);
+
+            setUserFollowers(response.data.user.followers.length);
+            setUserFollowing(response.data.user.following.length);
+
+            console.log("userFollowers: ", userFollowers);
+            console.log("userFollowing: ", userFollowing);
+
         } catch (error) {
             console.error("error fetching user data:", error);
         }
         
     };
+
 
     const handlePicClick = async () => {
         setIsEditingPic(true);
@@ -103,10 +96,7 @@ export default function Profile(){
             console.error("error updating bio:", error);
         }
     }
-    useEffect (() => {
-        if (user.username) {
-        }
-    }, [user.username]);
+
 
     const editBio = async () => {
         try {
@@ -152,8 +142,6 @@ export default function Profile(){
         }
     }
 
-    
-
     useEffect(() => {
         if (user.username) {
             const fetchReviews = async () => {
@@ -167,13 +155,23 @@ export default function Profile(){
                     }
                 } catch (error) {
                     console.error('Error fetching data:', error);
-                    // Handle error, maybe set an error state or show a message to the user
                 }
             };
             fetchReviews();
         }
-    }, [user.username]); // Triggered when user.username changes
+    }, [user.username]); 
     
+    // useEffect(() => {
+    //     getUser(); 
+    // }, [userFollowers, userFollowing]); 
+
+    useEffect (() => {
+        if (user.username) {};
+        if (userFollowers) {};
+        if (userFollowing) {};
+        getUser();
+    }, [user.username, userFollowers, userFollowing]);
+
 
     if (!user) return null;
   

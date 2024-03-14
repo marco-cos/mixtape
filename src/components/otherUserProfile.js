@@ -8,71 +8,63 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function OtherUserProfile(){  
-    // const { isLoggedIn } = useAuth(); // Access isLoggedIn state from AuthContext
     const navigate = useNavigate();
     const [user, setUser] = useState({});
     const { username } = useParams();
-    console.log("parameter: ", username);
-
-    // console.log(useParams());
-    const [userReviews, setUserReviews] = useState([]);
-    const [sameUser, setSameUser] = useState(false);
+  
     const [userFollowers, setUserFollowers] = useState();
     const [userFollowing, setUserFollowing] = useState();
-    const [followersLogin, setFollowersLogin] = useState([]);
-    const [followingLogin, setFollowingLogin] = useState([]);
     const [reviews, setReviews] = useState([]);
 
     let loggedInUserId = useAuth().userId;
-    const [loggedInUsername, setLoggedInUsername] = useState();
 
-    if (loggedInUserId === null) {
-        const localId = localStorage.getItem('userId');
-        console.log("localId:", localId);
-        if (localId === null) {
-            console.error('please log in');
-        }
-        loggedInUserId = localId;
-    }
+
+    const [loggedInUsername, setLoggedInUsername] = useState();
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    const [isFollowing, setIsFollowing] = useState(false);
 
     const checkSameUser = async () => {
         try {
-            const check = await axios.get(`http://localhost:8000/profile/${username}/checkSame/`, {
-                params: {
-                    loggedInUserId: loggedInUserId
+          const check = await axios.get(`http://localhost:8000/profile/${username}/checkSame/${loggedInUserId}`);
+                if (check.data.sameUser) {
+                    navigate('/profile');
                 }
-            });
-            if (check.isSameUser) {
-                setSameUser(true);
-                navigate('/profile');
-            }
-            else {
-                console.log(loggedInUsername);
-                setLoggedInUsername(check.loggedInUsername);
-            }
-        } catch (error) {
-            console.error("error fetching users:", error);
+                console.log(check.data.loggedInUsername);
+                setLoggedInUsername(check.data.loggedInUsername);
+            } catch (error) {
+                console.error("Error fetching users:", error);
         }
+    };
+    
+    const verifyUser = async() => {
+        if (loggedInUserId === null) {
+            const localId = localStorage.getItem('userId');
+            console.log("localId:", localId);
+            if (localId === null) {
+                console.error('please log in');
+            }
+            loggedInUserId = localId;
+        }
+        const localAuth = localStorage.getItem('isLoggedIn');
+        console.log("localAuth", localAuth);
+        if (localAuth) {
+            console.log("local auth true");
+            setLoggedIn(true);
+            console.log(loggedIn);
+        }
+        checkSameUser();
     }
     
     const getUser = async() => {
         try {
-            const user = await axios.get(`http://localhost:8000/profile/${username}`);
-            setUser(user.data.user);
-            if (user.data.following) {
-                setUserFollowing(user.data.following.length);
-            } else {
-                setUserFollowing(0); 
-            }
-            if (user.data.followers){
-                console.log(user.data.followers.length);
-                setUserFollowers(user.data.following.length);
-            } else {
-                console.log(user.data.followers.length);
-                setUserFollowers(0);
-            }
-            setUserFollowers(user.data.followers.length);
-            setUserFollowing(user.data.following.length);
+            const response = await axios.get(`http://localhost:8000/profile/${username}`);
+            setUser(response.data.user);
+            console.log("followers:", response.data.user.followers.length);
+            setUserFollowers(response.data.user.followers.length);
+            setUserFollowing(response.data.user.following.length);
+            const alreadyFollowing = response.data.user.followers.includes(loggedInUserId);
+            setIsFollowing(alreadyFollowing);
         } catch (error) {
             console.error("error fetching user data:", error);
         }
@@ -81,12 +73,11 @@ export default function OtherUserProfile(){
 
 
     useEffect(() => {
+        verifyUser();
         getUser();
-        
-    }, [username]);
+    }, [])
 
     useEffect(() => {
-        if (username) {
             const fetchReviews = async () => {
                 try {
                     const response = await axios.get(`http://localhost:8000/review/${username}/myReviews`);
@@ -98,12 +89,39 @@ export default function OtherUserProfile(){
                     }
                 } catch (error) {
                     console.error('Error fetching data:', error);
-                    // Handle error, maybe set an error state or show a message to the user
                 }
             };
             fetchReviews();
+    }, [reviews.length]); 
+
+
+    const handleFollow = async (e) => {
+        e.preventDefault();
+        try {
+            console.log("handleFollow", loggedInUsername)
+            if (loggedIn) {
+                const response = await axios.put(`http://localhost:8000/profile/${username}/follow`, { curr: loggedInUsername });
+                if (response.message !== "already following") {
+                    const updatedUser = await axios.put(`http://localhost:8000/profile/${username}/add`, 
+                    { username: loggedInUsername});
+                }
+            console.log("follow response:", response.data.message);
+                if (response.success) {
+                    setIsFollowing(true);
+                    setUserFollowers(prevFollowers => prevFollowers + 1);
+                    getUser();
+                }
+            }
+            else {
+                console.error("login to follow other users");
+            }
+            
+        } catch (error) {
+            console.error('Error following:', error);
+
         }
-    }, [username]); // Triggered when user.username changes
+    }
+
 
     if (!user) return null;
    
@@ -119,8 +137,15 @@ export default function OtherUserProfile(){
                         <div className="profilePic-container">
                             <img src={profilePicUrl} id="profilePic"></img>
                         </div>
-                        <div className="username-container">
-                            <h1>{user.username}</h1>
+                        <div className="username-follow-container">
+                            <div className="username-container">
+                                <h1>{user.username}</h1>
+                            </div>
+                            <div className="follow-button">
+                                <button onClick={handleFollow}>
+                                    {isFollowing ? 'Following' : 'Follow'}
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div className="followers-container">
@@ -177,7 +202,6 @@ export default function OtherUserProfile(){
                                 <p>Creation Date: {review.creationDate}</p>
                                 <p>Favorite Song: {review.favSong}</p>
                                 <p>Least Favorite Song: {review.leastFavSong}</p>
-                                {/* Display likes and comments if needed */}
                             </div>
                         ))}  
                     </div> 

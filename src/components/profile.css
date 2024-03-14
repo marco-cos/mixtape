@@ -35,6 +35,14 @@
     margin-right: 10px; /* Add right margin to create space between title and button */
 }
 
+.username-follow-container{
+    display: inline-block;
+}
+
+.follow-button {
+    display: inline-block;
+}
+
 .editButton {
     display: inline-block;
     width: 12px;

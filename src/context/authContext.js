@@ -12,29 +12,27 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const storedId = localStorage.getItem('userId');
     if(storedId === userId) {
-        setIsLoggedIn(true);
+        localStorage.setItem('isLoggedIn', true);
     }
   }, [userId]);
 
+
   const login = (id) => {
-    console.log("login id: ", userId);
-    console.log("set is logged in");
+    // console.log("login id: ", userId);
+    // console.log("set is logged in");
+    localStorage.setItem('isLoggedIn', true);
     setIsLoggedIn(true);
-    // console.log(isLoggedIn);
-    console.log("set local storage");
+    // console.log("set local storage");
     localStorage.setItem('userId', `${id}`);
-    console.log(localStorage.getItem('userId'));
+    // console.log(localStorage.getItem('userId'));
     setUserId(id);
-    // const result = localStorage.getItem('userId');
-    // console.log('stored id: ', result);
   };
 
   const logout = () => {
     setIsLoggedIn(false);
-    // console.log("setting isLoggedIn:", isLoggedIn);
     setUserId(null);
     localStorage.removeItem('userId');
-    // sessionStorage.removeItem('userId');
+    localStorage.setItem('isLoggedIn', false);
   };
 
 

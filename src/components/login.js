@@ -6,9 +6,10 @@ import { useAuth } from '../context/authContext';
 
 export default function Login(){
     const navigate = useNavigate();
-    const { isLoggedIn, login, logout } = useAuth();
-    console.log("isLoggedIn 1: ", isLoggedIn);
-    // console.log(sessionStorage.getItem('userId'));
+    const {login, logout } = useAuth();
+
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    console.log(isLoggedIn);
 
     const [data, setData] = useState({
         email: '',
@@ -18,9 +19,9 @@ export default function Login(){
 
     const [error, setError] = useState('')
 
-    useEffect(() => {
-        console.log("isLoggedIn:", isLoggedIn);
-    }, [isLoggedIn]);
+    // useEffect(() => {
+    //     console.log("isLoggedIn:", localStorage.getItem('isLoggedIn'));
+    // }, [isLoggedIn]);
 
     const loginUser = async(e) =>{
         e.preventDefault();
@@ -33,11 +34,13 @@ export default function Login(){
                 withCredentials: true
             });
             const id  = result.data.userId;
-            // console.log("result data: ", result);
-            // console.log("result id", id);
             if (result.error){
                 setError('incorrect username or password');
-            } else {
+            } 
+            else if (localStorage.getItem('isLoggedIn')) {
+                setError('already logged in')
+            }  
+            else {
                 login(id);
                 setData({});
                 navigate('/');
@@ -50,6 +53,7 @@ export default function Login(){
     const handleLogout = () => {
         logout();
         localStorage.removeItem('userId');
+        localStorage.removeItem('isLoggedIn');
         console.log("logged out");
         navigate('/'); // Redirect to home page after logout
     };
@@ -68,7 +72,7 @@ export default function Login(){
                     <button className="custom-button" type = 'login'>Login</button>
                     {error && <p style = {{color: 'red'}}>{error}</p>}
                 </form>
-                {isLoggedIn && ( // Conditionally render logout button if logged in
+                {isLoggedIn && ( 
                     <button className="custom-button" onClick={handleLogout}>Logout</button>
                 )}
              </div>

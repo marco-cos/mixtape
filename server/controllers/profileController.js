@@ -14,8 +14,8 @@ module.exports.getProfileFromId = async (req, res) => {
         return res.status(404).json({ error: 'User not found' });
     }
     const reviews = await Review.find({ reviewer: user._id }).populate("reviewer");
-    const { username, favArtist, favSong, favAlbum, password, ...other } = user._doc;
-    res.status(200).json({ user: { username, favArtist, favSong, favAlbum, ...other }, reviews });
+    const { username, favArtist, favSong, favAlbum, followers, following, password, ...other } = user._doc;
+    res.status(200).json({ user: { username, favArtist, favSong, favAlbum, followers, following, ...other }, reviews });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -41,49 +41,6 @@ module.exports.getProfileFromUsername = async (req, res) => {
   }
 };
 
-module.exports.followUser = async (req, res, next) => {
-    const targetUsername = req.params.targetUser;
-    const currentUsername = req.body.username;
-    if (targetUsername !== currentUsername) {
-    try {
-      const user = await User.findOne({ username: targetUsername });
-      const currentUser = await User.findOne({ username: currentUsername });
-      if (!user.followers.includes(currentUser._id)) {
-        await user.updateOne({ $push: { followers: currentUser._id } });
-        await currentUser.updateOne({ $push: { followings: targetUser._id } });
-        res.status(200).json("user has been followed");
-      } else {
-        res.status(403).json("you already follow this user");
-      }
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  } else {
-    res.status(403).json("you cant follow yourself");
-  }
-}
-
-module.exports.unfollowUser = async (req, res, next) => {
-    const targetUsername = req.params.targetUser;
-    const currentUsername = req.body.username;
-    if (targetUsername !== currentUsername) {
-        try {
-          const user = await User.findOne({ username: targetUsername });
-          const currentUser = await User.findOne({ username: currentUsername })
-          if (user.followers.includes(currentUser._id)) {
-            await user.updateOne({ $pull: { followers: currentUser._id } });
-            await currentUser.updateOne({ $pull: { followings: user._id } });
-            res.status(200).json("user has been unfollowed");
-          } else {
-            res.status(403).json("you dont follow this user");
-          }
-        } catch (err) {
-          res.status(500).json(err);
-        }
-      } else {
-        res.status(403).json("you cant unfollow yourself");
-      }
-}
 
 module.exports.getFollowers = async (req, res) => {
     try {
@@ -103,6 +60,119 @@ module.exports.getFollowers = async (req, res) => {
         res.status(500).json(error); 
     }
 };
+
+module.exports.followUser = async (req, res) => {
+  try {
+    const username = req.params.targetUser;
+    const currUsername = req.body.curr;
+
+    const user = await User.findOne({ username: username});
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const currUser = await User.findOne({ username: currUsername });
+    if (!currUser) {
+      return res.status(404).json({ success: false, message: "Current user not found" });
+    }
+
+    if (!user.followers.includes(currUser._id)) {
+      await User.findByIdAndUpdate( 
+        user._id,
+        { $addToSet: { followers: currUser._id } }
+        );
+        return res.status(200).json({ success: true, message: "followed!"});
+      }
+      else {
+        return res.status(200).json({ success:true, message: "already following "});
+      }
+    } catch (error) {
+    console.error(error);
+  }
+}; 
+
+module.exports.addToFollowing = async (req, res) => {
+  try {
+    const username = req.params.username;
+    // console.log(username);
+    const currUsername = req.body.username;
+
+    const user = await User.findOne({ username: username});
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const currUser = await User.findOne({ username: currUsername });
+    if (!currUser) {
+      return res.status(404).json({ success: false, message: "Current user not found" });
+    }
+
+    await User.findByIdAndUpdate( 
+      currUser._id,
+      { $addToSet: { following: user._id }}
+    );
+    return res.status(200).json({ success: true, message: "updated following "});
+    } catch (error) {
+    console.error(error);
+  }
+}; 
+
+module.exports.unfollowUser = async (req, res) => {
+  try {
+    const username = req.params.targetUser;
+    console.log(username);
+    const currUsername = req.body.username;
+
+    const user = await User.findOne({ username: username});
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const currUser = await User.findOne({ username: currUsername });
+    if (!currUser) {
+      return res.status(404).json({ success: false, message: "Current user not found" });
+    }
+
+    if (user.followers.includes(currUser._id)) {
+      await User.findByIdAndUpdate( 
+        user._id,
+        { $pull: { followers: currUser._id } }
+        );
+        return res.status(200).json({ success: true, message: "unfollowed!"});
+      }
+      else {
+        return res.status(200).json({ success:true, message: "not following "});
+      }
+    } catch (error) {
+    console.error(error);
+  }
+}; 
+
+module.exports.removeFollowing = async (req, res) => {
+  try {
+    const username = req.body.target;
+    console.log(username);
+    const currUsername = req.body.username;
+
+    const user = await User.findOne({ username: username});
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const currUser = await User.findOne({ username: currUsername });
+    if (!currUser) {
+      return res.status(404).json({ success: false, message: "Current user not found" });
+    }
+
+    await User.findByIdAndUpdate( 
+      currUser._id,
+      { $pull: { following: user._id }}
+    );
+    return res.status(200).json({ success: true, message: "no longer following "});
+    } catch (error) {
+    console.error(error);
+  }
+}; 
 
 module.exports.updateProfilePic = async (req, res) => {
   try {
@@ -134,10 +204,14 @@ module.exports.updateProfilePic = async (req, res) => {
 
 module.exports.checkSameUser = async (req, res, next) => {
   try {
-    const { loggedInUserId, otherUsername } = req.params;
+    const { username: otherUsername, loginId: loggedInUserId } = req.params;
+    console.log(otherUsername);
+    console.log(loggedInUserId);
     const loggedIn = await User.findById(loggedInUserId);
+    console.log(loggedIn.username);
     const otherUser = await User.findOne({ username: otherUsername });
     const sameUser = loggedIn._id.equals(otherUser._id);
+    console.log(sameUser);
     res.status(200).json({ sameUser, loggedInUsername: loggedIn.username });
   } catch (error) {
     console.error(error);

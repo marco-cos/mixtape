@@ -7,8 +7,10 @@ import { useAuth } from '../context/authContext';
 
 export default function Register(){
     const navigate = useNavigate()
-    const { isLoggedIn, login, logout } = useAuth();
-    
+    const { login, logout } = useAuth();
+
+    var isLoggedIn = localStorage.getItem('isLoggedIn');
+  
     const [userData, setUserData] = useState({
         username: '',
         email:'',
@@ -64,8 +66,8 @@ export default function Register(){
     const handleLogout = () => {
         logout();
         localStorage.removeItem('userId');
+        localStorage.removeItem('isLoggedIn');
         console.log("logged out");
-
         navigate('/login'); // Redirect to login page after logout
     };
 
@@ -87,7 +89,7 @@ export default function Register(){
                         <button className="custom-button" type='submit'>Submit</button>
                         {error && <p style = {{color: 'red'}}>{error}</p>}
                 </form>
-                {isLoggedIn && ( // Conditionally render logout button if logged in
+                {isLoggedIn && ( 
                     <button className="custom-button" onClick={handleLogout}>Logout</button>
                 )}
             </div>
