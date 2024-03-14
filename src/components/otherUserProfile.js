@@ -125,21 +125,7 @@ export default function OtherUserProfile(){
                     
                 }
                 else {
-                    console.log("unfollow");
-                    // console.log("unfollowed by:", loggedInUsername);
-                    // console.log("unfollowing", username );
-                    const result = await axios.put(`http://localhost:8000/profile/${username}/unfollow`, { username: loggedInUsername });
-                    if (result.data.message !== "not following") {
-                        const updatedUser = await axios.put(`http://localhost:8000/profile/${username}/remove`, 
-                        { username: loggedInUsername});
-                        console.log(updatedUser);
-                        if (result.data.success) {
-                            setIsFollowing(false);
-                            setUserFollowers(userFollowers-1);
-                            // getUser();
-                        }
-                    }
-                    console.log("unfollow response:", result.data.message); 
+                    console.log("already following user");
                 }
             }
             else {

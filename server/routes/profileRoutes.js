@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getProfileFromId, getProfileFromUsername, checkSameUser, 
-    followUser, addToFollowing, unfollowUser, removeFollowing, getFollowers, updateProfilePic, 
+    followUser, addToFollowing, getFollowers, updateProfilePic, 
     updateBio, updateArtist, updateSong, updateAlbum
     } = require('../controllers/profileController');
 
@@ -11,8 +11,6 @@ router.route('/:username/checkSame/:loginId').get(checkSameUser);
 
 router.route('/:targetUser/follow').put(followUser);
 router.route('/:username/add').put(addToFollowing);
-router.route('/:targetUser/unfollow').put(unfollowUser);
-router.route('/:username/remove').put(removeFollowing);
 router.route('/followers/:username').get(getFollowers);
 
 
