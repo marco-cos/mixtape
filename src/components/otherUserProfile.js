@@ -111,18 +111,18 @@ export default function OtherUserProfile(){
                     console.log("follow");
                     // console.log(loggedInUsername);
                     const response = await axios.put(`http://localhost:8000/profile/${username}/follow`, { username: loggedInUsername });
-                    console.log(response.data);
                     if (response.data.message !== "already following") {
                         const updatedUser = await axios.put(`http://localhost:8000/profile/${username}/add`, 
                             { username: loggedInUsername});
+                        if (response.data.success) {
+                                setIsFollowing(true);
+                                setUserFollowers(userFollowers+1);
+                                console.log("followers: ", userFollowers);
+                                // getUser();
+                        }
                     }
                     console.log("follow response:", response.data.message);
-                    if (response.data.success) {
-                        setIsFollowing(true);
-                        setUserFollowers(userFollowers+1);
-                        console.log("followers: ", userFollowers);
-                        // getUser();
-                    }
+                    
                 }
                 else {
                     console.log("unfollow");
@@ -133,13 +133,13 @@ export default function OtherUserProfile(){
                         const updatedUser = await axios.put(`http://localhost:8000/profile/${username}/remove`, 
                         { username: loggedInUsername});
                         console.log(updatedUser);
+                        if (result.data.success) {
+                            setIsFollowing(false);
+                            setUserFollowers(userFollowers-1);
+                            // getUser();
+                        }
                     }
                     console.log("unfollow response:", result.data.message); 
-                    if (result.data.success) {
-                        setIsFollowing(false);
-                        setUserFollowers(userFollowers-1);
-                        // getUser();
-                    }
                 }
             }
             else {

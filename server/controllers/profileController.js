@@ -79,19 +79,26 @@ module.exports.followUser = async (req, res) => { //update target user follower 
       return res.status(404).json({ success: false, message: "Current user not found" });
     }
     let isIncluded = false;
+    // console.log(user.followers);
+    // console.log("length: ", user.followers.length);
+    // console.log(user.followers[0]);
+    // console.log(user.followers[0]._id);
+    // console.log("curr user", currUser._id);
+    // if (currUser._id.equals(user.followers[0]._id)) {
+    //   console.log("true");
+    // }
     for (let i = 0; i < user.followers.length; i++) {
-      if (currUser._id === user.followers[i]) {
+      if (currUser._id.equals(user.followers[i]._id)) {
         isIncluded = true;
         break;
       }
     }
-    console.log(isIncluded);
-    // const isIncluded = await user.findOne({ followers: { $in: [currUser._id] } });
-    // console.log("isIncluded", isIncluded);
-    if (!isIncluded) {
+    console.log("isIncluded", isIncluded);
+    if (isIncluded === false) {
+      console.log("entered false branch");
       const updated = await User.findByIdAndUpdate( 
         user._id,
-        { $push: { followers: currUser._id } }
+        { $addToSet: { followers: currUser._id } }
         );
         console.log("followed!");
         return res.status(200).json({ success: true, message: "followed!"});
@@ -123,7 +130,7 @@ module.exports.addToFollowing = async (req, res) => { //update logged in user fo
     }
     await User.findByIdAndUpdate( 
       currUser._id,
-      { $push: { following: user._id }}
+      { $addToSet: { following: user._id }}
     );
     console.log("following updated");
     return res.status(200).json({ success: true, message: "updated following "});
