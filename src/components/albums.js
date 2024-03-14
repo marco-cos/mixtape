@@ -108,69 +108,9 @@ const album19 = {
     url: 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/the-queen-is-dead-nyasia-hamill.jpg'
 }
 
-
-
-
-//const albums = [album19,album14,album12,album13,album3,album8,album1,album16,album4,album17,album5,album0,album18,album6,album15,album7,album2,album9,album11,album10];
 const albums_shuf0 = [album2,album5,album4,album19,album11,album17,album13,album14,album8,album10,album15,album12,album3,album0,album6,album1,album9,album18,album7,album16];
 const albums_shuf1 = [album13,album18,album11,album17,album8,album3,album16,album15,album5,album6,album7,album1,album0,album9,album10,album4,album12,album19,album14,album2];
 
-//
-// CODE
-//
-
-function AlbumGridComponent({ album, onClick}) {
-
-    return (
-        <div style={{ cursor: 'pointer' }} onClick={() => onClick(album.id)}>
-            <img 
-                src={album.url}
-                alt='alt_text_here' 
-                className="pop-out"
-                width="225px"
-                height="225px" 
-            />
-        </div>
-    );
-}
-
-
-
-// album grid element
-function AlbumGrid({ albumsArray }) {
-    const scrollContainerRef = useRef(null);
-    const [displayAlbums, setDisplayAlbums] = useState([...albumsArray, ...albumsArray]); 
-
-    useEffect(() => {
-        const container = scrollContainerRef.current;
-        const totalWidth = container.scrollWidth / 2; 
-
-        const handleScroll = () => {
-            if (container.scrollLeft >= totalWidth) {
-                container.scrollLeft = 0;
-            }
-        };
-        container.addEventListener('scroll', handleScroll);
-        
-        return () => {
-            container.removeEventListener('scroll', handleScroll);
-        };
-    }, [albumsArray]);
-
-    const handleClick = (id) => {
-        console.log(`${id} clicked!`);
-        // handle click event later
-    }
-    return (
-        <div ref={scrollContainerRef} className='album-grid-container'>
-            <div className='album-grid'>
-                {displayAlbums.map((album, index) => (
-                    <AlbumGridComponent key={album.id} album={album} onClick={handleClick} />
-                ))}
-            </div>
-        </div>
-    )
-}
 
 
 // new album grid element
@@ -192,24 +132,7 @@ function NewAlbumGridComponent({ album, onClick}) {
 function NewAlbumGrid({ albumsArray }) {
     const navigate = useNavigate();
     console.log("IN NEW ALBRUM GRID FOR "+albumsArray)
-    const scrollContainerRef = useRef(null);
     const [displayAlbums, setDisplayAlbums] = useState([...albumsArray]);
-
-    useEffect(() => {
-        const container = scrollContainerRef.current;
-        const totalWidth = container.scrollWidth / 2; 
-
-        const handleScroll = () => {
-            if (container.scrollLeft >= totalWidth) {
-                container.scrollLeft = 0;
-            }
-        };
-        container.addEventListener('scroll', handleScroll);
-        
-        return () => {
-            container.removeEventListener('scroll', handleScroll);
-        };
-    }, [albumsArray]);
 
     console.log(albumsArray)
     const handleClick = (title) => {
@@ -220,43 +143,18 @@ function NewAlbumGrid({ albumsArray }) {
 
     
     return (
-        <div ref={scrollContainerRef} className='album-grid-container'>
-            <div className='album-grid'>
-                {displayAlbums.map((album, index) => (
-                    <NewAlbumGridComponent key={album.id} album={album} onClick={() => handleClick(album.title)} />
-                ))}
-            </div>
+        <div className='album-grid'>
+            {displayAlbums.map((album, index) => (
+                <NewAlbumGridComponent key={album.id} album={album} onClick={() => handleClick(album.title)} />
+            ))}
         </div>
     )
 }
 
 
-
-
-
 // entire page
 export default function Albums() {
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY;
-            const grids = document.querySelectorAll('.album-grid');
-
-            grids.forEach( (grid,index) => {
-                const directionMultiplier = index % 2 === 0 ? 1 : -1;
-
-                const initialOffset = -grid.offsetWidth * 0.13;
-                const dynamicScrollAmount = scrollPosition / 20 * directionMultiplier;
-                grid.style.transform = `translateX(${initialOffset + dynamicScrollAmount}px)`;
-            });
-        };
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-    const [albums, setAlbums] = useState(null); // Initial state is null or could be an empty array
+    const [albums, setAlbums] = useState(null); 
 
     useEffect(() => {
         async function fetchAlbums() {
@@ -268,20 +166,10 @@ export default function Albums() {
     }, []);
     return (
         <div id='albumpage'>
-            <h1>Popular Albums</h1>
+            <h1>Albums to Review</h1>
             <div style={{marginBottom: '50px'}}>
             {albums ? <NewAlbumGrid albumsArray={albums} /> : 'Loading...'}
-            </div>
-            <h1>Reviewed By Your Friends</h1>
-            <div style={{marginBottom: '50px'}}>
-                <AlbumGrid albumsArray={albums_shuf0} />
-            </div>
-            <h1>New Reviews</h1>
-            <div style={{marginBottom: '50px'}}>
-                <AlbumGrid albumsArray={albums_shuf1} />
             </div>
         </div>
     )
 }
-
-export { AlbumGrid, AlbumGridComponent };
