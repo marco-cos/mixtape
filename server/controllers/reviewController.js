@@ -4,11 +4,12 @@ const Albums = require('../models/albums');
 
 module.exports.createReview = async(req, res) => {
     try{
-        const {albumName, rating, content, userID,likes} = req.body;
+        const {albumName, rating, content, reviewer,likes} = req.body;
         const name = req.body.albumName;
+        // const id = req.body.userID;
+    
         console.log(name);
-        //const name1 = name.toString();
-        // const existingalbum = await Albums.findOne({title: {$regex: name1, $options: 'i'}});
+        // const existinguser = await User.findOne({})
         const existingalbum = await Albums.findOne({title: {$regex: name, $options: 'i'}});
         // const existingalbum = await Albums.findOne({title: req.body.albumName});
         if (!existingalbum){
@@ -21,7 +22,7 @@ module.exports.createReview = async(req, res) => {
             albumName,
             rating,
             content,
-            userID,
+            reviewer,
             likes,
         });
         console.log(newReview.album);
