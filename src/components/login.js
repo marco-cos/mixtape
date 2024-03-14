@@ -73,7 +73,7 @@ export default function Login(){
                     </div>
                     <div class="align-buttons">
                         <button className="custom-button" type = 'login'>Login</button>
-                        {error && <p style = {{color: 'red'}}>{error}</p>}
+                        {error && <p style = {{color: 'red', marginLeft: "50px"}}>{error}</p>}
                         {isLoggedIn && ( 
                             <button className="custom-button" onClick={handleLogout}>Logout</button>
                         )}

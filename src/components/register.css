@@ -48,6 +48,7 @@ body.registerpg-body::before {
 }
 .align-buttons{
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-right: 45px;
 }
