@@ -42,5 +42,5 @@ app.use('/searchresults', require('./routes/searchRoutes'));
 app.use('/profile', require('./routes/profileRoutes'))
 app.use('/createReview', require('./routes/reviewRoutes'))
 app.use('/Albumpage', require('./routes/albumpageRoutes'));
-// app.use('/Albumshowcase/', require('./routes/albumshowcaseRoutes'));
+ app.use('/Albumshowcase/', require('./routes/albumshowcaseRoutes'));
 

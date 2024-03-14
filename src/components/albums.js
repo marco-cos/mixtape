@@ -131,7 +131,7 @@ function NewAlbumGridComponent({ album, onClick}) {
 
 function NewAlbumGrid({ albumsArray }) {
     const navigate = useNavigate();
-    console.log("IN NEW ALBRUM GRID FOR "+albumsArray)
+    console.log("IN NEW ALBRUM GRID FOR ")
     const [displayAlbums, setDisplayAlbums] = useState([...albumsArray]);
 
     console.log(albumsArray)

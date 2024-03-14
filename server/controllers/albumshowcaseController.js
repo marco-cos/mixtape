@@ -1,9 +1,8 @@
 const Albumpage = require("../models/albums");
 
+console.log("in comntroller jka")
 
 exports.main = async (req, res, next) => {
-  console.log("INA")
-
     try {
         const albums = await Albumpage.find({});
         res.json({albums})
