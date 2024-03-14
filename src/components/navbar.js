@@ -11,7 +11,6 @@ function Navbar() {
   const [user, setUser] = useState({});
   var { userId }  = useAuth();
 
-  console.log("local storage: ", userId);
   if (userId === null) {
       const localId = localStorage.getItem('userId');
       console.log("localId:", localId);
@@ -20,22 +19,24 @@ function Navbar() {
       }
       userId = localId;
   }
-  const getUser = async() => {
-      console.log(userId); 
-      try {
-          const response = await axios.get('http://localhost:8000/profile/', {
-              params: { userId }
-          });
-          setUser(response.data.user);
-      } catch (error) {
-          console.error("error fetching user data:", error);
-      }
-  };
 
-  useEffect (() => {
-      if (user.username) {};
-      getUser();
-  }, [user.username]);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (userId) {
+        try {
+          const response = await axios.get('http://localhost:8000/profile/', {
+            params: { userId }
+          });
+          setUser(response.data.user); 
+        } catch (error) {
+          console.error("error fetching user data:", error);
+        }
+      } else {
+        setUser({});
+      }
+    };
+    fetchUserData();
+  }, [userId]); // Dependency array includes userId
 
   const [results, setresults] = useState({ users: [], albums: [] });
 
