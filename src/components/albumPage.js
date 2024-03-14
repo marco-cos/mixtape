@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useAuth } from '../context/authContext'; // Import the useAuth hook
 import { useParams } from 'react-router-dom';
+import '../App.css';
 
 
 
@@ -132,7 +133,12 @@ function ReviewComponent({ review}) {
         <div id="titleblock">
             <h2 style={{paddingTop: "0.5%"}}>{review.username}</h2>
             <h2>{stars}</h2>
-            <img  style={redlikebutton} src={likebutton} alt="like button" width="2%" height="2%" onClick={() => likecountchange()}/>
+            <img  style={{
+                ...redlikebutton,
+                marginTop: "9px"
+            }} 
+                src={likebutton} alt="like button" width="2%" height="2%" onClick={() => likecountchange()}
+            />
             <h4 style={{paddingTop: ".75%"}}>{likecount}</h4>
             <p  style={{paddingTop: "1.5%"}}><b>{review.date}</b></p>
         </div>
@@ -168,7 +174,7 @@ function Reviews({ReviewList}) {
                 <div id="postreviewbutton"><Link to="/postreview"><button class="custom-button">Post a Review </button> </Link> </div>
             </div>
             <div id="reviewwrapper">
-                <div id="reviews"> 
+                <div className = "reviewsContainer"> 
                 <br></br>
                 <Reviews ReviewList={reviews} />
                 </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from '../context/authContext'; // Import the useAuth hook
 import logo from '../images/mixtape_newlogo_small.png';
 import searchicon from '../images/searchicon.svg';
 import '../App.css';
@@ -7,6 +8,36 @@ import { Link } from 'react-router-dom';
 
 
 function Navbar() {
+  const [user, setUser] = useState({});
+  var { userId }  = useAuth();
+
+  if (userId === null) {
+      const localId = localStorage.getItem('userId');
+      console.log("localId:", localId);
+      if (localId === null) {
+          console.error('please log in');
+      }
+      userId = localId;
+  }
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (userId) {
+        try {
+          const response = await axios.get('http://localhost:8000/profile/', {
+            params: { userId }
+          });
+          setUser(response.data.user); 
+        } catch (error) {
+          console.error("error fetching user data:", error);
+        }
+      } else {
+        setUser({});
+      }
+    };
+    fetchUserData();
+  }, [userId]); // Dependency array includes userId
+
   const [results, setresults] = useState({ users: [], albums: [] });
 
   const handleSearch = async (query) => {
@@ -44,9 +75,10 @@ function hidesearch(){
   return (
     <div>
     <nav>
-      <div className="logo">
-      <li><Link to="/"><img src={logo} width='20%' height='20%' alt="logo"/></Link></li>
+      <div>
+        <li><Link to="/"><img src={logo} width='135px' height='50px' alt="logo"/></Link></li>
       </div>
+      <div className="loggedinas">Logged in as:  {user.username}</div>
       <div className="links">
           <ul id="navbartext">
             <li><Link to="/" style={{color:"white"}}>Home</Link></li>

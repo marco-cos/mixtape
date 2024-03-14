@@ -19,10 +19,10 @@ axios.defaults.withCredentials = true
 
 function App() {
  return (
-        <div>
+  <AuthContextProvider>
+       <div>
         <Navbar />
           <div style={{ marginTop: '70px' }}></div>
-          <AuthContextProvider>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/albums" element={<Albums />} />
@@ -34,8 +34,8 @@ function App() {
               <Route path="/Albumpage" element={<Albumpage />} />
               <Route path="/postreview" element={<Postreview />} />
             </Routes>
-          </AuthContextProvider>
         </div>
+  </AuthContextProvider>
   );
 }
 
