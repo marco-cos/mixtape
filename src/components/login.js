@@ -8,7 +8,7 @@ export default function Login(){
     const navigate = useNavigate();
     const {login, logout } = useAuth();
 
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    var isLoggedIn = localStorage.getItem('isLoggedIn');
     console.log(isLoggedIn);
 
     const [data, setData] = useState({

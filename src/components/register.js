@@ -68,7 +68,7 @@ export default function Register(){
         localStorage.removeItem('userId');
         localStorage.removeItem('isLoggedIn');
         console.log("logged out");
-        navigate('/login'); // Redirect to login page after logout
+        navigate('/'); // Redirect to home page after logout
     };
 
     return(

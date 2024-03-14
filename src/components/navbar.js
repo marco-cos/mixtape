@@ -11,15 +11,6 @@ function Navbar() {
   const [user, setUser] = useState({});
   var { userId }  = useAuth();
 
-  if (userId === null) {
-      const localId = localStorage.getItem('userId');
-      console.log("localId:", localId);
-      if (localId === null) {
-          console.error('please log in');
-      }
-      userId = localId;
-  }
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (userId) {
