@@ -435,6 +435,18 @@ nav{
   margin-left: 180px;
   position: fixed;
 }
+.reviewsContainer {
+  border: 5px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: rgba(25, 25, 47, 20);;
+  overflow-y: auto;
+  margin-right: 20px;
+  margin-left: 35px;
+  font-family: Archivo, sans-serif;
+  border-radius: 10px;
+  width: 90%;
+}
 
 .seeMoreContainer {
   padding-right: 170px;
