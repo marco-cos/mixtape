@@ -21,7 +21,7 @@ npm start
 - Users can register an account and login
 - Create a profile with their name, bio, profile picture
 - Explore other user profiles and follow them
-- Like/comment on other user's reviews. 
+- Like other user's reviews. 
 - Dynamic album pages that updates with new reviews
 - Search for albums and users
 
