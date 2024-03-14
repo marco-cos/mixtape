@@ -226,7 +226,7 @@ export default function Profile(){
                             {isEditingBio ? (
                                 <div>
                                     <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
-                                    <button onClick={editBio}>Save</button>
+                                    <button className="save-button" onClick={editBio}>Save</button>
                                 </div>
                                 ):(<> </>
                             )}
@@ -245,7 +245,7 @@ export default function Profile(){
                             {isEditingArtist ? (
                                 <div>
                                     <textarea value={favArtist} onChange={(e) => setFavArtist(e.target.value)} />
-                                    <button onClick={editArtist}>Save</button>
+                                    <button className="save-button" onClick={editArtist}>Save</button>
                                 </div>
                                 ):(<> </>
                             )}
@@ -264,7 +264,7 @@ export default function Profile(){
                             {isEditingAlbum ? (
                                 <div>
                                     <textarea value={favAlbum} onChange={(e) => setFavAlbum(e.target.value)} />
-                                    <button onClick={editAlbum}>Save</button>
+                                    <button className="save-button" onClick={editAlbum}>Save</button>
                                 </div>
                                 ):(<> </>
                             )}
@@ -283,7 +283,7 @@ export default function Profile(){
                             {isEditingSong ? (
                                 <div>
                                     <textarea value={favSong} onChange={(e) => setFavSong(e.target.value)} />
-                                    <button onClick={editSong}>Save</button>
+                                    <button className="save-button" onClick={editSong}>Save</button>
                                 </div>
                                 ):(<> </>
                             )}
@@ -294,7 +294,7 @@ export default function Profile(){
             </div>
             <div className="reviews-container">
                 <div className="review-title">
-                    <h2 class="headerStyle">Recent Reviews</h2><br/>
+                    <h2 class="headerStyle"></h2><br/>
                 </div>
                     <div className="gallery">
                         {myReviews.map(review => ( 
