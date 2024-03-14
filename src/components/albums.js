@@ -1,30 +1,31 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-//let beenrun= false;
-
-//const getalbums = async (query) => {
-  //  if(!beenrun) {
-    //    beenrun=true;
-        try {
-            const query = "";
-            const response = await axios.post('/Albumshowcase', { query }, {withCredentials: true});
-            const albums = response.data;
-            console.log(albums)
-            }
+async function GetALBS() {
+    var albums =[];
+    try {
+        const query = "";
+        const response = await axios.post('/Albumshowcase/', { query }, {withCredentials: true});
+        const resalbums = response.data.albums;
     
-             catch (error) {
-            console.error(error);
+        for (let i = 0; i < resalbums.length; i++) {
+            const alb0 = {
+                title:resalbums[i].title,
+                id:resalbums[i]._id,
+                url:resalbums[i].cover
             }
+            albums[i] = alb0;
     
-   // }
- // };
-
-
-//getalbums();
-//
-// SHOWCASE ALBUMS
-//
+        }
+        console.log(albums)
+    }  
+    
+            catch (error) {
+        console.error(error);
+        }
+    return albums    
+}
 
 const album0 = {
     id: 'pinkfloyd_dsotm',
@@ -110,7 +111,6 @@ const album19 = {
 
 
 
-const albums=[]
 //const albums = [album19,album14,album12,album13,album3,album8,album1,album16,album4,album17,album5,album0,album18,album6,album15,album7,album2,album9,album11,album10];
 const albums_shuf0 = [album2,album5,album4,album19,album11,album17,album13,album14,album8,album10,album15,album12,album3,album0,album6,album1,album9,album18,album7,album16];
 const albums_shuf1 = [album13,album18,album11,album17,album8,album3,album16,album15,album5,album6,album7,album1,album0,album9,album10,album4,album12,album19,album14,album2];
@@ -120,6 +120,7 @@ const albums_shuf1 = [album13,album18,album11,album17,album8,album3,album16,albu
 //
 
 function AlbumGridComponent({ album, onClick}) {
+
     return (
         <div style={{ cursor: 'pointer' }} onClick={() => onClick(album.id)}>
             <img 
@@ -132,6 +133,8 @@ function AlbumGridComponent({ album, onClick}) {
         </div>
     );
 }
+
+
 
 // album grid element
 function AlbumGrid({ albumsArray }) {
@@ -169,6 +172,68 @@ function AlbumGrid({ albumsArray }) {
     )
 }
 
+
+// new album grid element
+function NewAlbumGridComponent({ album, onClick}) {
+
+    return (
+        <div style={{ cursor: 'pointer' }} onClick={() => onClick(album.id)}>
+            <img 
+                src={"data:image/jpeg;base64,"+album.url}
+                alt='alt_text_here' 
+                className="pop-out"
+                width="225px"
+                height="225px" 
+            />
+        </div>
+    );
+}
+
+function NewAlbumGrid({ albumsArray }) {
+    const navigate = useNavigate();
+    console.log("IN NEW ALBRUM GRID FOR "+albumsArray)
+    const scrollContainerRef = useRef(null);
+    const [displayAlbums, setDisplayAlbums] = useState([...albumsArray]);
+
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        const totalWidth = container.scrollWidth / 2; 
+
+        const handleScroll = () => {
+            if (container.scrollLeft >= totalWidth) {
+                container.scrollLeft = 0;
+            }
+        };
+        container.addEventListener('scroll', handleScroll);
+        
+        return () => {
+            container.removeEventListener('scroll', handleScroll);
+        };
+    }, [albumsArray]);
+
+    console.log(albumsArray)
+    const handleClick = (title) => {
+        console.log("IN HANDLECLICK WITH TITLE: "+ title)
+        navigate(`/albums/${title}`);
+        // handle click event later
+    }
+
+    
+    return (
+        <div ref={scrollContainerRef} className='album-grid-container'>
+            <div className='album-grid'>
+                {displayAlbums.map((album, index) => (
+                    <NewAlbumGridComponent key={album.id} album={album} onClick={() => handleClick(album.title)} />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+
+
+
+
 // entire page
 export default function Albums() {
 
@@ -191,11 +256,21 @@ export default function Albums() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+    const [albums, setAlbums] = useState(null); // Initial state is null or could be an empty array
+
+    useEffect(() => {
+        async function fetchAlbums() {
+            const albumsData = await GetALBS();
+            setAlbums(albumsData);
+        }
+
+        fetchAlbums();
+    }, []);
     return (
         <div id='albumpage'>
             <h1>Popular Albums</h1>
             <div style={{marginBottom: '50px'}}>
-                <AlbumGrid albumsArray={albums} />
+            {albums ? <NewAlbumGrid albumsArray={albums} /> : 'Loading...'}
             </div>
             <h1>Reviewed By Your Friends</h1>
             <div style={{marginBottom: '50px'}}>
