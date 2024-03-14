@@ -5,6 +5,7 @@ import { useAuth } from '../context/authContext'; // Import the useAuth hook
 import { useNavigate } from 'react-router-dom';
 import { convertToBase64 } from '../helper.js';
 import './profile.css'
+import {  NewAlbumGrid, NewAlbumGridComponent} from './albums.js';
 
 
 
@@ -71,6 +72,18 @@ export default function Profile(){
         }
         
     };
+
+    function getStarString(starnum) {
+        let starstr = ""
+        for (var i = 0; i < starnum; i++) {
+            starstr+= "★"
+        }
+        for (var i = 0; i < 5 - starnum; i++) {
+            starstr+="☆"
+        }
+        return starstr
+    }
+    
 
 
     const handlePicClick = async () => {
@@ -147,8 +160,10 @@ export default function Profile(){
         if (user.username) {
             const fetchReviews = async () => {
                 try {
+                    console.log("GETTING REVIEWS")
                     const response = await axios.get(`http://localhost:8000/createReview/${user.username}/myReviews`);
-                    console.log("reviews: ", response.data);
+                    console.log("GOT REVIEWS: ");
+                    console.log(response.data)
                     if (response.status >= 200 && response.status < 300) {
                         setMyReviews(response.data);
                     } else {
@@ -292,22 +307,26 @@ export default function Profile(){
                     </div>
                 </div>
             </div>
-            <div className="reviews-container">
-                <div className="review-title">
                     <h2 class="headerStyle">Recent Reviews</h2><br/>
-                </div>
-                    <div className="gallery">
+                    <div class="reviews-grid">
                         {myReviews.map(review => ( 
                             console.log(review._id),
-                            <div key={review._id} className="review-item">
-                                <p>{review.content}</p>
-                                <p>Creation Date: {review.creationDate}</p>
-                                <p>Favorite Song: {review.favSong}</p>
-                                <p>Least Favorite Song: {review.leastFavSong}</p>
-                                {/* Display likes and comments if needed */}
+                            <div  class="review-item" key={review._id}>
+                                <a href={"/albums/"+review.album.title}> <img 
+                src={"data:image/jpeg;base64,"+review.album.cover}
+                alt='alt_text_here' 
+                className="pop-out"
+                width="225px"
+                height="225px" ></img></a>
+
+                                <p>{getStarString(review.review.stars) +"⠀⠀⠀" +review.review.creationDate.split('T')[0]} </p>
+                                <p><b>Favorite Song:</b> {review.review.favSong}</p>
+                                <p><b>Least Favorite Song: </b>{review.review.leastFavSong}</p>
+                                <p><b>Content: </b>{review.review.content}</p>
+                                
                             </div>
                         ))}  
+                    </div>
                     </div> 
-            </div>
-        </div>
+                    
     )}

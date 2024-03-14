@@ -60,7 +60,6 @@ body {
   padding: 10px 0;
 }
 
-
 .album-grid-container::-webkit-scrollbar {
   display: none;
   background-color: #080814;
@@ -69,6 +68,26 @@ body {
 .album-grid:hover .pop-out{
   opacity: 50%;
 }
+
+.reviews-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+}
+
+.review-item {
+  width: 225px;
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc; 
+  padding: 10px; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  line-height: 1.5em;
+}
+
 
 @keyframes non-hovered {
   from {

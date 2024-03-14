@@ -73,12 +73,26 @@ module.exports.getAllReviews = async (req, res) => {
 
 module.exports.getUserReviews = async (req, res) => {
     try {
+
+        console.log("TEST")
         username = req.params.username
-        console.log(req.params.username);
         const user = await User.findOne({username});
-        const reviews = await Review.find({ reviewer: user._id })
-                                    .populate('reviewer', '_id name');
-        res.status(200).json(reviews);
+        const reviews = await Review.find({ reviewer: user._id }).populate('reviewer', '_id name');
+
+        // const album = (await Albums.findById(reviews.album)).toObject();
+
+        var ret = []
+        for (let i = 0; i < reviews.length;i++) {
+            var ID = reviews[i].album.toString()
+            var album = await Albums.findById(ID)
+            const reviewandalb = {
+                review: reviews[i],
+                album: album
+            }
+            ret[i] = reviewandalb;
+        }
+
+        res.status(200).json(ret);
     } 
     catch (error) {
         res.status(500).json({ error: "could not get reviews" });
