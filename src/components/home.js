@@ -87,13 +87,15 @@ export default function Home(){
 
                         <img src={album0.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 0"></img>
                         <img src={album1.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 1"></img>
-                        <img src={album2.url} width="225px" height="225px" alt="Album 2"></img>
+                        <img src={album2.url} width="225px" height="225px" className="slideUpAlbums" alt="Album 2"></img>
                         <img src={album3.url} width="225px" height="225px" alt="Album 3"></img>
                         <img src={album4.url} width="225px" height="225px" alt="Album 4"></img>
-                        <img src={album9.url} width="225px" height="225px" alt="Album 8"></img>
+                        <img src={album5.url} width="225px" height="225px" alt="Album 5"></img>
                         <img src={album6.url} width="225px" height="225px" alt="Album 6"></img>
                         <img src={album7.url} width="225px" height="225px" alt="Album 7"></img>
                         <img src={album8.url} width="225px" height="225px" alt="Album 8"></img>
+                        <img src={album0.url} width="225px" height="225px" alt="Album 0"></img>
+                        <img src={album1.url} width="225px" height="225px" alt="Album 1"></img>
                     </div>
                 </div>
                 <br></br>
