@@ -11,6 +11,7 @@ body.registerpg-body::before {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
     filter: blur(5px);
+    align-items: center;
   }
 .container{
     background-color: #231f20;
@@ -25,6 +26,31 @@ body.registerpg-body::before {
     left: 50%; /* Center the container horizontally */
     transform: translate(-50%, 50%); /* Adjust position to center both vertically and horizontally */
   }
+.login-container{
+  background-color: #231f20;
+  color: DEDEDE;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 3);
+  padding: 20px;
+  border-radius: 10px;
+  width: 450px;
+  text-align: center;
+  position: absolute; /* Position the container absolutely */
+  top: 0%; /* Move the container down to the middle of the page */
+  left: 50%; /* Center the container horizontally */
+  transform: translate(-50%, 50%); /* Adjust position to center both vertically and horizontally */
+  align-items: center;
+}
+.registration-form {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center items vertically */
+
+}
+.align-buttons{
+  display: flex;
+  align-items: center;
+  margin-right: 45px;
+}
 form{
     display: flex;
     flex-direction: column;
@@ -35,6 +61,7 @@ form{
     text-align: center;
     font-size: 15px;
     font-family: "Archivo", sans-serif;
+    width: 120%;
 }
 .custom-button{
     display: inline-block;
@@ -47,7 +74,7 @@ form{
     transition-duration: .3s;
     border: 1px solid transparent;
     letter-spacing: 2px;
-    min-width: 160px;
+    min-width: 180px;
     text-transform: uppercase;
     white-space: normal;
     font-weight: 700;

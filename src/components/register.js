@@ -86,16 +86,17 @@ export default function Register(){
                         <div class="form-group">
                             <input className='un' type='password' placeholder='password less than 7 characters' value={userData.password} onChange={(e) => setUserData({...userData, password: e.target.value})} />
                         </div>
-                        <button className="custom-button" type='submit'>Submit</button>
-                        {error && <p style = {{color: 'red'}}>{error}</p>}
+                        <div class="align-buttons">
+                            <button className="custom-button" type='submit'>Submit</button>
+                            {error && <p style = {{color: 'red'}}>{error}</p>}
+                    
+                            {isLoggedIn && ( 
+                                <button className="custom-button" onClick={handleLogout}>Logout</button>
+                            )}
+                        </div>
                 </form>
-                {isLoggedIn && ( 
-                    <button className="custom-button" onClick={handleLogout}>Logout</button>
-                )}
             </div>
+            
         </body>
-
-
-
     )
 }

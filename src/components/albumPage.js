@@ -171,7 +171,7 @@ function Reviews({ReviewList}) {
                 <h1 >{albuminfo.albuname} {getStarString(getalbumstars(reviews))}</h1>
                 <h2>{albuminfo.artist}</h2>
                 <img src={"data:image/jpeg;base64,"+albuminfo.image} width="100%" height="100%"/>
-                <div id="postreviewbutton"><Link to="/postreview"><button class="custom-button">Post a Review </button> </Link> </div>
+                <div id="postreviewbutton"><Link to="/postreview"><button class="postreview-button">Post a Review </button> </Link> </div>
             </div>
             <div id="reviewwrapper">
                 <div className = "reviewsContainer"> 

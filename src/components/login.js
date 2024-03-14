@@ -71,12 +71,15 @@ export default function Login(){
                     <div class="form-group">
                         <input className='un' type = 'password' placeholder= 'enter password'value={data.password} onChange={(e) => setData({...data,password:e.target.value})}/>
                     </div>
-                    <button className="custom-button" type = 'login'>Login</button>
-                    {error && <p style = {{color: 'red'}}>{error}</p>}
+                    <div class="align-buttons">
+                        <button className="custom-button" type = 'login'>Login</button>
+                        {error && <p style = {{color: 'red'}}>{error}</p>}
+                        {isLoggedIn && ( 
+                            <button className="custom-button" onClick={handleLogout}>Logout</button>
+                        )}
+                    </div>
                 </form>
-                {isLoggedIn && ( 
-                    <button className="custom-button" onClick={handleLogout}>Logout</button>
-                )}
+
              </div>
         </body>
     )
