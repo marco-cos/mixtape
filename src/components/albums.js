@@ -1,5 +1,27 @@
 import React, { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
 
+//let beenrun= false;
+
+//const getalbums = async (query) => {
+  //  if(!beenrun) {
+    //    beenrun=true;
+        try {
+            const query = "";
+            const response = await axios.post('/Albumshowcase', { query }, {withCredentials: true});
+            const albums = response.data;
+            console.log(albums)
+            }
+    
+             catch (error) {
+            console.error(error);
+            }
+    
+   // }
+ // };
+
+
+//getalbums();
 //
 // SHOWCASE ALBUMS
 //
@@ -85,7 +107,11 @@ const album19 = {
     url: 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/the-queen-is-dead-nyasia-hamill.jpg'
 }
 
-const albums = [album19,album14,album12,album13,album3,album8,album1,album16,album4,album17,album5,album0,album18,album6,album15,album7,album2,album9,album11,album10];
+
+
+
+const albums=[]
+//const albums = [album19,album14,album12,album13,album3,album8,album1,album16,album4,album17,album5,album0,album18,album6,album15,album7,album2,album9,album11,album10];
 const albums_shuf0 = [album2,album5,album4,album19,album11,album17,album13,album14,album8,album10,album15,album12,album3,album0,album6,album1,album9,album18,album7,album16];
 const albums_shuf1 = [album13,album18,album11,album17,album8,album3,album16,album15,album5,album6,album7,album1,album0,album9,album10,album4,album12,album19,album14,album2];
 
