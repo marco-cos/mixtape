@@ -14,12 +14,9 @@ export default function Postreview(){
     
 
     const navigate = useNavigate();
-    //const { userId: loggedInUserId } = useAuth();
     var userId =localStorage.getItem('userId')
     console.log(userId);
-    // const id = new ObjectId(userId);
     var objectId = new mongoose.Types.ObjectId(userId);
-    //const username = localStorage.getItem('username');
     console.log("here is the userID:", userId);
 
     const [data, setData] = useState({
@@ -36,6 +33,9 @@ export default function Postreview(){
         try {
             // const albumResponse = await axios.get(`http://localhost:8000/albums/${data.albumName}`);
             // const albumId = albumResponse.data._id;
+            if (!userId) {
+                throw new Error("Login to post a review");
+            }
 
             const response = await axios.post('http://localhost:8000/createReview', {
                 album:data.album,
@@ -50,7 +50,7 @@ export default function Postreview(){
             console.log(response.data); 
             // WILL WANT TO NAVIGATE BACK TO ALBUM PAGE
             //navigate(`http://localhost:8000/${albumName}`)
-            navigate('/'); 
+            navigate(`/albums/${data.albumName}`); 
         } catch (error) {
             console.error('Error submitting review:', error);
         }
@@ -119,7 +119,7 @@ export default function Postreview(){
                         <textarea 
                             style={{fontSize: "20px"}} 
                             id="content" 
-                            name="content" 
+                            name="Your Review" 
                             rows="9" 
                             cols="60" 
                             placeholder="I thought this album was..."

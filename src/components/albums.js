@@ -166,7 +166,9 @@ export default function Albums() {
     }, []);
     return (
         <div id='albumpage'>
-            <h1>Albums to Review</h1>
+            <div className="AlbumsTitle" style={{textAlign: "center"}}>
+                <h1>Popular Albums</h1>
+            </div>
             <div style={{marginBottom: '50px'}}>
             {albums ? <NewAlbumGrid albumsArray={albums} /> : 'Loading...'}
             </div>

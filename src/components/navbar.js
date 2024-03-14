@@ -2,32 +2,32 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/authContext'; // Import the useAuth hook
 import logo from '../images/mixtape_newlogo_small.png';
-import searchicon from '../images/searchicon.svg';
+import searchicon from '../images/searchicon.png';
 import '../App.css';
 import { Link } from 'react-router-dom';
 
 
 function Navbar() {
-  const [user, setUser] = useState({});
-  var { userId }  = useAuth();
+  // const [user, setUser] = useState({});
+  // var { userId }  = useAuth();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (userId) {
-        try {
-          const response = await axios.get('http://localhost:8000/profile/', {
-            params: { userId }
-          });
-          setUser(response.data.user); 
-        } catch (error) {
-          console.error("error fetching user data:", error);
-        }
-      } else {
-        setUser({});
-      }
-    };
-    fetchUserData();
-  }, [userId]); // Dependency array includes userId
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     if (userId) {
+  //       try {
+  //         const response = await axios.get('http://localhost:8000/profile/', {
+  //           params: { userId }
+  //         });
+  //         setUser(response.data.user); 
+  //       } catch (error) {
+  //         console.error("error fetching user data:", error);
+  //       }
+  //     } else {
+  //       setUser({});
+  //     }
+  //   };
+  //   fetchUserData();
+  // }, [userId]); // Dependency array includes userId
 
   const [results, setresults] = useState({ users: [], albums: [] });
 
@@ -69,7 +69,7 @@ function hidesearch(){
       <div>
         <li><Link to="/"><img src={logo} width='135px' height='50px' alt="logo"/></Link></li>
       </div>
-      <div className="loggedinas">Logged in as:  {user.username}</div>
+      {/* <div className="loggedinas">Logged in as:  {user.username} </div> */}
       <div className="links">
           <ul id="navbartext">
             <li><Link to="/" style={{color:"white"}}>Home</Link></li>
@@ -81,7 +81,7 @@ function hidesearch(){
           <div className="search">
               <input type="text" class="searchTerm" placeholder="search" onChange={(e) => handleSearch(e.target.value)}></input>
               <button type="submit">
-                <img src={searchicon} alt="go"/>
+                <img src={searchicon} width='135px' height='50px' alt="go"/>
               </button>
           </div>
 

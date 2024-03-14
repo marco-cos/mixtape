@@ -389,7 +389,7 @@ body {
 }
 .searchTerm {
   width: 50%;
-  border: 3px solid #231f20;
+  border: 3px solid white;
   border-right: none;
   padding: 5px;
   height: 20px;
@@ -400,10 +400,10 @@ body {
 .search button{
   width: 40px;
   height: 36px;
-  border: 1px solid #231f20;
-  background: #231f20;
+  border: 1px solid white;
+  background: white;
   text-align: center;
-  color: #fff;
+  color: #171724;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 20px;
@@ -568,27 +568,3 @@ a:hover {
 a:active { 
   text-decoration: none; 
 }
-
-/* 
-text font:
-.archivo{
-  font-family: "Archivo", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-}
-
-logo font:
-.museomoderno{
-  font-family: "MuseoModerno", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-}
-
-theme {
-  color: #bdbcbc --> nav bar
-  color: #eae8e8 --> background
-*/

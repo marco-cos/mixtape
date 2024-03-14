@@ -68,6 +68,8 @@ export default function Profile(){
             console.log("userFollowing: ", userFollowing);
 
         } catch (error) {
+            setUserFollowers(0);
+            setUserFollowing(0);
             console.error("error fetching user data:", error);
         }
         
@@ -177,9 +179,6 @@ export default function Profile(){
         }
     }, [user.username]); 
     
-    // useEffect(() => {
-    //     getUser(); 
-    // }, [userFollowers, userFollowing]); 
 
     useEffect (() => {
         if (user.username) {};
@@ -313,16 +312,16 @@ export default function Profile(){
                             console.log(review._id),
                             <div  class="review-item" key={review._id}>
                                 <a href={"/albums/"+review.album.title}> <img 
-                src={"data:image/jpeg;base64,"+review.album.cover}
-                alt='alt_text_here' 
-                className="pop-out"
-                width="225px"
-                height="225px" ></img></a>
+                                    src={"data:image/jpeg;base64,"+review.album.cover}
+                                    alt='alt_text_here' 
+                                    className="pop-out"
+                                    width="225px"
+                                    height="225px" ></img></a>
 
                                 <p>{getStarString(review.review.stars) +"⠀⠀⠀" +review.review.creationDate.split('T')[0]} </p>
                                 <p><b>Favorite Song:</b> {review.review.favSong}</p>
                                 <p><b>Least Favorite Song: </b>{review.review.leastFavSong}</p>
-                                <p><b>Content: </b>{review.review.content}</p>
+                                <p><b>Your Review: </b>{review.review.content}</p>
                                 
                             </div>
                         ))}  
