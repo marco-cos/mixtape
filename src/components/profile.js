@@ -48,6 +48,7 @@ export default function Profile(){
             const response = await axios.get('http://localhost:8000/profile/', {
                 params: { userId }
             });
+            console.log(response);
             setUser(response.data.user);
             setBio(response.data.bio);
             setFavArtist(response.data.favArtist);

@@ -11,12 +11,14 @@ export default function OtherUserProfile(){
     const navigate = useNavigate();
     const [user, setUser] = useState({});
     const { username } = useParams();
+    // console.log("user's page: ", username);
   
     const [userFollowers, setUserFollowers] = useState();
     const [userFollowing, setUserFollowing] = useState();
     const [reviews, setReviews] = useState([]);
 
     let loggedInUserId = useAuth().userId;
+    let followers, following;
 
 
     const [loggedInUsername, setLoggedInUsername] = useState();
@@ -30,7 +32,7 @@ export default function OtherUserProfile(){
                 if (check.data.sameUser) {
                     navigate('/profile');
                 }
-                console.log(check.data.loggedInUsername);
+                console.log("loggedInUsername", check.data.loggedInUsername);
                 setLoggedInUsername(check.data.loggedInUsername);
             } catch (error) {
                 console.error("Error fetching users:", error);
@@ -60,9 +62,12 @@ export default function OtherUserProfile(){
         try {
             const response = await axios.get(`http://localhost:8000/profile/${username}`);
             setUser(response.data.user);
-            console.log("followers:", response.data.user.followers.length);
+            console.log(response.data.user);
+            // console.log("followers:", response.data.user.followers.length);
             setUserFollowers(response.data.user.followers.length);
+            followers = userFollowers;
             setUserFollowing(response.data.user.following.length);
+            following = userFollowing;
             const alreadyFollowing = response.data.user.followers.includes(loggedInUserId);
             setIsFollowing(alreadyFollowing);
         } catch (error) {
@@ -98,24 +103,48 @@ export default function OtherUserProfile(){
     const handleFollow = async (e) => {
         e.preventDefault();
         try {
-            console.log("handleFollow", loggedInUsername)
+            // console.log("handleFollow", loggedInUsername)
+            console.log("isLoggedIn: ", loggedIn);
+            console.log("isFollowing", isFollowing);
             if (loggedIn) {
-                const response = await axios.put(`http://localhost:8000/profile/${username}/follow`, { curr: loggedInUsername });
-                if (response.message !== "already following") {
-                    const updatedUser = await axios.put(`http://localhost:8000/profile/${username}/add`, 
-                    { username: loggedInUsername});
+                if (!isFollowing){
+                    console.log("follow");
+                    // console.log(loggedInUsername);
+                    const response = await axios.put(`http://localhost:8000/profile/${username}/follow`, { username: loggedInUsername });
+                    console.log(response.data);
+                    if (response.data.message !== "already following") {
+                        const updatedUser = await axios.put(`http://localhost:8000/profile/${username}/add`, 
+                            { username: loggedInUsername});
+                    }
+                    console.log("follow response:", response.data.message);
+                    if (response.data.success) {
+                        setIsFollowing(true);
+                        setUserFollowers(userFollowers+1);
+                        console.log("followers: ", userFollowers);
+                        // getUser();
+                    }
                 }
-            console.log("follow response:", response.data.message);
-                if (response.success) {
-                    setIsFollowing(true);
-                    setUserFollowers(prevFollowers => prevFollowers + 1);
-                    getUser();
+                else {
+                    console.log("unfollow");
+                    // console.log("unfollowed by:", loggedInUsername);
+                    // console.log("unfollowing", username );
+                    const result = await axios.put(`http://localhost:8000/profile/${username}/unfollow`, { username: loggedInUsername });
+                    if (result.data.message !== "not following") {
+                        const updatedUser = await axios.put(`http://localhost:8000/profile/${username}/remove`, 
+                        { username: loggedInUsername});
+                        console.log(updatedUser);
+                    }
+                    console.log("unfollow response:", result.data.message); 
+                    if (result.data.success) {
+                        setIsFollowing(false);
+                        setUserFollowers(userFollowers-1);
+                        // getUser();
+                    }
                 }
             }
             else {
                 console.error("login to follow other users");
             }
-            
         } catch (error) {
             console.error('Error following:', error);
 

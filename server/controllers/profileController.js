@@ -26,7 +26,7 @@ module.exports.getProfileFromUsername = async (req, res) => {
         // console.log(req);
     const username = req.params.username
     // console.log(req.params);
-    console.log(username);
+    // console.log(username);
     try {
       const user = await User.findOne({username: username});
       if (!user) {
@@ -61,10 +61,56 @@ module.exports.getFollowers = async (req, res) => {
     }
 };
 
-module.exports.followUser = async (req, res) => {
+module.exports.followUser = async (req, res) => { //update target user follower count
   try {
     const username = req.params.targetUser;
-    const currUsername = req.body.curr;
+    // console.log("params", username);
+    const currUsername = req.body.username;
+    // console.log("logged in user", currUsername);
+
+    const user = await User.findOne({ username: username});
+    // console.log(user);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const currUser = await User.findOne({ username: currUsername });
+    if (!currUser) {
+      return res.status(404).json({ success: false, message: "Current user not found" });
+    }
+    let isIncluded = false;
+    for (let i = 0; i < user.followers.length; i++) {
+      if (currUser._id === user.followers[i]) {
+        isIncluded = true;
+        break;
+      }
+    }
+    console.log(isIncluded);
+    // const isIncluded = await user.findOne({ followers: { $in: [currUser._id] } });
+    // console.log("isIncluded", isIncluded);
+    if (!isIncluded) {
+      const updated = await User.findByIdAndUpdate( 
+        user._id,
+        { $push: { followers: currUser._id } }
+        );
+        console.log("followed!");
+        return res.status(200).json({ success: true, message: "followed!"});
+      }
+      else {
+        console.log("already following!");
+        return res.status(200).json({ success:true, message: "already following "});
+      }
+    } catch (error) {
+    // console.error(error);
+  }
+}; 
+
+module.exports.addToFollowing = async (req, res) => { //update logged in user following count
+  try {
+    const username = req.params.username;
+    // console.log("params", username);
+    const currUsername = req.body.username;
+    // console.log("logged in user", currUsername);
 
     const user = await User.findOne({ username: username});
     if (!user) {
@@ -75,25 +121,59 @@ module.exports.followUser = async (req, res) => {
     if (!currUser) {
       return res.status(404).json({ success: false, message: "Current user not found" });
     }
-
-    if (!user.followers.includes(currUser._id)) {
-      await User.findByIdAndUpdate( 
-        user._id,
-        { $addToSet: { followers: currUser._id } }
-        );
-        return res.status(200).json({ success: true, message: "followed!"});
-      }
-      else {
-        return res.status(200).json({ success:true, message: "already following "});
-      }
+    await User.findByIdAndUpdate( 
+      currUser._id,
+      { $push: { following: user._id }}
+    );
+    console.log("following updated");
+    return res.status(200).json({ success: true, message: "updated following "});
     } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
 }; 
 
-module.exports.addToFollowing = async (req, res) => {
+module.exports.unfollowUser = async (req, res) => { //update target user follower count
   try {
-    const username = req.params.username;
+    const username = req.params.targetUser;
+    // console.log("params", username);
+    const currUsername = req.body.username;
+    // console.log("logged in user", currUsername);
+    const user = await User.findOne({ username: username});
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const currUser = await User.findOne({ username: currUsername });
+    if (!currUser) {
+      return res.status(404).json({ success: false, message: "Current user not found" });
+    }
+    let isIncluded = false;
+    for (let i = 0; i < user.followers.length; i++) {
+      if (currUser._id === user.followers[i]) {
+        isIncluded = true;
+        break;
+      }
+    }
+    if (isIncluded) {
+      await User.findByIdAndUpdate( 
+        user._id,
+        { $pull: { followers: currUser._id } }
+        );
+        console.log("unfollowed!");
+        return res.status(200).json({ success: true, message: "unfollowed!"});
+      }
+      else {
+        console.log("Not following already");
+        return res.status(200).json({ success:true, message: "not following "});
+      }
+    } catch (error) {
+    // console.error(error);
+  }
+}; 
+
+module.exports.removeFollowing = async (req, res) => { //update logged in user following count
+  try {
+    const username = req.body.username;
     // console.log(username);
     const currUsername = req.body.username;
 
@@ -106,69 +186,15 @@ module.exports.addToFollowing = async (req, res) => {
     if (!currUser) {
       return res.status(404).json({ success: false, message: "Current user not found" });
     }
+    
+    // console.log(currUser.following);
 
-    await User.findByIdAndUpdate( 
-      currUser._id,
-      { $addToSet: { following: user._id }}
+    const updatedUser = await User.findByIdAndUpdate( currUser._id,
+      {$pull: {following: user._id}},
     );
-    return res.status(200).json({ success: true, message: "updated following "});
-    } catch (error) {
-    console.error(error);
-  }
-}; 
-
-module.exports.unfollowUser = async (req, res) => {
-  try {
-    const username = req.params.targetUser;
-    console.log(username);
-    const currUsername = req.body.username;
-
-    const user = await User.findOne({ username: username});
-    if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
-    }
-
-    const currUser = await User.findOne({ username: currUsername });
-    if (!currUser) {
-      return res.status(404).json({ success: false, message: "Current user not found" });
-    }
-
-    if (user.followers.includes(currUser._id)) {
-      await User.findByIdAndUpdate( 
-        user._id,
-        { $pull: { followers: currUser._id } }
-        );
-        return res.status(200).json({ success: true, message: "unfollowed!"});
-      }
-      else {
-        return res.status(200).json({ success:true, message: "not following "});
-      }
-    } catch (error) {
-    console.error(error);
-  }
-}; 
-
-module.exports.removeFollowing = async (req, res) => {
-  try {
-    const username = req.body.target;
-    console.log(username);
-    const currUsername = req.body.username;
-
-    const user = await User.findOne({ username: username});
-    if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
-    }
-
-    const currUser = await User.findOne({ username: currUsername });
-    if (!currUser) {
-      return res.status(404).json({ success: false, message: "Current user not found" });
-    }
-
-    await User.findByIdAndUpdate( 
-      currUser._id,
-      { $pull: { following: user._id }}
-    );
-    return res.status(200).json({ success: true, message: "no longer following "});
+    // console.log(updatedUser.following);
+      console.log("removed from following");
+    return res.status(200).json({ success: true, message: "removed from following ", updatedUser});
     } catch (error) {
     console.error(error);
   }
@@ -205,13 +231,13 @@ module.exports.updateProfilePic = async (req, res) => {
 module.exports.checkSameUser = async (req, res, next) => {
   try {
     const { username: otherUsername, loginId: loggedInUserId } = req.params;
-    console.log(otherUsername);
-    console.log(loggedInUserId);
+    // console.log(otherUsername);
+    // console.log(loggedInUserId);
     const loggedIn = await User.findById(loggedInUserId);
-    console.log(loggedIn.username);
+    // console.log(loggedIn.username);
     const otherUser = await User.findOne({ username: otherUsername });
     const sameUser = loggedIn._id.equals(otherUser._id);
-    console.log(sameUser);
+    // console.log(sameUser);
     res.status(200).json({ sameUser, loggedInUsername: loggedIn.username });
   } catch (error) {
     console.error(error);
