@@ -71,9 +71,9 @@ export default function Postreview(){
     
         <div className="postreview-body">
                 <div id="ReviewPostBody">
-                    <h1>Post a Review</h1>
+                    <h1 style={{color:"black"}}>Post a Review</h1>
                     <form onSubmit= { handleSubmit }  >
-                        <label for="albumname"><h3>Album Name</h3></label>
+                        <label for="albumname"><h3 style={{color:"black"}}>Album Name</h3></label>
                         <input 
                             style={{fontSize: "20px",width:"60%"}} 
                             type="text" 
@@ -82,7 +82,7 @@ export default function Postreview(){
                             value={data.albumName}
                             onChange={handleChange}
                         />
-                        <label for="rating"><h4>Your Rating</h4></label>
+                        <label for="rating"><h4 style={{color:"black"}}>Your Rating</h4></label>
                         <select 
                             name="rating" 
                             id="rating" 
@@ -97,7 +97,7 @@ export default function Postreview(){
                             <option value='2'>★★☆☆☆ - Bad</option>
                             <option value='1'>★☆☆☆☆ - Horrible</option>
                         </select> 
-                        <label for="favsong"><h3>Favorite Song</h3></label>
+                        <label for="favsong"><h3 style={{color:"black"}}>Favorite Song</h3></label>
                         <input 
                             style={{fontSize: "20px",width:"60%"}} 
                             type="text" 
@@ -106,7 +106,7 @@ export default function Postreview(){
                             value={data.favsong}
                             onChange={handleChange}
                         />
-                        <label for="albumname"><h3>Least Favorite Song</h3></label>
+                        <label for="albumname"><h3 style={{color:"black"}}>Least Favorite Song</h3></label>
                         <input 
                             style={{fontSize: "20px",width:"60%"}} 
                             type="text" 
@@ -115,18 +115,18 @@ export default function Postreview(){
                             value={data.leastfavsong}
                             onChange={handleChange}
                         />
-                        <label for="content"><h4>Your Review</h4></label>
+                        <label for="content"><h4 style={{color:"black"}}>Your Review</h4></label>
                         <textarea 
                             style={{fontSize: "20px"}} 
                             id="content" 
                             name="content" 
-                            rows="15" 
+                            rows="9" 
                             cols="60" 
                             placeholder="I thought this album was..."
                             value={data.content}
                             onChange={handleChange}>
                         </textarea> <br /> <br/>
-                        <button type="submit" class="custom-button" >Submit Review</button>
+                        <button type="submit" class="custom-button" style={{color:"black"}} >Submit Review</button>
                     </form>
                 </div>
             </div>
