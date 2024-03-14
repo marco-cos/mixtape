@@ -25,7 +25,7 @@ export default function Postreview(){
     const [data, setData] = useState({
         album:'',
         albumName: '',
-        rating: '',
+        rating: '5',
         content: '',
         reviewer: objectId,
     })
