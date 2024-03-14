@@ -5,30 +5,44 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/authContext';
 import { Link } from 'react-router-dom'
 
+const mongoose = require('mongoose');
+
 
 export default function Postreview(){
+    // const mongoose = require('mongoose');
+    // const ObjectId = mongoose.Types.ObjectId;
+    
+
     const navigate = useNavigate();
-    const { userId: loggedInUserId } = useAuth();
-    const userId = localStorage.getItem('userId');
+    //const { userId: loggedInUserId } = useAuth();
+    var userId =localStorage.getItem('userId')
+    console.log(userId);
+    // const id = new ObjectId(userId);
+    var objectId = new mongoose.Types.ObjectId(userId);
     //const username = localStorage.getItem('username');
     console.log("here is the userID:", userId);
 
     const [data, setData] = useState({
+        album:'',
         albumName: '',
-        rating: '5',
+        rating: '',
         content: '',
-        userID: userId
+        reviewer: objectId,
     })
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         
         try {
+            // const albumResponse = await axios.get(`http://localhost:8000/albums/${data.albumName}`);
+            // const albumId = albumResponse.data._id;
+
             const response = await axios.post('http://localhost:8000/createReview', {
+                album:data.album,
                 albumName: data.albumName,
                 rating: data.rating,
                 content: data.content,
-                userID: userId
+                reviewer: data.reviewer,
             });
 
             console.log(response.data); 
