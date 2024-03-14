@@ -36,9 +36,10 @@ export default function Register(){
             console.log("data id: ", id);
 
             console.log(result.message);
-            if (isLoggedIn) {
-                console.log("local storage id: ", localStorage.getItem('userId'));
-                setError('already logged in')
+            if (result.status === 201) {
+                setUserData({})
+                console.log("navigate");
+                navigate('/login')
             }
             else if (result.error) {
                 setError('please enter valid email or password')
@@ -54,9 +55,8 @@ export default function Register(){
             }
             else {
                 // console.log("local storage id: ", localStorage.getItem('userId'));
-                setUserData({})
-                console.log("navigate");
-                navigate('/login')
+                console.log("local storage id: ", localStorage.getItem('userId'));
+                setError('already logged in')
             }
         } catch (error) {
             console.error('error', error)

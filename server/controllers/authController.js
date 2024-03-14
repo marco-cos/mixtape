@@ -33,7 +33,7 @@ module.exports.Register = async (req, res, next) => {
     console.log(user._id);
     res
       .status(201)
-      .json({ message: "user created successfully", success: true, token: jwtToken, userId: user._id });
+      .json({ message: "user created successfully", success: true, token: token, userId: user._id });
     // req.user = user;
     next();
   } catch (error) { //ensure errors thrown are logged (registering issue username/email issue)
