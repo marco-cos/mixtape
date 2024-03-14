@@ -43,6 +43,8 @@ export default function Postreview(){
                 rating: data.rating,
                 content: data.content,
                 reviewer: data.reviewer,
+                favsong: data.favsong,
+                leastfavsong: data.leastfavsong,
             });
 
             console.log(response.data); 
@@ -95,6 +97,24 @@ export default function Postreview(){
                             <option value='2'>★★☆☆☆ - Bad</option>
                             <option value='1'>★☆☆☆☆ - Horrible</option>
                         </select> 
+                        <label for="favsong"><h3>Favorite Song</h3></label>
+                        <input 
+                            style={{fontSize: "20px",width:"60%"}} 
+                            type="text" 
+                            id="favsong" 
+                            name="favsong"
+                            value={data.favsong}
+                            onChange={handleChange}
+                        />
+                        <label for="albumname"><h3>Least Favorite Song</h3></label>
+                        <input 
+                            style={{fontSize: "20px",width:"60%"}} 
+                            type="text" 
+                            id="leastfavsong" 
+                            name="leastfavsong"
+                            value={data.leastfavsong}
+                            onChange={handleChange}
+                        />
                         <label for="content"><h4>Your Review</h4></label>
                         <textarea 
                             style={{fontSize: "20px"}} 
