@@ -126,7 +126,7 @@ export default function Postreview(){
                             value={data.content}
                             onChange={handleChange}>
                         </textarea> <br /> <br/>
-                        <button type="submit" class="custom-button" style={{color:"black"}} >Submit Review</button>
+                        <button type="submit" class="postreview-button" style={{color:"black"}} >Submit Review</button>
                     </form>
                 </div>
             </div>
