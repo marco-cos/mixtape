@@ -13,7 +13,7 @@ function Examplealbum(){
     const Albumpage= useParams()
     const albumID = Albumpage.albumName;
     var user =localStorage.getItem('userId')
-    console.log(user)
+    console.log("USER IS: "+user)
 
     const [albuminfo, setAlbumInfo] = useState({
         albuname: "",
@@ -56,11 +56,12 @@ const getalbuminfo = async (query) => {
   const unlikereview = async (reviewID, userID) => {
     console.log(reviewID,userID);
 
-    try {
-        const response = await axios.put(`/Albumpage/unlike`, { reviewID: reviewID, userID: userID });
-    } catch (error) {
-        console.error("error updating bio:", error);
+        try {
+            const response = await axios.put(`/Albumpage/unlike`, { reviewID: reviewID, userID: userID });
+        } catch (error) {
+            console.error("error updating bio:", error);
     }
+
 
   };
 
@@ -72,7 +73,6 @@ const getalbuminfo = async (query) => {
     } catch (error) {
         console.error("error updating bio:", error);
     }
-
   };
 
 
@@ -103,6 +103,7 @@ function getStarString(starnum) {
 function ReviewComponent({ review}) {
     const [likecount, setlikecount] = useState(review.likedby.length);
    function likecountchange() {
+    if (user != null && user != undefined) {
         if (review.likedby.indexOf(user) > -1) {
             //Unlike
             console.log(review)
@@ -118,6 +119,7 @@ function ReviewComponent({ review}) {
 
         }
     }
+}
 
     const stars = useState(getStarString(review.stars));
 
