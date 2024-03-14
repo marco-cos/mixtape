@@ -1,11 +1,12 @@
 const Albumpage = require("../models/albums");
 
+
 exports.main = async (req, res, next) => {
+  console.log("INA")
+
     try {
-        console.log("BEFORE")
-        //const albums = await Albumpage.find({title: {$regex:".", $options: 'i'}});
-       console.log("AFTER")
-        //res.json({albums})
+        const albums = await Albumpage.find({});
+        res.json({albums})
 
     } 
     catch (error) {

@@ -8,7 +8,7 @@ export default function Login(){
     const navigate = useNavigate();
     const {login, logout } = useAuth();
 
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    var isLoggedIn = localStorage.getItem('isLoggedIn');
     console.log(isLoggedIn);
 
     const [data, setData] = useState({
@@ -33,17 +33,19 @@ export default function Login(){
             }, {
                 withCredentials: true
             });
-            const id  = result.data.userId;
-            if (result.error){
-                setError('incorrect username or password');
+            console.log(result.status);
+            //const id  = result.data.userId;
+            if (result.status === 201){
+                const id = result.data.userId;
+                login(id);
+                setData({});
+                navigate('/');
             } 
             else if (localStorage.getItem('isLoggedIn')) {
                 setError('already logged in')
             }  
             else {
-                login(id);
-                setData({});
-                navigate('/');
+                setError('incorrect username or password');
             }
         } catch (error) {
             console.error('error', error);

@@ -53,25 +53,13 @@ body {
 
 .album-grid {
   display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(auto-fill, minmax(225px,225px));
+  grid-auto-flow: row;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
   gap: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  flex-wrap: nowrap;
-  overflow: visible;
+  margin: 0 auto; 
   padding: 10px 0;
 }
 
-.album-grid-container {
-  overflow-x: auto;
-  overflow-y: visible;
-  display: flex;
-  white-space: nowrap;
-  margin: 0 -40px;
-  background-color: #080814;
-}
 
 .album-grid-container::-webkit-scrollbar {
   display: none;
