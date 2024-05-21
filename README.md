@@ -3,6 +3,9 @@
 
 Mixtape is an open-source client/server application allowing users to post and search for persistent reviews of music albums, dynamically displaying the information to website viewers. Music lovers can discover new music and share their thoughts on albums with the Mixtape community.
 
+## Demo Video
+https://youtu.be/ia_PHN2ttMM?si=Ppv_l-o7q6wWhzqg
+
 ## Installation Tutorial
 ### Set up
 Clone the repo to your local folder, cd into the folder if necessary.
